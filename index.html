@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Spotify Clone</title>
     <link rel="stylesheet" href="style.css" />
 
     <!-- link tag for google icons and fonts -->
@@ -13,9 +13,11 @@
     />
 
     <!-- CDN of tailwind css -->
+    <!-- This allows developers to use Tailwind CSS in HTML files without installing it in the project. -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- script for including jquery. we will use jquery to load a html file in other file. -->
+    <!-- To achieve a React-like structure in HTML, this approach enables developers to use a component-based structure -->
     <script
       src="https://code.jquery.com/jquery-3.7.1.js"
       integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -57,7 +59,7 @@
       <h2 class="px-5 m-2">New music playlists</h2>
       <div
         id="includeNewMusicCardsLanding"
-        class="text-gray-600 body-font container px-5 mx-auto overflow-scroll"
+        class="text-gray-600 body-font container px-5 mx-auto overflow-x-auto"
       ></div>
     </div>
     <!-- New music playlists -->
@@ -68,7 +70,7 @@
       <h2 class="px-5 m-2">Trending</h2>
       <div
         id="includeTrendingCardsLanding"
-        class="text-gray-600 body-font container px-5 mx-auto overflow-scroll"
+        class="text-gray-600 body-font container px-5 mx-auto overflow-x-auto"
       ></div>
     </div>
     <!-- Trending Playlists -->
@@ -79,7 +81,7 @@
       <h2 class="px-5 m-2">Artists</h2>
       <div
         id="includeArtistsCardsLanding"
-        class="text-gray-600 body-font container px-5 mx-auto overflow-scroll"
+        class="text-gray-600 body-font container px-5 mx-auto overflow-x-auto"
       ></div>
     </div>
     <!-- Artists  -->
@@ -90,7 +92,7 @@
       <h2 class="px-5 m-2">Popular Release by artists</h2>
       <div
         id="includePopularCardsLanding"
-        class="text-gray-600 body-font container px-5 mx-auto overflow-scroll"
+        class="text-gray-600 body-font container px-5 mx-auto overflow-x-auto"
       ></div>
     </div>
     <!-- Popular Playlists -->
