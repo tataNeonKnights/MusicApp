@@ -39,15 +39,19 @@
 
     <!-- Music Player -->
     <div class="container">
-      <div class="flex flex-col justify-centerm items-center py-12">
+      <div class="flex flex-col justify-center items-center py-12">
         <img
           class="lg:h-50 md:h-50 w-50 object-cover object-center p-5"
           src="https://dummyimage.com/720x400"
           alt="blog"
         />
-        <audio id="audio" >
-        </audio>
+
+        <audio id="audio" src="songs/Heartbreak-Anniversary.mp3"></audio>
         <div id="controls">
+          <div class="timeTracker flex justify-between">
+            <div class="currentTimeAudio">1</div>
+            <div class="totalTimeAudio">2</div>
+          </div>
           <div class="audio-track w-[150px] h-[10px] bg-gray-500">
             <div class="timeBar w-[0px] h-[10px] bg-green-700"></div>
           </div>
