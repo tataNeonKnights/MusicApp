@@ -24,7 +24,7 @@
   </head>
   <body>
     <script>
-      // using jquery to load html files in index.html
+      // using jquery to load html files in musicPlayer.html
       $(function () {
         $("#includeNavbarLanding").load("navbar.html");
       });
@@ -40,30 +40,59 @@
     <!-- Music Player -->
     <div class="container">
       <div class="flex flex-col justify-center items-center py-12">
-        <img
-          class="lg:h-50 md:h-50 w-50 object-cover object-center p-5"
-          src="https://dummyimage.com/720x400"
-          alt="blog"
-        />
+        
+        <!-- Audio Details -->
+        <div class="audioDetails flex flex-col">
+          <img
+            class="lg:h-50 md:h-50 w-50 object-cover object-center p-5"
+            src="https://dummyimage.com/720x400"
+            alt="blog"
+          />
+          <div class="audioTitle p-5">title</div>
+        </div>
+        <!-- Audio Details -->
 
+
+        <!-- Audio Element -->
         <audio id="audio" src="songs/Heartbreak-Anniversary.mp3"></audio>
+        <!-- Audio Element -->
+
+
+        <!-- Controls -->
         <div id="controls">
+
+          <!-- Audio Time Tracker -->
           <div class="timeTracker flex justify-between">
             <div class="currentTimeAudio">1</div>
             <div class="totalTimeAudio">2</div>
           </div>
+          <!-- Audio Time Tracker -->
+
+          <!-- Progress Bar -->
           <div class="audio-track w-[150px] h-[10px] bg-gray-500">
             <div class="timeBar w-[0px] h-[10px] bg-green-700"></div>
           </div>
+          <!-- Progress Bar -->
+
+          <!-- Button controls -->
           <button class="play">Play</button>
           <button class="pause">Pause</button>
           <button class="prev">&#60;prev</button>
           <button class="next">next&#62;</button>
+          <!-- Button controls -->
+
         </div>
+        <!-- Controls -->
+
+
       </div>
     </div>
     <!-- Music Player -->
 
+    
+    <!-- Script tag for our musicPlayer.js -->
     <script src="musicPlayer.js"></script>
+    <!-- Script tag for our musicPlayer.js -->
+
   </body>
 </html>
