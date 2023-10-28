@@ -46,7 +46,7 @@ window.onload = function () {
 function switchTrack(numTrack) {
 
   // Change the src attribute value of the audio element to the target audio track.
-  audio.src = "songs/" + playlist[numTrack];
+  audio.src = "Resources/Songs-Raza/" + playlist[numTrack];
 
   // Initilize the audio progress bar and audio 
   audio.currentTime = 0;
