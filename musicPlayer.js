@@ -24,6 +24,7 @@ function switchTrack(numTrack) {
   audio.src = "songs/" + playlist[numTrack];
   // Assign a song time of zero
   audio.currentTime = 0;
+  time.style.width = 0;
   // Play the song
   audio.play();
 }
@@ -80,4 +81,15 @@ btnNext.addEventListener("click", function () {
 totalTime.addEventListener("click", function (event) {
   console.log(event.offsetX);
   console.log("clicked");
+
+  let clickLocation =event.offsetX;
+
+  let widthTimeBar = (clickLocation*100)/150+"%";
+  time.style.width = widthTimeBar;
+
+  let audioLength = Math.round(audio.duration);
+  audio.currentTime = (clickLocation/150)*audioLength;
+
+  audio.play();
+
 });
