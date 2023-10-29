@@ -32,13 +32,19 @@ let track;
 
 
 // Created an event to fire when the webpage is loaded
+// Updated variable to track name of the song
 window.onload = function () {
+  // Initialize the track
+  track = 0;
 
-  //Initial Values
-  track = 0; 
+  // Set the initial song title
+  audioTitle.innerHTML = titleSong[track];
+
+  // Set the current time and total time as well
   currentTimeAudio.innerHTML = "0:00";
   totalTimeAudio.innerHTML = "0:00";
 };
+
 
 
 
