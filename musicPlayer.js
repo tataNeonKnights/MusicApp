@@ -8,7 +8,7 @@ let btnNext = document.querySelector(".next"); // Take the switch button of the 
 let currentTimeAudio = document.querySelector(".currentTimeAudio");// Take the current audio time tracker element
 let totalTimeAudio = document.querySelector(".totalTimeAudio");// Take the total duration audio time tracker element
 let audioTitle = document.querySelector(".audioTitle");// Take the audio title
-let play_pause = document.querySelector(".play_pause")
+let play_pause = document.querySelector(".play_pause"); //Take the play_pause element and use it toggle play and pause
 
 //Initialized a placeholder playlist for the sake of development
 let playlist = [
@@ -26,7 +26,7 @@ let titleSong = [
 ];
 
 
-//Created variable to track index
+//Created variable to track index and to check whether the audio is playing or not
 let track;
 let playing; 
 
@@ -41,6 +41,28 @@ window.onload = function () {
   currentTimeAudio.innerHTML = "0:00";
   totalTimeAudio.innerHTML = "0:00";
 };
+
+
+// Created an event to fire when the user hits spacebar and to prevent default behaviour of spacebar which is to scroll the page
+window.addEventListener('keydown',function (event){
+  if (event.code === 'Space' || event.key ===" "){
+    event.preventDefault();
+  }
+})
+
+
+// Added an event listener so that when the user presses spacebar audio starts playing or stops playing
+document.addEventListener('keyup',function(event) {
+  if (event.code === 'Space' || event.key===" ") {
+    if(playing===true)
+    {
+      btnPause.click(); //whatever you want to do when space is pressed
+    }
+    else{
+      btnPlay.click();
+    }
+  }
+})
 
 
 
@@ -58,10 +80,10 @@ function switchTrack(numTrack) {
   btnPlay.click();
 }
 
-play_pause.addEventListener("click",function(){
-  console.log("clicked")
 
-  if(playing ===true)
+//Added an event listener to toggle play and pause icons
+play_pause.addEventListener("click",function(){
+  if(playing === true)
   {
     btnPlay.classList.add("hidden");
     btnPause.classList.remove("hidden");

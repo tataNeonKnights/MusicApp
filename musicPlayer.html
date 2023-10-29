@@ -26,13 +26,14 @@
     <script>
       // using jquery to load html files in musicPlayer.html
       $(function () {
-        $("#includeNavbarLanding").load("navbar.html");
+        $("#includeNavbarMusicPlayer").load("navbar.html");
+        $("#footerMusicPlayer").load("footer.html");
       });
     </script>
 
     <!-- Navbar -->
     <header
-      id="includeNavbarLanding"
+      id="includeNavbarMusicPlayer"
       class="text-gray-600 bg-green-100 body-font z-10"
     ></header>
     <!-- Navbar -->
@@ -89,11 +90,20 @@
             <button class="next material-symbols-outlined">skip_next</button>
           </div>
           <!-- Button controls -->
+
+
+
         </div>
         <!-- Controls -->
       </div>
     </div>
     <!-- Music Player -->
+
+
+    <!-- Footer -->
+    <footer id="footerMusicPlayer" class="text-gray-600 body-font"></footer>
+    <!-- Footer -->
+
 
     <!-- Script tag for our musicPlayer.js -->
     <script src="musicPlayer.js"></script>
