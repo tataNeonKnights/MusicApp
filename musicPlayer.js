@@ -8,7 +8,7 @@ let btnNext = document.querySelector(".next"); // Take the switch button of the 
 let currentTimeAudio = document.querySelector(".currentTimeAudio");// Take the current audio time tracker element
 let totalTimeAudio = document.querySelector(".totalTimeAudio");// Take the total duration audio time tracker element
 let audioTitle = document.querySelector(".audioTitle");// Take the audio title
-
+let play_pause = document.querySelector(".play_pause"); //Take the play_pause element and use it toggle play and pause
 
 //Initialized a placeholder playlist for the sake of development
 let playlist = [
@@ -26,8 +26,9 @@ let titleSong = [
 ];
 
 
-//Created variable to track index
-let track; 
+//Created variable to track index and to check whether the audio is playing or not
+let track;
+let playing; 
 
 
 
@@ -35,10 +36,33 @@ let track;
 window.onload = function () {
 
   //Initial Values
-  track = 0; 
+  track = 0;
+  playing = false; 
   currentTimeAudio.innerHTML = "0:00";
   totalTimeAudio.innerHTML = "0:00";
 };
+
+
+// Created an event to fire when the user hits spacebar and to prevent default behaviour of spacebar which is to scroll the page
+window.addEventListener('keydown',function (event){
+  if (event.code === 'Space' || event.key ===" "){
+    event.preventDefault();
+  }
+})
+
+
+// Added an event listener so that when the user presses spacebar audio starts playing or stops playing
+document.addEventListener('keyup',function(event) {
+  if (event.code === 'Space' || event.key===" ") {
+    if(playing===true)
+    {
+      btnPause.click(); //whatever you want to do when space is pressed
+    }
+    else{
+      btnPlay.click();
+    }
+  }
+})
 
 
 
@@ -57,6 +81,20 @@ function switchTrack(numTrack) {
 }
 
 
+//Added an event listener to toggle play and pause icons
+play_pause.addEventListener("click",function(){
+  if(playing === true)
+  {
+    btnPlay.classList.add("hidden");
+    btnPause.classList.remove("hidden");
+  }
+  else{
+    btnPlay.classList.remove("hidden");
+    btnPause.classList.add("hidden");
+  }
+})
+
+
 //Added an event listener on the play button to play the audio
 btnPlay.addEventListener("click", function () {
 
@@ -65,6 +103,7 @@ btnPlay.addEventListener("click", function () {
 
   //Method to play the audio
   audio.play();
+  playing=true;
 
   // Now we will set an interval when the audio is playing and will clear the interval when the audio is paused 
   audioPlay = setInterval(function () {
@@ -139,6 +178,7 @@ btnPlay.addEventListener("click", function () {
 //Added an event listener on the pause button to pause the audio
 btnPause.addEventListener("click", function () {
   audio.pause(); // Stops the song
+  playing=false;
   clearInterval(audioPlay); // stops the interval
 });
 
