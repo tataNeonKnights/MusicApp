@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist</title>
+
+    <!-- link tag for google icons and fonts -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <!-- CDN of tailwind css -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- script for including jquery. we will use jquery to load a html file in other file. -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <script>
+        // using jquery to load html files in musicPlayer.html
+        $(function () {
+            $("#includeNavbarMusicPlayer").load("navbar.html");
+            $("#footerMusicPlayer").load("footer.html");
+        });
+    </script>
+
+    <!-- Navbar -->
+    <header id="includeNavbarMusicPlayer" class="text-gray-600 bg-green-100 body-font z-10"></header>
+    <!-- Navbar -->
+
+    <!-- Playlist Page Starts -->
+
+    <!--Playlist Hero page -->
+    <div class="h-80 bg-gradient-to-b from-green-100 via-indigo-300 to-purple-500 flex items-center text-slate-800">
+        <div class="border-4 border-purple-400 m-6 w-1/5 rounded-3xl drop-shadow-xl">
+            <img class="rounded-2xl" src="./Resources/Songs-Raza/Playlist-Image.jpg" alt="Playlist-Image">
+        </div>
+        <div>
+            <P class="text-sm mb-2">Public Playlist</P>
+            <h1 class="font-bold text-4xl">Melody Songs <span class="material-symbols-outlined">
+                    library_music
+                </span> Playlist</h1>
+            <div class="flex flex-row mt-1">
+                <img class="rounded-full w-6" src="./Resources/Legends-Never-Die/Legends-Never-Die-Photo.jpg"
+                    alt="Artist"> &nbsp; *
+                <p class="text-slate-900 text-sm mx-2"><a class="hover:underline" href="/">User Name</a></p> *
+                <p id="songCount" class="text-slate-900 text-sm mx-2">0 Songs</p> *
+                <p id="totalTime" class="text-slate-900 text-sm mx-2">0:00</p>
+            </div>
+        </div>
+    </div>
+    <!--Playlist Hero page -->
+
+    <!-- Playlist Page Control Options Starts -->
+    <div class="h-20 bg-gradient-to-b from-purple-500 to-purple-900 flex text-white justify-between px-10">
+
+        <!-- Audio Element -->
+        <audio id="audio" src="Resources/Songs-Raza/TunePocket-Tech-Sparks-Logo-Preview.mp3"></audio>
+        <!-- Audio Element -->
+
+        <!-- Play/Pause Button Starts -->
+        <div class="text-3xl text-white flex flex-row items-center">
+            <div
+                class="play_pause flex justify-center items-center transition-opacity duration-500 ease-in-out bg-green-500 rounded-full h-10 w-10 mr-6 border-black border-2">
+                <button class="play material-symbols-outlined">play_arrow</button>
+                <button class="play_pause pause material-symbols-outlined hidden">
+                    pause
+                </button>
+            </div>
+            <!-- Play/Pause Button Ends -->
+
+            <!-- Shuffle Button Starts -->
+            <div class="group relative inline-block shuffle">
+                <span class="material-symbols-outlined rounded-full p-1 cursor-pointer m-2">
+                    shuffle
+                </span>
+                <span
+                    class="hidden group-hover:inline absolute -top-6 -left-10 bg-inherit text-white p-2 rounded text-xs whitespace-nowrap overflow-hidden">
+                    Click to shuffle the Playlist
+                </span>
+            </div>
+            <!-- Shuffle Button Ends -->
+
+
+            <!-- Like Button Starts -->
+            <div class="group relative inline-block">
+                <span class="material-symbols-outlined rounded-full p-1 cursor-pointer m-2">
+                    favorite
+                </span>
+                <span
+                    class="hidden group-hover:inline absolute -top-6 -left-10 bg-inherit text-white p-2 rounded text-xs whitespace-nowrap overflow-hidden">
+                    Save to Your Library
+                </span>
+            </div>
+            <!-- Like Button Ends -->
+
+            <!-- Download Button Starts -->
+            <div class="group relative inline-block">
+                <span class="material-symbols-outlined rounded-full p-1 cursor-pointer m-2 download">
+                    download
+                </span>
+                <span
+                    class="hidden group-hover:inline absolute -top-6 -left-2 bg-inherit text-white p-2 rounded text-xs whitespace-nowrap overflow-hidden">
+                    Download
+                </span>
+            </div>
+            <!-- Download Button Ends -->
+
+
+        </div>
+        <div class="text-3xl text-white flex flex-row items-center">
+
+            <!-- Search Button Starts -->
+            <div class="group relative inline-block">
+                <span class="material-symbols-outlined rounded-full p-1 cursor-pointer m-2">
+                    search
+                </span>
+                <span
+                    class="hidden group-hover:inline absolute -top-6 -left-8 bg-inherit text-white p-2 rounded text-xs whitespace-nowrap overflow-hidden">
+                    Search in PlayList
+                </span>
+            </div>
+            <!-- Search Button Ends -->
+
+            <!-- Drop Down Menu Starts -->
+            <label class="text-sm m-2" for="options">Sort by:</label>
+
+            <select id="options"
+                class="h-6 w-auto bg-transparent text-sm bg-inherit border border-gray-600 cursor-pointer"
+                name="options" id="options">
+                <option selected value="volvo" class="text-xs bg-slate-700 ">Custom Order</option>
+                <option value="saab" class="text-xs bg-slate-700 ">Title</option>
+                <option value="mercedes" class="text-xs bg-slate-700 ">Artist</option>
+                <option value="audi" class="text-xs bg-slate-700 ">Duration</option>
+            </select>
+            <!-- Drop Down Menu Ends -->
+
+
+        </div>
+    </div>
+    <!-- Playlist Page Control Options Ends -->
+
+    <!-- Playlist Section Starts -->
+    <section class="text-gray-600 body-font bg-gradient-to-b from-purple-900 from-20% to-black to-90%">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="w-5/6 block mx-auto">
+                <!-- Playlist Table Starts -->
+                <table class="w-full mx-auto table-fixed text-left">
+                    <!-- Table headers -->
+                    <thead>
+                        <tr class="bg-inherit text-white">
+                            <th class="w-1/12 py-2 border-b border-gray-500">#</th>
+                            <th class="w-4/12 py-2 border-b border-gray-500">Title</th>
+                            <th class="w-3/12 py-2 border-b border-gray-500">Artist</th>
+                            <th class="w-2/12 py-2 border-b border-gray-500">
+                                <span class="material-symbols-outlined">
+                                    schedule
+                                </span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <!-- Table rows -->
+                    <tbody>
+                        <tr class="bg-bg-inherit hover:bg-purple-800 text-white cursor-pointer playlist-item">
+                            <td class="w-1/12 py-2">1</td>
+                            <td class="w-4/12 py-2">
+                                <div class="music-title">Music 1</div>
+                            </td>
+                            <td class="w-3/12 py-2">
+                                <div class="artist-name">Artist 1</div>
+                            </td>
+                            <td class="w-2/12 py-2">
+                                <div class="music-time">0:00</div>
+                            </td>
+                        </tr>
+                        <tr class="bg-bg-inherit hover:bg-purple-800 text-white cursor-pointer playlist-item">
+                            <td class="w-1/12 py-2">2</td>
+                            <td class="w-4/12 py-2">
+                                <div class="music-title">Music 2</div>
+                            </td>
+                            <td class="w-3/12 py-2">
+                                <div class="artist-name">Artist 2</div>
+                            </td>
+                            <td class="w-2/12 py-2">
+                                <div class="music-time">0:00</div>
+                            </td>
+                        </tr>
+                        <tr class="bg-bg-inherit hover:bg-purple-800 text-white cursor-pointer playlist-item">
+                            <td class="w-1/12 py-2">3</td>
+                            <td class="w-4/12 py-2">
+                                <div class="music-title">Music 3</div>
+                            </td>
+                            <td class="w-3/12 py-2">
+                                <div class="artist-name">Artist 3</div>
+                            </td>
+                            <td class="w-2/12 py-2">
+                                <div class="music-time">0:00</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- Playlist Table Ends -->
+            </div>
+        </div>
+    </section>
+    <!-- Playlist Section Ends -->
+    <!-- Playlist Page Ends -->
+
+    <!-- Footer -->
+    <footer id="footerMusicPlayer" class="text-white font-bold bg-black body-font"></footer>
+    <!-- Footer -->
+
+    <!-- Script tag for our musicPlayer.js -->
+    <script src="playList.js"></script>
+    <!-- Script tag for our musicPlayer.js -->
+</body>
+
+</html>
