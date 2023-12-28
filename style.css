@@ -1,0 +1,20 @@
+
+.prev:hover{
+    font-size: 2rem;
+    
+    transition: .05s ;
+}
+.pause:hover{
+    font-size: 2rem;
+    transition: .05s ;
+}
+
+.next:hover{
+    font-size: 2rem;
+    transition: .05s ;
+}
+
+.play:hover{
+    font-size: 2rem;
+    transition: .05s ;
+}
