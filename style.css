@@ -1,0 +1,33 @@
+.prev{
+    margin: 20px 5px;
+}
+.prev:hover{
+    font-size: 2rem;
+    margin: 18px 1px;
+    transition: .05s ;
+}
+.pause{
+    margin: 20px 5px;
+    
+}
+.pause:hover{
+    font-size: 2rem;
+    margin: 20px 1px;
+    transition: .05s ;
+}
+.next{
+    margin: 20px 5px;
+}
+.next:hover{
+    font-size: 2rem;
+    margin: 20px 1px;
+    transition: .05s ;
+}
+.play{
+    margin: 20px 5px;
+}
+.play:hover{
+    font-size: 2rem;
+    margin: 20px 1px;
+    transition: .05s ;
+}
