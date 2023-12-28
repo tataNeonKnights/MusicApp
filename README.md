@@ -24,6 +24,9 @@ Meet the talented individuals behind this project:
 - **Binod Rai**
   - GitHub: [binodrai9](https://github.com/binodrai9)
 
+ - **Ravi Maurya**
+  - GitHub: [Ravi2977](https://github.com/Ravi2977)
+
 ## About the Project
 
 The Spotify Clone project is a learning endeavor by our team, consisting of Akash Vasava, Mohiyaddeen Raza, Lipi Dey, and Binod Rai. The primary purpose of this project is to gain practical experience in web development and application design.
