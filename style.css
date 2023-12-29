@@ -38,34 +38,34 @@
 
   
   /* Common button styles */
-  button {
+  /* button {
     border: none;
     background-color: transparent;
     cursor: pointer;
     font-size: 14px;
     margin: 7px;
   }
-  
+   */
   /* Like Button specific styles */
-  .like {
-    color: #4CAF50; /* Green color for the like button */
-  }
+  /* .like {
+    color: #4CAF50; 
+  } */
   
   /* Karaoke Button specific styles */
-  .karaoke {
-    color: #2196F3; /* Blue color for the karaoke button */
-  }
+  /* .karaoke {
+    color: #2196F3;
+  } */
   
   /* Hamburger Menu specific styles */
-  .dropdown {
+  /* .dropdown {
     position: relative;
     display: inline-block;
-  }
+  } */
   
-  .hamburger {
-    color: #FF9800; /* Orange color for the hamburger menu */
+  /* .hamburger {
+    color: #FF9800; 
   }
-  
+   */
   .dropdown-content {
     display: none;
     position: absolute;
