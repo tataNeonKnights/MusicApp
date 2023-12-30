@@ -15,8 +15,11 @@ Meet the talented individuals behind this project:
 - **Akash Vasava**
   - GitHub: [Akash9119](https://github.com/Akash9119)
 
-- **Mohiyaddeen Raza**
+- **Mohiyaddeen Raza (Project Lead)**
   - GitHub: [mohiyaddeen7](https://github.com/mohiyaddeen7)
+
+- **Ravi Maurya**
+  - GitHub: [ravi2977](https://github.com/ravi2977)
 
 - **Lipi Dey**
   - GitHub: [LipiDey](https://github.com/LipiDey)
