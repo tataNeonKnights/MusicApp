@@ -5,6 +5,7 @@ import Home from "./Components/Home";
 import MusicPlayer from "./Components/MusicPlayer";
 import Navbar from "./Components/Navbar";
 
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Playlists from "./Components/Playlists";
 
@@ -12,7 +13,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-
+        
         <Navbar />
         <Routes>
           <Route exact path="/" element={<Home />}></Route>

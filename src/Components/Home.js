@@ -5,6 +5,7 @@ import TrendingPlaylists from "./TrendingPlaylists";
 import ArtistsCardsHome from "./ArtistsCardsHome";
 import PopularPlaylists from "./PopularPlaylists";
 
+
 export default function Home() {
   return (
     <>
