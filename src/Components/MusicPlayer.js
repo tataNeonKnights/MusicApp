@@ -233,10 +233,30 @@ export default function MusicPlayer() {
           <div className="flex items-center justify-between">
             <div className="audioTitle p-2 ">title</div>
 
-            <div className=" ">
+            <div className="flex flex-row">
               {/* Karaoke Button */}
               <button className="karaoke material-icons w-1/4 text-blue-500 mr-1">
                 mic
+              </button>
+
+              {/* Loop Button */}
+              <button className="material-symbols-outlined w-1/4 text-gray-500 mr-1">
+                laps
+              </button>
+
+              {/* Volume Up Button */}
+              <button className="material-symbols-outlined w-1/4 text-gray-500 mr-1">
+              volume_up
+              </button>
+
+              {/* Volume Down Button */}
+              <button className="material-symbols-outlined w-1/4 text-gray-500 mr-1">
+              volume_down
+              </button>
+
+              {/* Volume Off Button */}
+              <button className="material-symbols-outlined w-1/4 text-gray-500 mr-1">
+              volume_off
               </button>
 
               {/* Like Button */}
