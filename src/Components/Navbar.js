@@ -24,7 +24,7 @@ export default function Navbar() {
     return (
     <header   
       id="includeNavbarLanding"
-      className={`text-gray-600 body-font z-10 shadow-md ${
+      className={`text-gray-600 bg-green-100 body-font z-10 shadow-md ${
         isSticky ? 'sticky-nav' : ''
       }`}
     >
