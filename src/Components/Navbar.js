@@ -33,8 +33,8 @@ export default function Navbar() {
           <span className="ml-3 text-2xl cursor-pointer">Spotify 2.0</span>
         </a>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-          <a className="mr-5 hover:text-gray-950 cursor-pointer font-semibold text-xl font-sans">Home</a>
-          <a className="mr-5 hover:text-gray-950 cursor-pointer font-semibold text-xl font-sans">Your Library</a>
+          <a className="mr-5 hover:text-gray-950 cursor-pointer font-semibold text-lg font-sans">Home</a>
+          <a className="mr-5 hover:text-gray-950 cursor-pointer font-semibold text-lg font-sans">Your Library</a>
         </nav>
         
         <div className="dropdown inline-block relative mr-7">

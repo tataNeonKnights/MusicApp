@@ -235,8 +235,8 @@ export default function MusicPlayer() {
 
             <div className="flex flex-row">
               {/* Karaoke Button */}
-              <button className="karaoke material-icons w-1/4 text-blue-500 mr-1">
-                mic
+              <button className="karaoke material-icons w-1/4 text-black-500 mr-1">
+              headset_mic
               </button>
 
               {/* Loop Button */}
@@ -260,8 +260,8 @@ export default function MusicPlayer() {
               </button>
 
               {/* Like Button */}
-              <button className="like material-icons w-1/4 text-green-500 mr-1">
-                thumb_up
+              <button className="like material-icons w-1/4 text-black-500 mr-1">
+                favorite
               </button>
 
               {/* Hamburger Menu with Dropdown List */}
