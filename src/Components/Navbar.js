@@ -4,7 +4,7 @@ export default function Navbar() {
   return (
     <header
       id="includeNavbarLanding"
-      className="text-gray-600 bg-green-100 body-font z-10 shadow-md"
+      className="text-gray-600 bg-indigo-200 body-font z-10 shadow-md"
     >
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">

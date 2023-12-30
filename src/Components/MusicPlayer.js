@@ -221,7 +221,7 @@ export default function MusicPlayer() {
     };
   }, []);
   return (
-    <div className="container">
+    <div className="container bg-gradient-to-b from-indigo-200 from-2% via-purple-500 via-10% to-black to-30%">
       <div className="flex flex-col justify-center items-center py-12">
         {/* Audio Details */}
         <div className="audioDetails flex flex-col p-4 ">
@@ -231,7 +231,7 @@ export default function MusicPlayer() {
             alt="blog"
           />
           <div className="flex items-center justify-between">
-            <div className="audioTitle p-2 ">title</div>
+            <div className="audioTitle p-2 text-white">title</div>
 
             <div className="flex flex-row">
               {/* Karaoke Button */}
@@ -240,22 +240,22 @@ export default function MusicPlayer() {
               </button>
 
               {/* Loop Button */}
-              <button className="material-symbols-outlined w-1/4 text-gray-500 mr-1">
+              <button className="material-symbols-outlined w-1/4 text-gray-400 mr-1">
                 laps
               </button>
 
               {/* Volume Up Button */}
-              <button className="material-symbols-outlined w-1/4 text-gray-500 mr-1">
+              <button className="material-symbols-outlined w-1/4 text-gray-400 mr-1">
               volume_up
               </button>
 
               {/* Volume Down Button */}
-              <button className="material-symbols-outlined w-1/4 text-gray-500 mr-1">
+              <button className="material-symbols-outlined w-1/4 text-gray-400 mr-1">
               volume_down
               </button>
 
               {/* Volume Off Button */}
-              <button className="material-symbols-outlined w-1/4 text-gray-500 mr-1">
+              <button className="material-symbols-outlined w-1/4 text-gray-400 mr-1">
               volume_off
               </button>
 
@@ -266,10 +266,10 @@ export default function MusicPlayer() {
 
               {/* Hamburger Menu with Dropdown List */}
               <div className="dropdown inline-block  mr-1 relative">
-                <button className="hamburger material-icons text-gray-600">
+                <button className="hamburger material-icons text-gray-400">
                   menu
                 </button>
-                <div className="dropdown-content top-4 right-0 absolute bg-white border shadow-md mt-2 py-2">
+                <div className="dropdown-content top-4 right-0 absolute bg-inherit border shadow-md mt-2 py-2">
                   <a
                     href="#"
                     className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
@@ -314,7 +314,7 @@ export default function MusicPlayer() {
 
           {/* Progress Bar */}
           <div
-            className="audio-track w-[150px] h-[10px] bg-gray-500 cursor-pointer"
+            className="audio-track w-[150px] h-[10px] bg-gray-400 cursor-pointer"
             onClick={handleProgressClick}
           >
             <div className="timeBar w-[0px] h-[10px] bg-green-700"></div>
@@ -324,7 +324,7 @@ export default function MusicPlayer() {
           {/* Button controls */}
           <div className="buttonControls flex justify-center items-center h-[5vh]">
             <button
-              className="prev  material-symbols-outlined w-1/4"
+              className="prev material-symbols-outlined w-1/4"
               onClick={handlePrevButton}
             >
               skip_previous

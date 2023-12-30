@@ -14,7 +14,7 @@ export default function ArtistsCards() {
           alt="blog"
         />
         <div className="p-6">
-          <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+          <h1 className="title-font text-lg font-medium text-gray-400 mb-3">
             The Catalyzer
           </h1>
           <p className="leading-relaxed mb-3">
@@ -33,7 +33,7 @@ export default function ArtistsCards() {
           alt="blog"
         />
         <div className="p-6">
-          <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+          <h1 className="title-font text-lg font-medium text-gray-400 mb-3">
             The Catalyzer
           </h1>
           <p className="leading-relaxed mb-3">
@@ -52,7 +52,7 @@ export default function ArtistsCards() {
           alt="blog"
         />
         <div className="p-6">
-          <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+          <h1 className="title-font text-lg font-medium text-gray-400 mb-3">
             The Catalyzer
           </h1>
           <p className="leading-relaxed mb-3">
@@ -71,7 +71,7 @@ export default function ArtistsCards() {
           alt="blog"
         />
         <div className="p-6">
-          <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+          <h1 className="title-font text-lg font-medium text-gray-400 mb-3">
             The Catalyzer
           </h1>
           <p className="leading-relaxed mb-3">
@@ -90,7 +90,7 @@ export default function ArtistsCards() {
           alt="blog"
         />
         <div className="p-6">
-          <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+          <h1 className="title-font text-lg font-medium text-gray-400 mb-3">
             The Catalyzer
           </h1>
           <p className="leading-relaxed mb-3">
@@ -109,7 +109,7 @@ export default function ArtistsCards() {
           alt="blog"
         />
         <div className="p-6">
-          <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+          <h1 className="title-font text-lg font-medium text-gray-400 mb-3">
             The Catalyzer
           </h1>
           <p className="leading-relaxed mb-3">
@@ -128,7 +128,7 @@ export default function ArtistsCards() {
           alt="blog"
         />
         <div className="p-6">
-          <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+          <h1 className="title-font text-lg font-medium text-gray-400 mb-3">
             The Catalyzer
           </h1>
           <p className="leading-relaxed mb-3">
@@ -147,7 +147,7 @@ export default function ArtistsCards() {
           alt="blog"
         />
         <div className="p-6">
-          <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+          <h1 className="title-font text-lg font-medium text-gray-400 mb-3">
             The Catalyzer
           </h1>
           <p className="leading-relaxed mb-3">
@@ -166,7 +166,7 @@ export default function ArtistsCards() {
           alt="blog"
         />
         <div className="p-6">
-          <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+          <h1 className="title-font text-lg font-medium text-gray-400 mb-3">
             The Catalyzer
           </h1>
           <p className="leading-relaxed mb-3">
@@ -185,7 +185,7 @@ export default function ArtistsCards() {
           alt="blog"
         />
         <div className="p-6">
-          <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+          <h1 className="title-font text-lg font-medium text-gray-400 mb-3">
             The Catalyzer
           </h1>
           <p className="leading-relaxed mb-3">
@@ -204,7 +204,7 @@ export default function ArtistsCards() {
           alt="blog"
         />
         <div className="p-6">
-          <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+          <h1 className="title-font text-lg font-medium text-gray-400 mb-3">
             The Catalyzer
           </h1>
           <p className="leading-relaxed mb-3">
@@ -223,7 +223,7 @@ export default function ArtistsCards() {
           alt="blog"
         />
         <div className="p-6">
-          <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+          <h1 className="title-font text-lg font-medium text-gray-400 mb-3">
             The Catalyzer
           </h1>
           <p className="leading-relaxed mb-3">
@@ -242,7 +242,7 @@ export default function ArtistsCards() {
           alt="blog"
         />
         <div className="p-6">
-          <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+          <h1 className="title-font text-lg font-medium text-gray-400 mb-3">
             The Catalyzer
           </h1>
           <p className="leading-relaxed mb-3">

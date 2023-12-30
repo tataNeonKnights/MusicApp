@@ -8,7 +8,7 @@ export default function TrendingPlaylists() {
       <h2 className="px-5 m-2">Trending</h2>
       <div
         id="includeTrendingCardsLanding"
-        className="text-gray-600 body-font container px-5 mx-auto overflow-x-auto"
+        className="text-gray-300 body-font container px-5 mx-auto overflow-x-auto"
       >
         <Cards />
       </div>

@@ -3,7 +3,7 @@ import React from "react";
 export default function Playlists() {
   return (
     <>
-      <div className="bg-gradient-to-b from-green-100 via-indigo-300 to-purple-500 flex items-center text-slate-800">
+      <div className="bg-gradient-to-b from-indigo-200 to-purple-500 flex items-center text-slate-800">
         <div className="border-4 border-purple-400 m-6 w-1/5 rounded-3xl drop-shadow-xl">
           <img
             className="rounded-2xl"
