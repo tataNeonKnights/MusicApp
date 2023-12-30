@@ -7,6 +7,8 @@ import Navbar from "./Components/Navbar";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Playlists from "./Components/Playlists";
+import Login from "./Components/Login";
+import Signup from "./Components/Signup";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
           <Route exact path="/" element={<Home />}></Route>
           <Route exact path="/musicplayer" element={<MusicPlayer />}></Route>
           <Route exact path="/playlists" element={<Playlists />}></Route>
+          <Route exact path="/login" element={<Login />}></Route>
+          <Route exact path="/signup" element={<Signup/>}></Route>
         </Routes>
         <Footer />
 
