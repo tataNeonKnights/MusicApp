@@ -236,8 +236,8 @@ export default function MusicPlayer() {
             <div className="flex flex-row">
               {/* Karaoke Button */}
               <button className="karaoke material-icons w-1/4 text-black-500 mr-1">
-              mic
-              </button>
+              mic_external_on
+              </button>   
 
               {/* Loop Button */}
               <button className="material-symbols-outlined w-1/4 text-gray-500 mr-1">
