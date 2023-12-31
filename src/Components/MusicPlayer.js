@@ -261,7 +261,7 @@ export default function MusicPlayer() {
 
               {/* Like Button */}
               <button className="like material-icons w-1/4 text-green-500 mr-1">
-                thumb_up
+                favorite
               </button>
 
               {/* Hamburger Menu with Dropdown List */}

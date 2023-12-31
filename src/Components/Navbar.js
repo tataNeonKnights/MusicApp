@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from 'react-router-dom';
 
 export default function Navbar() {
   return (
@@ -7,12 +8,15 @@ export default function Navbar() {
       className="text-gray-600 bg-green-100 body-font z-10 shadow-md"
     >
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-        <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+        <div className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
           <span className="ml-3 text-xl cursor-pointer">Spotify 2.0</span>
-        </a>
+        </div>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-          <a className="mr-5 hover:text-gray-900 cursor-pointer">Home</a>
-          <a className="mr-5 hover:text-gray-900 cursor-pointer">Your Library</a>
+        <NavLink to="/" >
+          <div  className="mr-5 hover:text-gray-900 cursor-pointer">Home</div>
+        </NavLink>
+
+          <div className="mr-5 hover:text-gray-900 cursor-pointer">Your Library</div>
         </nav>
 
         <div className="dropdown inline-block relative mr-7">

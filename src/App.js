@@ -1,5 +1,5 @@
 import "./App.css";
-
+import React, {useState} from "react";
 import Footer from "./Components/Footer";
 import Home from "./Components/Home";
 import MusicPlayer from "./Components/MusicPlayer";
@@ -9,9 +9,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Playlists from "./Components/Playlists";
 
 function App() {
+  const [data, setData] = useState(1);
   return (
     <div className="App">
-      <Router>
+
+      {<Router>
 
         <Navbar />
         <Routes>
@@ -21,7 +23,11 @@ function App() {
         </Routes>
         <Footer />
 
-      </Router>
+      </Router> 
+      
+      
+      
+      }
     </div>
   );
 }

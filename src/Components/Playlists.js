@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from 'react-router-dom';
 
 export default function Playlists() {
   return (
@@ -37,11 +38,13 @@ export default function Playlists() {
 
       <div className="h-20 bg-gradient-to-b from-purple-500 to-purple-900 flex text-white justify-between px-10">
         <div className="text-3xl text-white flex flex-row items-center">
+        <NavLink to="/musicplayer" >
           <div className=" bg-green-500 rounded-full h-10 w-10 mr-6 border-black border-2 transition-transform transform hover:-translate-y-1 hover:shadow-md hover:shadow-[rgba(115,255,87)]">
             <button className="material-symbols-outlined  w-full h-full">
               play_arrow
             </button>
           </div>
+        </NavLink>  
 
           <div className="group relative inline-block shuffle">
             <span className="material-symbols-outlined rounded-full p-1 cursor-pointer m-2">
