@@ -1,33 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 
 export default function Navbar() {
-  const [isSticky, setIsSticky] = useState(false);
-
   useEffect(() => {
-    const handleScroll = () => {
-      const offset = window.scrollY;
-      if (offset > 100) {
-        setIsSticky(true);
+    let navBar = document.getElementById("navBar");
+    let oldScrollY = window.scrollY;
+
+    window.addEventListener("scroll", (e) => {
+      const currentScroll = window.scrollY;
+
+      if (oldScrollY > currentScroll) {
+        navBar.classList.add("sticky");
       } else {
-        setIsSticky(false);
+        navBar.classList.remove("sticky");
       }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    // Clean up the event listener
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+      oldScrollY = currentScroll <= 0 ? 0 : currentScroll;
+    });
   }, []);
 
     return (
+      <div className="top-0 z-10" id="navBar">
     <header   
       id="includeNavbarLanding"
-      className={`text-gray-600 bg-green-100 body-font z-10 shadow-md ${
-        isSticky ? 'sticky-nav' : ''
-      }`}
+      className="text-gray-600 bg-green-100 body-font shadow-md"
     >
+
        <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         <a className="flex title-font font-bold items-center text-gray-900 font-sans mb-4 md:mb-0">
           <span className="ml-3 text-2xl cursor-pointer">Spotify 2.0</span>
@@ -55,6 +51,7 @@ export default function Navbar() {
         </div>
       </div>  
 </header>
+</div>
     );
 }
       
