@@ -18,10 +18,10 @@ export default function Navbar() {
   }, []);
 
     return (
-      <div className="top-0 z-10" id="navBar">
+      <div className="top-0 z-10 shadow-md" id="navBar">
     <header   
       id="includeNavbarLanding"
-      className="text-gray-600 bg-green-100 body-font shadow-md"
+      className="text-gray-600 bg-green-100 body-font"
     >
 
        <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
