@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import ArtistsCards from "./ArtistsCards";
+import UsersContext from "../Memory/UsersContext";
 
 export default function ArtistsCardsHome() {
+  const { users } = useContext(UsersContext);
+
   return (
     // <!-- Artists  -->
     <div className="flex flex-col py-12  justify-center items-start">
@@ -10,7 +13,11 @@ export default function ArtistsCardsHome() {
         id="includeArtistsCardsLanding"
         className="text-gray-600 body-font container px-5 mx-auto overflow-x-auto"
       >
-        <ArtistsCards />
+        <div className="flex">
+          {Object.keys(users).map((item) => {
+            return <ArtistsCards key={item} item={item} />;
+          })}
+        </div>
       </div>
     </div>
     // <!-- Artists  -->

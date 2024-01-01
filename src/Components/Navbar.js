@@ -12,7 +12,9 @@ export default function Navbar() {
         </a>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
           <a className="mr-5 hover:text-gray-900 cursor-pointer">Home</a>
-          <a className="mr-5 hover:text-gray-900 cursor-pointer">Your Library</a>
+          <a className="mr-5 hover:text-gray-900 cursor-pointer">
+            Your Library
+          </a>
         </nav>
 
         <div className="dropdown inline-block relative mr-7">
@@ -20,13 +22,22 @@ export default function Navbar() {
             menu
           </button>
           <div className="dropdown-content absolute top-7 right-0  bg-white border shadow-md mt-2 py-2">
-            <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+            <a
+              href="#"
+              className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+            >
               Item 1
             </a>
-            <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+            <a
+              href="#"
+              className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+            >
               Item 2
             </a>
-            <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-200">
+            <a
+              href="#"
+              className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+            >
               Item 3
             </a>
           </div>
