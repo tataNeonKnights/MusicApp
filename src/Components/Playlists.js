@@ -1,34 +1,55 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import { NavLink, useParams } from "react-router-dom";
+import PlaylistsContext from "../Memory/PlaylistsContext";
+import SongsContext from "../Memory/SongsContext";
+import UsersContext from "../Memory/UsersContext";
+import CurrentPlaylistContext from "../Memory/CurrentPlaylistContext";
 
 export default function Playlists() {
+  const { playlists } = useContext(PlaylistsContext);
+  const { playlistId } = useParams();
+  const { songs } = useContext(SongsContext);
+  const { users } = useContext(UsersContext);
+  // console.log(songs);
+
+  const { playlist, setPlaylist } = useContext(CurrentPlaylistContext);
+
+  useEffect(() => {
+    let playlistData = playlists[playlistId].songs;
+    // console.log("playlist master data : ",playlistData)
+    setPlaylist(playlistData);
+  }, []);
+
   return (
     <>
       <div className="bg-gradient-to-b from-green-100 via-indigo-300 to-purple-500 flex items-center text-slate-800">
         <div className="border-4 border-purple-400 m-6 w-1/5 rounded-3xl drop-shadow-xl">
           <img
             className="rounded-2xl"
-            src="./Assets/Legends-Never-Die/Legends-Never-Die-Photo.jpg"
+            src="/Assets/Legends-Never-Die/Legends-Never-Die-Photo.jpg"
             alt="Playlist-Image"
           />
         </div>
         <div className="flex  flex-col items-start">
           <p className="text-sm mb-2">Public Playlist</p>
-          <h1 className="font-bold text-4xl">Melody Songs Playlist</h1>
+          <h1 className="font-bold text-4xl">{playlists[playlistId].name}</h1>
           <div className="flex flex-row mt-1">
             <img
               className="rounded-full w-6"
-              src="./Assets/Legends-Never-Die/Legends-Never-Die-Photo.jpg"
+              src="/Assets/Legends-Never-Die/Legends-Never-Die-Photo.jpg"
               alt="Artist"
             />
             &nbsp; *
             <p className="text-slate-900 text-sm mx-2">
-              <a className="hover:underline" href="/">
-                User Name
+              <a className="hover:underline" href="#">
+                {users[playlists[playlistId].user].name}
               </a>
             </p>
             *
             <p id="songCount" className="text-slate-900 text-sm mx-2">
-              0 Songs
+              {playlists[playlistId].songs.length > 1
+                ? playlists[playlistId].songs.length + " Songs"
+                : playlists[playlistId].songs.length + " Song"}
             </p>
             *
           </div>
@@ -111,56 +132,59 @@ export default function Playlists() {
             <table className="w-full mx-auto table-fixed text-left">
               <thead>
                 <tr className="bg-inherit text-white">
-                  <th className="w-1/12 py-2 border-b border-gray-500">#</th>
-                  <th className="w-4/12 py-2 border-b border-gray-500">
-                    Title
-                  </th>
-                  <th className="w-3/12 py-2 border-b border-gray-500">
+                  <th className="w-1/4 py-2 border-b border-gray-500">#</th>
+                  <th className="w-1/4 py-2 border-b border-gray-500">Title</th>
+                  <th className="w-1/4 py-2 border-b border-gray-500">
                     Artist
                   </th>
-                  <th className="w-2/12 py-2 border-b border-gray-500">
+                  <th className="w-1/4 py-2 border-b border-gray-500">
                     <span className="material-symbols-outlined">schedule</span>
                   </th>
                 </tr>
               </thead>
 
               <tbody>
-                <tr className="bg-bg-inherit hover:bg-purple-800 text-white cursor-pointer playlist-item">
-                  <td className="w-1/12 py-2">1</td>
-                  <td className="w-4/12 py-2">
-                    <div className="music-title">Music 1</div>
-                  </td>
-                  <td className="w-3/12 py-2">
-                    <div className="artist-name">Artist 1</div>
-                  </td>
-                  <td className="w-2/12 py-2">
-                    <div className="music-time">0:00</div>
-                  </td>
-                </tr>
-                <tr className="bg-bg-inherit hover:bg-purple-800 text-white cursor-pointer playlist-item">
-                  <td className="w-1/12 py-2">2</td>
-                  <td className="w-4/12 py-2">
-                    <div className="music-title">Music 2</div>
-                  </td>
-                  <td className="w-3/12 py-2">
-                    <div className="artist-name">Artist 2</div>
-                  </td>
-                  <td className="w-2/12 py-2">
-                    <div className="music-time">0:00</div>
-                  </td>
-                </tr>
-                <tr className="bg-bg-inherit hover:bg-purple-800 text-white cursor-pointer playlist-item">
-                  <td className="w-1/12 py-2">3</td>
-                  <td className="w-4/12 py-2">
-                    <div className="music-title">Music 3</div>
-                  </td>
-                  <td className="w-3/12 py-2">
-                    <div className="artist-name">Artist 3</div>
-                  </td>
-                  <td className="w-2/12 py-2">
-                    <div className="music-time">0:00</div>
-                  </td>
-                </tr>
+                {playlists[playlistId].songs.map((item, index) => {
+                  return (
+                    <tr
+                      className="bg-bg-inherit hover:bg-purple-800 text-white cursor-pointer playlist-item"
+                      key={item}
+                    >
+                      <td className="w-1/12">
+                        <NavLink
+                          to={`/musicplayer/${item}`}
+                          className="w-full block  py-2"
+                        >
+                          {index + 1}
+                        </NavLink>
+                      </td>
+                      <td className="w-4/12">
+                        <NavLink
+                          to={`/musicplayer/${item}`}
+                          className="music-title w-full block py-2"
+                        >
+                          {songs[item].name}
+                        </NavLink>
+                      </td>
+                      <td className="w-3/12 ">
+                        <NavLink
+                          to={`/musicplayer/${item}`}
+                          className="artist-name w-full block py-2"
+                        >
+                          {songs[item].name}
+                        </NavLink>
+                      </td>
+                      <td className="w-2/12 ">
+                        <NavLink
+                          to={`/musicplayer/${item}`}
+                          className="music-time w-full block py-2"
+                        >
+                          {songs[item].duration}
+                        </NavLink>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

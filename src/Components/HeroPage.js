@@ -6,7 +6,7 @@ export default function HeroPage() {
       id="heroPage"
       className="h-72 py-12 [100vw] bg-green-700 flex justify-center items-center text-white overflow-hidden text-xl"
     >
-        Spotify-Clone
+      Spotify-Clone
     </div>
   );
 }

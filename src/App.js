@@ -7,21 +7,40 @@ import Navbar from "./Components/Navbar";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Playlists from "./Components/Playlists";
+import PlaylistsState from "./Memory/PlaylistsState";
+import SongsState from "./Memory/SongsState";
+import UsersState from "./Memory/UsersState";
+import CurrentPlaylistState from "./Memory/CurrentPlaylistState";
+
 
 function App() {
   return (
     <div className="App">
-      <Router>
-
-        <Navbar />
-        <Routes>
-          <Route exact path="/" element={<Home />}></Route>
-          <Route exact path="/musicplayer" element={<MusicPlayer />}></Route>
-          <Route exact path="/playlists" element={<Playlists />}></Route>
-        </Routes>
-        <Footer />
-
-      </Router>
+      <PlaylistsState>
+        <SongsState>
+          <UsersState>
+            <CurrentPlaylistState>
+              <Router>
+                <Navbar />
+                <Routes>
+                  <Route exact path="/" element={<Home />}></Route>
+                  <Route
+                    exact
+                    path="/musicplayer/:identifier"
+                    element={<MusicPlayer />}
+                  ></Route>
+                  <Route
+                    exact
+                    path="/playlists/:playlistId"
+                    element={<Playlists />}
+                  ></Route>
+                </Routes>
+                <Footer />
+              </Router>
+            </CurrentPlaylistState>
+          </UsersState>
+        </SongsState>
+      </PlaylistsState>
     </div>
   );
 }

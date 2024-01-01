@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import NewMusicPlaylist from "./NewMusicPlaylist";
 import TrendingPlaylists from "./TrendingPlaylists";
 import ArtistsCardsHome from "./ArtistsCardsHome";
 import PopularPlaylists from "./PopularPlaylists";
+import { useParams } from "react-router-dom";
+import SongsContext from "../Memory/SongsContext";
+import PlaylistsContext from "../Memory/PlaylistsContext";
+import CurrentPlaylistContext from "../Memory/CurrentPlaylistContext";
 
 export default function MusicPlayer() {
   let audio; // Take the audio element
@@ -22,204 +26,245 @@ export default function MusicPlayer() {
   let playing;
   let audioPlay;
 
-  const [playlist, setPlaylist] = useState([
-    "Heartbreak-Anniversary.mp3",
-    "Ordinary-Person.mp3",
-    "thank-you.mp3",
-  ]);
-
-  const [titleSong, settitleSong] = useState([
-    "Heartbreak Anniversary by Giveon",
-    "Ordinary Person by Anirudh Ravichander",
-    "Thank you by Dido",
-  ]);
+  // const [playlist, setPlaylist] = useState([""]);
+  const { playlist, setPlaylist } = useContext(CurrentPlaylistContext);
+  // console.log("playlist master data in music player : ", playlist);
 
   // Added an event listener so that when the user presses spacebar audio starts playing or stops playing
   const handleSpaceUpEvent = (event) => {
-    if (event.code === "Space" || event.key === " ") {
-      if (playing === true) {
-        handlePauseButton();
-      } else {
-        console.log("clicked in space");
-        handlePlayButton();
+    try {
+      if (event.code === "Space" || event.key === " ") {
+        if (playing === true) {
+          handlePauseButton();
+        } else {
+          // console.log("clicked in space");
+          handlePlayButton();
+        }
       }
+    } catch (error) {
+      console.log("Some error fetching");
     }
   };
 
   // Created an event to fire when the user hits spacebar and to prevent default behaviour of spacebar which is to scroll the page
   const handleSpaceDownEvent = (event) => {
-    if (event.code === "Space" || event.key === " ") {
-      event.preventDefault();
+    try {
+      if (event.code === "Space" || event.key === " ") {
+        event.preventDefault();
+      }
+    } catch (error) {
+      console.log("Some error fetching");
     }
   };
 
   // created a function to handle the switching of audio tracks.
   function switchTrack(numTrack) {
-    // Change the src attribute value of the audio element to the target audio track.
-    handlePauseButton();
-    audio.src = "./Assets/Songs-Raza/" + playlist[numTrack];
-    console.log(audio.src);
+    try {
+      // Change the src attribute value of the audio element to the target audio track.
+      handlePauseButton();
+      audio.src = songs[playlist[numTrack]].audio;
+      // console.log(audio.src);
 
-    // Initilize the audio progress bar and audio
-    audio.currentTime = 0;
-    time.style.width = 0;
+      // Initilize the audio progress bar and audio
+      audio.currentTime = 0;
+      time.style.width = 0;
 
-    // Play the song
-    handlePlayButton();
+      // Play the song
+      handlePlayButton();
+    } catch (error) {
+      console.log("Some error fetching");
+    }
   }
 
   //Added an event listener to toggle play and pause icons
   const handelPlayPause = () => {
-    console.log("play pause called");
-    if (playing === true) {
-      btnPlay.classList.add("hidden");
-      btnPause.classList.remove("hidden");
-    } else {
-      btnPlay.classList.remove("hidden");
-      btnPause.classList.add("hidden");
+    try {
+      // console.log("play pause called");
+      if (playing === true) {
+        btnPlay.classList.add("hidden");
+        btnPause.classList.remove("hidden");
+      } else {
+        btnPlay.classList.remove("hidden");
+        btnPause.classList.add("hidden");
+      }
+    } catch (error) {
+      console.log("Some error fetching");
     }
   };
 
   //Added an event listener on the play button to play the audio
-  const handlePlayButton = () => {
-    //Setting the title with respect to the audio playing
-    audioTitle.innerHTML = titleSong[track];
+  const handlePlayButton = async () => {
+    try {
+      //Setting the title with respect to the audio playing
 
-    //Method to play the audio
+      //Method to play the audio
 
-    audio.play();
-    playing = true;
-    handelPlayPause();
+      await audio.play();
+      audioTitle.innerHTML = songs[playlist[track]].name;
+      playing = true;
+      handelPlayPause();
 
-    // Now we will set an interval when the audio is playing and will clear the interval when the audio is paused
-    audioPlay = setInterval(function () {
-      //Calculating and updating the current audio time tracker.
-      // Get the value of what second the song is at.
-      let currentAudioTime = Math.round(audio.currentTime);
-      //Calculate minutes
-      let minutesCurrent = Math.floor(currentAudioTime / 60);
-      // calculate seconds
-      let secondsCurrent = currentAudioTime % 60;
+      // Now we will set an interval when the audio is playing and will clear the interval when the audio is paused
+      audioPlay = setInterval(function () {
+        //Calculating and updating the current audio time tracker.
+        // Get the value of what second the song is at.
+        let currentAudioTime = Math.round(audio.currentTime);
+        //Calculate minutes
+        let minutesCurrent = Math.floor(currentAudioTime / 60);
+        // calculate seconds
+        let secondsCurrent = currentAudioTime % 60;
 
-      // if seconds is a single character add a "0" at the starting. eg :- 01,02,03...etc.
-      if ((secondsCurrent + "").length < 2) {
-        secondsCurrent = "0" + secondsCurrent;
-      }
-      //Now here we will update the current audio time tracker
-      currentTimeAudio.innerHTML = minutesCurrent + ":" + secondsCurrent;
+        // if seconds is a single character add a "0" at the starting. eg :- 01,02,03...etc.
+        if ((secondsCurrent + "").length < 2) {
+          secondsCurrent = "0" + secondsCurrent;
+        }
+        //Now here we will update the current audio time tracker
+        currentTimeAudio.innerHTML = minutesCurrent + ":" + secondsCurrent;
 
-      //Here we are updating audio progress bar
-      // Get the value of what second the song is at
-      let audioTime = Math.round(audio.currentTime);
-      // We get songs with different durations
-      let audioLength = Math.round(audio.duration);
-      // Assign a width to an element at time
-      time.style.width = (audioTime * 100) / audioLength + "%";
+        //Here we are updating audio progress bar
+        // Get the value of what second the song is at
+        let audioTime = Math.round(audio.currentTime);
+        // We get songs with different durations
+        let audioLength = Math.round(audio.duration);
+        // Assign a width to an element at time
+        time.style.width = (audioTime * 100) / audioLength + "%";
 
-      //Calculating and updating the total audio time tracker.
-      // Get the total duration of the audio.
-      let totalAudioTime = Math.round(audio.duration);
-      //Calculate minutes
-      let minutesTotal = Math.floor(totalAudioTime / 60);
-      // calculate seconds
-      let secondsTotal = totalAudioTime % 60;
+        //Calculating and updating the total audio time tracker.
+        // Get the total duration of the audio.
+        let totalAudioTime = Math.round(audio.duration);
+        //Calculate minutes
+        let minutesTotal = Math.floor(totalAudioTime / 60);
+        // calculate seconds
+        let secondsTotal = totalAudioTime % 60;
 
-      // if seconds is a single character add a "0" at the starting. eg :- 01,02,03...etc.
-      if ((secondsTotal + "").length < 2) {
-        secondsTotal = "0" + secondsTotal;
-      }
-      totalTimeAudio.innerHTML = minutesTotal + ":" + secondsTotal;
+        // if seconds is a single character add a "0" at the starting. eg :- 01,02,03...etc.
+        if ((secondsTotal + "").length < 2) {
+          secondsTotal = "0" + secondsTotal;
+        }
+        totalTimeAudio.innerHTML = minutesTotal + ":" + secondsTotal;
 
-      // Compare what second the track is now and how long in total
-      // And check that the track variable is less than three
-      if (audioTime === audioLength && track < 2) {
-        track++; // then Increase the variable
-        switchTrack(track); // change track
-        // Otherwise we check the same, but the track variable is greater than or equal to three
-      } else if (audioTime === audioLength && track >= 2) {
-        track = 0; // then we assign track to zero
-        switchTrack(track); //Change track
-      }
-    }, 10);
+        // Compare what second the track is now and how long in total
+        // And check that the track variable is less than three
+        if (audioTime === audioLength && track < playlist.length - 1) {
+          track++; // then Increase the variable
+          switchTrack(track); // change track
+          // Otherwise we check the same, but the track variable is greater than or equal to three
+        } else if (audioTime === audioLength && track >= playlist.length - 1) {
+          track = 0; // then we assign track to zero
+          switchTrack(track); //Change track
+        }
+      }, 10);
+    } catch (error) {
+      console.log("Some error fetching");
+    }
   };
 
   //Added an event listener on the pause button to pause the audio
   const handlePauseButton = () => {
-    console.log("clicked");
-    audio.pause(); // Stops the song
-    playing = false;
-    handelPlayPause();
-    clearInterval(audioPlay); // stops the interval
+    try {
+      // console.log("clicked");
+      audio.pause(); // Stops the song
+      playing = false;
+      handelPlayPause();
+      clearInterval(audioPlay); // stops the interval
+    } catch (error) {
+      console.log("Some error fetching");
+    }
   };
 
   //Added an event listener on the prev button to go back on the playlist
   const handlePrevButton = () => {
-    if (track > 0) {
-      track--;
-      switchTrack(track);
-    } else {
-      track = 2;
-      switchTrack(track);
+    try {
+      if (track > 0) {
+        track--;
+        switchTrack(track);
+      } else {
+        track = playlist.length - 1;
+        switchTrack(track);
+      }
+    } catch (error) {
+      console.log("Some error fetching");
     }
   };
 
   //Added an event listener on the next button to go forward on the playlist
   const handleNextButton = () => {
-    if (track < 2) {
-      track++;
-      switchTrack(track);
-    } else {
-      track = 0;
-      switchTrack(track);
+    try {
+      if (track < playlist.length - 1) {
+        track++;
+        switchTrack(track);
+      } else {
+        track = 0;
+        switchTrack(track);
+      }
+    } catch (error) {
+      console.log("Some error fetching");
     }
   };
 
   //Added an event listener on the audio progress bar because when a user clicks on the progress bar it should reflect the relative progress
   const handleProgressClick = (event) => {
-    console.log(event.nativeEvent);
+    try {
+      // console.log(event.nativeEvent);
 
-    let clickLocation = event.nativeEvent.offsetX;
-    console.log("click location : ", clickLocation);
+      let clickLocation = event.nativeEvent.offsetX;
+      // console.log("click location : ", clickLocation);
 
-    let widthTimeBar = (clickLocation * 100) / 150 + "%";
-    time.style.width = widthTimeBar;
+      let widthTimeBar = (clickLocation * 100) / 150 + "%";
+      time.style.width = widthTimeBar;
 
-    let audioLength = Math.round(audio.duration);
-    let temp = parseInt((clickLocation / 150) * audioLength);
-    console.log("temp : ", temp);
-    audio.currentTime = temp;
+      let audioLength = Math.round(audio.duration);
+      let temp = parseInt((clickLocation / 150) * audioLength);
+      // console.log("temp : ", temp);
+      audio.currentTime = temp;
 
-    handlePlayButton();
+      handlePlayButton();
+    } catch (error) {
+      console.log("Some error fetching");
+    }
   };
 
+  const { identifier } = useParams();
+  // console.log("identifier", identifier);
+  const { songs } = useContext(SongsContext);
+  const { playlists } = useContext(PlaylistsContext);
+
   useEffect(() => {
-    audio = document.getElementById("audio"); // Take the audio element
+    try {
+      audio = document.getElementById("audio"); // Take the audio element
+      // console.log("Mohiyaddeen raza audio : ", audio);
+      time = document.querySelector(".timeBar"); // Take the audio progress
+      btnPlay = document.querySelector(".play"); // Take the play button
+      btnPause = document.querySelector(".pause"); // Take the pause button
 
-    time = document.querySelector(".timeBar"); // Take the audio progress
-    btnPlay = document.querySelector(".play"); // Take the play button
-    btnPause = document.querySelector(".pause"); // Take the pause button
+      currentTimeAudio = document.querySelector(".currentTimeAudio"); // Take the current audio time tracker element
+      totalTimeAudio = document.querySelector(".totalTimeAudio"); // Take the total duration audio time tracker element
+      audioTitle = document.querySelector(".audioTitle"); // Take the audio title
 
-    currentTimeAudio = document.querySelector(".currentTimeAudio"); // Take the current audio time tracker element
-    totalTimeAudio = document.querySelector(".totalTimeAudio"); // Take the total duration audio time tracker element
-    audioTitle = document.querySelector(".audioTitle"); // Take the audio title
+      // Initalized titles for the audio tracks
 
-    // Initalized titles for the audio tracks
+      //Created variable to track index and to check whether the audio is playing or not
+      playing = false;
+      track = playlist.findIndex((ele) => ele === identifier);
+      audio.src = songs[playlist[track]].audio;
+      console.log("mohiyaddeen asd : ", audio.src);
+      currentTimeAudio.innerHTML = "0:00";
+      totalTimeAudio.innerHTML = songs[identifier].duration;
+      // console.log("mohiyaddeen raza asd : ", playlist[track]);
 
-    //Created variable to track index and to check whether the audio is playing or not
-    track = 0;
-    playing = false;
-    currentTimeAudio.innerHTML = "0:00";
-    totalTimeAudio.innerHTML = "0:00";
+      document.addEventListener("keydown", handleSpaceDownEvent);
+      document.addEventListener("keyup", handleSpaceUpEvent);
 
-    document.addEventListener("keydown", handleSpaceDownEvent);
-    document.addEventListener("keyup", handleSpaceUpEvent);
-
-    // Cleaning up the event listener on keydown and keyup
-    return () => {
-      document.removeEventListener("keydown", handleSpaceDownEvent);
-      document.removeEventListener("keyup", handleSpaceUpEvent);
-    };
+      // Cleaning up the event listener on keydown and keyup
+      return () => {
+        document.removeEventListener("keydown", handleSpaceDownEvent);
+        document.removeEventListener("keyup", handleSpaceUpEvent);
+      };
+    } catch (error) {
+      console.log("Some error fetching");
+    }
   }, []);
+
   return (
     <div className="container">
       <div className="flex flex-col justify-center items-center py-12">
@@ -231,7 +276,7 @@ export default function MusicPlayer() {
             alt="blog"
           />
           <div className="flex items-center justify-between">
-            <div className="audioTitle p-2 ">title</div>
+            <div className="audioTitle p-2 ">{songs[identifier].name}</div>
 
             <div className="flex flex-row">
               {/* Karaoke Button */}
@@ -246,24 +291,23 @@ export default function MusicPlayer() {
 
               {/* Volume Up Button */}
               <button className="material-symbols-outlined w-1/4 text-gray-500 mr-1">
-              volume_up
+                volume_up
               </button>
 
               {/* Volume Down Button */}
               <button className="material-symbols-outlined w-1/4 text-gray-500 mr-1">
-              volume_down
+                volume_down
               </button>
 
               {/* Volume Off Button */}
               <button className="material-symbols-outlined w-1/4 text-gray-500 mr-1">
-              volume_off
+                volume_off
               </button>
 
               {/* Like Button */}
               <button className="like material-icons w-1/4 text-green-500 mr-1">
                 thumb_up
               </button>
-              
 
               {/* Hamburger Menu with Dropdown List */}
               <div className="dropdown inline-block  mr-1 relative">
@@ -297,10 +341,7 @@ export default function MusicPlayer() {
         {/* Audio Details */}
 
         {/* Audio Element */}
-        <audio
-          id="audio"
-          src="./Assets/Songs-Raza/Heartbreak-Anniversary.mp3"
-        ></audio>
+        <audio id="audio" src=""></audio>
 
         {/* Audio Element */}
 
