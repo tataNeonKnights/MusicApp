@@ -18,6 +18,7 @@ export default function MusicPlayer() {
   let currentTimeAudio; // Take the current audio time tracker element
   let totalTimeAudio; // Take the total duration audio time tracker element
   let audioTitle; // Take the audio title
+  let audioImage; // Take the audio image
 
   // Initalized titles for the audio tracks
 
@@ -29,6 +30,11 @@ export default function MusicPlayer() {
   // const [playlist, setPlaylist] = useState([""]);
   const { playlist, setPlaylist } = useContext(CurrentPlaylistContext);
   // console.log("playlist master data in music player : ", playlist);
+
+  const { identifier } = useParams();
+  // console.log("identifier", identifier);
+  const { songs } = useContext(SongsContext);
+  const { playlists } = useContext(PlaylistsContext);
 
   // Added an event listener so that when the user presses spacebar audio starts playing or stops playing
   const handleSpaceUpEvent = (event) => {
@@ -101,6 +107,7 @@ export default function MusicPlayer() {
 
       await audio.play();
       audioTitle.innerHTML = songs[playlist[track]].name;
+      audioImage.src = songs[playlist[track]].image;
       playing = true;
       handelPlayPause();
 
@@ -210,11 +217,11 @@ export default function MusicPlayer() {
       let clickLocation = event.nativeEvent.offsetX;
       // console.log("click location : ", clickLocation);
 
-      let widthTimeBar = (clickLocation * 100) / 150 + "%";
+      let widthTimeBar = (clickLocation * 100) / 720 + "%";
       time.style.width = widthTimeBar;
 
       let audioLength = Math.round(audio.duration);
-      let temp = parseInt((clickLocation / 150) * audioLength);
+      let temp = parseInt((clickLocation / 720) * audioLength);
       // console.log("temp : ", temp);
       audio.currentTime = temp;
 
@@ -223,11 +230,6 @@ export default function MusicPlayer() {
       console.log("Some error fetching");
     }
   };
-
-  const { identifier } = useParams();
-  // console.log("identifier", identifier);
-  const { songs } = useContext(SongsContext);
-  const { playlists } = useContext(PlaylistsContext);
 
   useEffect(() => {
     try {
@@ -240,6 +242,7 @@ export default function MusicPlayer() {
       currentTimeAudio = document.querySelector(".currentTimeAudio"); // Take the current audio time tracker element
       totalTimeAudio = document.querySelector(".totalTimeAudio"); // Take the total duration audio time tracker element
       audioTitle = document.querySelector(".audioTitle"); // Take the audio title
+      audioImage = document.querySelector(".audioImage"); // Take the audio image
 
       // Initalized titles for the audio tracks
 
@@ -266,49 +269,19 @@ export default function MusicPlayer() {
   }, []);
 
   return (
-    <div className="container">
-      <div className="flex flex-col justify-center items-center py-12">
+    <div className="">
+      <div className="flex flex-col justify-center items-center py-12 ">
         {/* Audio Details */}
-        <div className="audioDetails flex flex-col p-4 ">
+        <div className="audioDetails flex flex-col p-4 lg:w-1/2 sm:w-3/4">
           <img
-            className="lg:h-50 md:h-50 w-50 object-cover object-center p-2"
-            src="https://dummyimage.com/720x400"
+            className="lg:h-96 md:3/4 w-full object-cover object-right-top p-2 audioImage"
+            src={songs[identifier].image}
             alt="blog"
           />
           <div className="flex items-center justify-between">
             <div className="audioTitle p-2 ">{songs[identifier].name}</div>
 
             <div className="flex flex-row">
-              {/* Karaoke Button */}
-              <button className="karaoke material-icons w-1/4 text-blue-500 mr-1">
-                mic
-              </button>
-
-              {/* Loop Button */}
-              <button className="material-symbols-outlined w-1/4 text-gray-500 mr-1">
-                laps
-              </button>
-
-              {/* Volume Up Button */}
-              <button className="material-symbols-outlined w-1/4 text-gray-500 mr-1">
-                volume_up
-              </button>
-
-              {/* Volume Down Button */}
-              <button className="material-symbols-outlined w-1/4 text-gray-500 mr-1">
-                volume_down
-              </button>
-
-              {/* Volume Off Button */}
-              <button className="material-symbols-outlined w-1/4 text-gray-500 mr-1">
-                volume_off
-              </button>
-
-              {/* Like Button */}
-              <button className="like material-icons w-1/4 text-green-500 mr-1">
-                thumb_up
-              </button>
-
               {/* Hamburger Menu with Dropdown List */}
               <div className="dropdown inline-block  mr-1 relative">
                 <button className="hamburger material-icons text-gray-600">
@@ -356,7 +329,7 @@ export default function MusicPlayer() {
 
           {/* Progress Bar */}
           <div
-            className="audio-track w-[150px] h-[10px] bg-gray-500 cursor-pointer"
+            className="audio-track w-[720px] h-[10px] bg-gray-500 cursor-pointer "
             onClick={handleProgressClick}
           >
             <div className="timeBar w-[0px] h-[10px] bg-green-700"></div>
@@ -364,36 +337,52 @@ export default function MusicPlayer() {
           {/* Progress Bar */}
 
           {/* Button controls */}
-          <div className="buttonControls flex justify-center items-center h-[5vh]">
-            <button
-              className="prev  material-symbols-outlined w-1/4"
-              onClick={handlePrevButton}
-            >
-              skip_previous
+          <div className="buttonControls flex justify-between items-center h-[5vh]">
+            {/* Volume Up Button */}
+            <button className="material-symbols-outlined w-10">
+              volume_up
             </button>
-            <div
-              className="play_pause flex justify-center items-center transition-opacity duration-500 ease-in-out w-1/4"
-              onClick={handelPlayPause}
-            >
-              <button
-                className="play material-symbols-outlined  "
-                onClick={handlePlayButton}
-              >
-                play_arrow
+            <div className="buttonMainControls flex w-full justify-center">
+              <button className="material-symbols-outlined w-10">
+                shuffle
               </button>
               <button
-                className="pause material-symbols-outlined hidden   "
-                onClick={handlePauseButton}
+                className="prev  material-symbols-outlined w-10"
+                onClick={handlePrevButton}
               >
-                pause
+                skip_previous
               </button>
+              <div
+                className="play_pause flex justify-center items-center transition-opacity duration-500 ease-in-out w-10"
+                onClick={handelPlayPause}
+              >
+                <button
+                  className="play material-symbols-outlined  "
+                  onClick={handlePlayButton}
+                >
+                  play_arrow
+                </button>
+                <button
+                  className="pause material-symbols-outlined hidden   "
+                  onClick={handlePauseButton}
+                >
+                  pause
+                </button>
+              </div>
+              <button
+                className="next material-symbols-outlined w-10"
+                onClick={handleNextButton}
+              >
+                skip_next
+              </button>
+              {/* Loop Button */}
+              <button className="material-symbols-outlined w-10">laps</button>
             </div>
-            <button
-              className="next material-symbols-outlined  w-1/4 "
-              onClick={handleNextButton}
-            >
-              skip_next
-            </button>
+            {/* Karaoke Button */}
+            <button className="karaoke material-icons w-10">mic</button>
+
+            {/* Like Button */}
+            <button className="like material-icons w-10">thumb_up</button>
           </div>
           {/* Button controls */}
         </div>

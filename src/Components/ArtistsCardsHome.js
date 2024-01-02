@@ -11,7 +11,7 @@ export default function ArtistsCardsHome() {
       <h2 className="px-5 m-2">Artists</h2>
       <div
         id="includeArtistsCardsLanding"
-        className="text-gray-600 body-font container px-5 mx-auto overflow-x-auto"
+        className="text-gray-600 body-font container px-5 m-2 overflow-x-auto"
       >
         <div className="flex">
           {Object.keys(users).map((item) => {
