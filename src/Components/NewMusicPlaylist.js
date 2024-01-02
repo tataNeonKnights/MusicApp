@@ -10,7 +10,7 @@ export default function NewMusicPlaylist() {
       <h2 className="px-5 m-2">New music playlists</h2>
       <div
         id="includeNewMusicCardsLanding"
-        className="text-gray-600 body-font container px-5 mx-auto overflow-x-auto"
+        className="text-gray-600 body-font container px-5 m-2 overflow-x-auto"
       >
         <div className="flex">
           {Object.keys(playlists).map((item) => {

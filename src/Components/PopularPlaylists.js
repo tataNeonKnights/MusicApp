@@ -9,7 +9,7 @@ export default function PopularPlaylists() {
       <h2 className="px-5 m-2">Popular Release by artists</h2>
       <div
         id="includePopularCardsLanding"
-        className="text-gray-600 body-font container px-5 mx-auto overflow-x-auto"
+        className="text-gray-600 body-font container px-5 m-2 overflow-x-auto"
       >
         <Cards />
       </div>
