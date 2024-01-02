@@ -11,6 +11,7 @@ import PlaylistsState from "./Memory/PlaylistsState";
 import SongsState from "./Memory/SongsState";
 import UsersState from "./Memory/UsersState";
 import CurrentPlaylistState from "./Memory/CurrentPlaylistState";
+import LyricsSynchronizer from "./Helpers/LyricsSynchronizer";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
 
@@ -26,6 +27,7 @@ function App() {
                 <Navbar />
                 <Routes>
                   <Route exact path="/" element={<Home />}></Route>
+                  <Route exact path="/lyricsLrcGenerator" element={<LyricsSynchronizer />}></Route>
                   <Route
                     exact
                     path="/musicplayer/:identifier"
