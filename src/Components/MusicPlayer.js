@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { createElement, useContext, useEffect, useState } from "react";
 import NewMusicPlaylist from "./NewMusicPlaylist";
 import TrendingPlaylists from "./TrendingPlaylists";
 import ArtistsCardsHome from "./ArtistsCardsHome";
@@ -69,8 +69,8 @@ export default function MusicPlayer() {
       // Change the src attribute value of the audio element to the target audio track.
       handlePauseButton();
       audio.src = songs[playlist[numTrack]].audio;
+      handleKaraokeButton();
       // console.log(audio.src);
-
       // Initilize the audio progress bar and audio
       audio.currentTime = 0;
       time.style.width = 0;
@@ -111,11 +111,42 @@ export default function MusicPlayer() {
       playing = true;
       handelPlayPause();
 
+      let LyricsKeyList = Object.keys(songs[playlist[track]].lyrics);
+      let iterator = 0;
+      // console.log(LyricsKeyList);
+
+      LyricsKeyList.forEach((item) => {
+        document.getElementById(item).style.backgroundColor = "white";
+      });
+
       // Now we will set an interval when the audio is playing and will clear the interval when the audio is paused
       audioPlay = setInterval(function () {
         //Calculating and updating the current audio time tracker.
         // Get the value of what second the song is at.
         let currentAudioTime = Math.round(audio.currentTime);
+
+        if (
+          currentAudioTime > LyricsKeyList[iterator] &&
+          iterator < LyricsKeyList.length
+        ) {
+          // console.log(
+          //   "iterator : ",
+          //   iterator,
+          //   " current time  : ",
+          //   currentAudioTime,
+          //   " array time : ",
+          //   LyricsKeyList[iterator]
+          // );
+          document.getElementById(
+            LyricsKeyList[iterator]
+          ).style.backgroundColor = "white";
+          iterator++;
+          if (iterator < LyricsKeyList.length)
+            document.getElementById(
+              LyricsKeyList[iterator]
+            ).style.backgroundColor = "green";
+        }
+
         //Calculate minutes
         let minutesCurrent = Math.floor(currentAudioTime / 60);
         // calculate seconds
@@ -231,6 +262,29 @@ export default function MusicPlayer() {
     }
   };
 
+  const handleKaraokeButton = async (flag = "default") => {
+    try {
+      // console.log(flag);
+      if (flag === "button") {
+        document.querySelector(".audioImage").classList.toggle("invisible");
+        document.getElementById("LyricsKaraoke").classList.toggle("invisible");
+      }
+
+      let lyricsElement = Object.keys(songs[playlist[track]].lyrics).map(
+        (item) => {
+          return `<li key=${item} id=${item}>${
+            songs[playlist[track]].lyrics[item]
+          } </li>`;
+        }
+      );
+      // console.log(lyricsElement);
+      let lyricsHTML = lyricsElement.join("");
+      document.getElementById("LyricsKaraokeList").innerHTML = lyricsHTML;
+    } catch (error) {
+      console.log("Some error fetching");
+    }
+  };
+
   useEffect(() => {
     try {
       audio = document.getElementById("audio"); // Take the audio element
@@ -272,12 +326,26 @@ export default function MusicPlayer() {
     <div className="">
       <div className="flex flex-col justify-center items-center py-12 ">
         {/* Audio Details */}
-        <div className="audioDetails flex flex-col p-4 lg:w-1/2 sm:w-3/4">
+        <div className="audioDetails flex flex-col p-4 lg:w-1/2 sm:w-3/4 relative">
           <img
             className="lg:h-96 md:3/4 w-full object-cover object-right-top p-2 audioImage"
             src={songs[identifier].image}
             alt="blog"
           />
+          <div
+            className="lg:h-96 md:3/4 w-full object-cover object-right-top p-2 audioImage overflow-y-auto absolute invisible"
+            id="LyricsKaraoke"
+          >
+            <ul className="list-none" id="LyricsKaraokeList">
+              {Object.keys(songs[identifier].lyrics).map((item) => {
+                return (
+                  <li key={item} id={item}>
+                    {songs[identifier].lyrics[item]}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
           <div className="flex items-center justify-between">
             <div className="audioTitle p-2 ">{songs[identifier].name}</div>
 
@@ -379,7 +447,12 @@ export default function MusicPlayer() {
               <button className="material-symbols-outlined w-10">laps</button>
             </div>
             {/* Karaoke Button */}
-            <button className="karaoke material-icons w-10">mic</button>
+            <button
+              className="karaoke material-icons w-10"
+              onClick={() => handleKaraokeButton("button")}
+            >
+              mic
+            </button>
 
             {/* Like Button */}
             <button className="like material-icons w-10">thumb_up</button>
