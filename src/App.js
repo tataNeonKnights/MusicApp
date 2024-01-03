@@ -14,6 +14,7 @@ import CurrentPlaylistState from "./Memory/CurrentPlaylistState";
 import LyricsSynchronizer from "./Helpers/LyricsSynchronizer";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
+import User from "./Components/User";
 
 
 function App() {
@@ -47,6 +48,11 @@ function App() {
                     exact
                     path="/login"
                     element={<Login />}
+                  ></Route>
+                    <Route
+                    exact
+                    path="/user"
+                    element={<User />}
                   ></Route>
                 </Routes>
                 <Footer />
