@@ -22,7 +22,7 @@ export default function Playlists() {
   }, []);
 
   const colorchange = () => {
-    const likeInfo=document.getElementById("saveInfo")
+    const likeInfo = document.getElementById("saveInfo")
     if (likeColor) {
       const favorite = document.getElementById("favorite")
       favorite.classList.remove("fa-regular", "fa-heart")
@@ -30,8 +30,8 @@ export default function Playlists() {
       favorite.classList.add("fa-heart")
       favorite.classList.add("text-red-600")
       likeColor = false;
-      likeInfo.innerHTML="Remove from your library"
-      
+      likeInfo.innerHTML = "Remove from your library"
+
     }
     else {
 
@@ -40,7 +40,7 @@ export default function Playlists() {
       favorite.classList.remove("text-red-600")
       favorite.classList.add("fa-regular")
       favorite.classList.add("fa-heart")
-      likeInfo.innerHTML="Save to your library"
+      likeInfo.innerHTML = "Save to your library"
       likeColor = true;
     }
   }
@@ -89,30 +89,35 @@ export default function Playlists() {
             </button>
           </div>
 
-          <div className="group relative inline-block shuffle">
-            <span className="material-symbols-outlined rounded-full p-1 cursor-pointer m-2 hover:text-3xl hover:mt-0.5 w-10 hover:text-green-500 hover:mb-0.5">
+          <div className=" relative inline-block shuffle">
+            <span className="peer material-symbols-outlined rounded-full cursor-pointer m-2 hover:text-3xl hover:mt-0.5 w-10 hover:text-green-500 hover:mb-0.5">
               shuffle
             </span>
-            <span className="hidden group-hover:inline absolute -top-6 -left-10 bg-inherit text-white p-2 rounded text-xs whitespace-nowrap overflow-hidden ">
+            <span className="hidden peer-hover:inline absolute -top-6 -left-10 bg-inherit text-white p-2 rounded text-xs whitespace-nowrap overflow-hidden ">
               Click to shuffle the Playlist
             </span>
+
+
           </div>
 
           <div className="group relative inline-block">
-            <button onClick={colorchange} className="w-10 cursor-pointer ">
-
-              <i id="favorite" className="fa-regular fa-heart  m-1 favorite hover:text-3xl text-2xl hover:mt-1 hover:text-red-500 hover:mb-0.5 transition-all"></i>
-            </button>
-            <span id="saveInfo" className="hidden group-hover:inline absolute -top-6 -left-10 bg-inherit text-white p-2 rounded text-xs whitespace-nowrap overflow-hidden">
+            <button onClick={colorchange} className="w-10 cursor-pointer">
+              <i id="favorite" className="peer fa-regular fa-heart  m-1 favorite hover:text-3xl text-2xl hover:mt-1 hover:text-red-500 hover:mb-0.5 transition-all"></i>
+              <span id="saveInfo" className="hidden peer-hover:inline absolute -top-7 -left-10 bg-inherit text-white p-2 rounded text-xs whitespace-nowrap overflow-hidden">
               Save to Your Library
             </span>
+            </button>
+            <span id="saveInfo" className="hidden peer-hover:inline absolute -top-7 -left-10 bg-inherit text-white p-2 rounded text-xs whitespace-nowrap overflow-hidden">
+              Save to Your Library
+            </span>
+
           </div>
 
           <div className="group relative inline-block">
-            <span className="material-symbols-outlined rounded-full p-1 cursor-pointer m-2 download hover:text-3xl hover:mt-0.5 w-10 hover:text-green-500 hover:mb-0.5">
+            <span className="peer material-symbols-outlined rounded-full p-1 cursor-pointer m-2 download hover:text-3xl hover:mt-0.5 w-10 hover:text-green-500 hover:mb-0.5">
               download
             </span>
-            <span className="hidden group-hover:inline absolute -top-6 -left-2 bg-inherit text-white p-2 rounded text-xs whitespace-nowrap overflow-hidden">
+            <span className="hidden peer-hover:inline absolute -top-6 -left-2 bg-inherit text-white p-2 rounded text-xs whitespace-nowrap overflow-hidden">
               Download
             </span>
           </div>
