@@ -24,7 +24,7 @@ function Login() {
                                     <input type="password" name="password" id="password" className="bg-white text-black border border-gray-30  sm:text-sm rounded-lg block w-full p-2.5" placeholder='Enter your password here' required="" />
                                 </div>
                                 <div className="flex flex-col items-end justify-center">
-                                    <a href="#" className="text-sm text-blue-700 font-bold hover:underline ">htmlForgot password?</a>
+                                    <a href="#" className="text-sm text-blue-700 font-bold hover:underline ">Forgot password?</a>
                                 </div>
                                 <button type="submit" className="w-3/6 text-white bg-green-600  rounded-full px-3 py-2 text-xl hover:-transition ease-in-out hover:-translate-y-1  hover: duration-300 hover:shadow-[0px_0px_10px_0px_rgba(0,0,0)] ">Sign in</button>
                                 <p className="text-sm text-gray-900 font-bold">

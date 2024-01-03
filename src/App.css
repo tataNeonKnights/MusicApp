@@ -74,3 +74,6 @@
   font-size: 2rem;
   transition: .05s ;
 }
+.favorite:hover{
+  text-shadow: 2px 2px 100px #ec3535;
+}

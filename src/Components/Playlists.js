@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import PlaylistsContext from "../Memory/PlaylistsContext";
 import SongsContext from "../Memory/SongsContext";
@@ -6,6 +6,7 @@ import UsersContext from "../Memory/UsersContext";
 import CurrentPlaylistContext from "../Memory/CurrentPlaylistContext";
 
 export default function Playlists() {
+  let likeColor = true;
   const { playlists } = useContext(PlaylistsContext);
   const { playlistId } = useParams();
   const { songs } = useContext(SongsContext);
@@ -19,6 +20,30 @@ export default function Playlists() {
     // console.log("playlist master data : ",playlistData)
     setPlaylist(playlistData);
   }, []);
+
+  const colorchange = () => {
+    const likeInfo=document.getElementById("saveInfo")
+    if (likeColor) {
+      const favorite = document.getElementById("favorite")
+      favorite.classList.remove("fa-regular", "fa-heart")
+      favorite.classList.add("fa-solid")
+      favorite.classList.add("fa-heart")
+      favorite.classList.add("text-red-600")
+      likeColor = false;
+      likeInfo.innerHTML="Remove from your library"
+      
+    }
+    else {
+
+      const favorite = document.getElementById("favorite")
+      favorite.classList.remove("fa-solid", "fa-heart")
+      favorite.classList.remove("text-red-600")
+      favorite.classList.add("fa-regular")
+      favorite.classList.add("fa-heart")
+      likeInfo.innerHTML="Save to your library"
+      likeColor = true;
+    }
+  }
 
   return (
     <>
@@ -59,31 +84,32 @@ export default function Playlists() {
       <div className="h-20 bg-gradient-to-b from-purple-500 to-purple-900 flex text-white justify-between px-10">
         <div className="text-3xl text-white flex flex-row items-center">
           <div className=" bg-green-500 rounded-full h-10 w-10 mr-6 border-black border-2 transition-transform transform hover:-translate-y-1 hover:shadow-md hover:shadow-[rgba(115,255,87)]">
-            <button className="material-symbols-outlined  w-full h-full">
+            <button className="material-symbols-outlined  w-full h-full ">
               play_arrow
             </button>
           </div>
 
           <div className="group relative inline-block shuffle">
-            <span className="material-symbols-outlined rounded-full p-1 cursor-pointer m-2">
+            <span className="material-symbols-outlined rounded-full p-1 cursor-pointer m-2 hover:text-3xl hover:mt-0.5 w-10 hover:text-green-500 hover:mb-0.5">
               shuffle
             </span>
-            <span className="hidden group-hover:inline absolute -top-6 -left-10 bg-inherit text-white p-2 rounded text-xs whitespace-nowrap overflow-hidden">
+            <span className="hidden group-hover:inline absolute -top-6 -left-10 bg-inherit text-white p-2 rounded text-xs whitespace-nowrap overflow-hidden ">
               Click to shuffle the Playlist
             </span>
           </div>
 
           <div className="group relative inline-block">
-            <span className="material-symbols-outlined rounded-full p-1 cursor-pointer m-2">
-              favorite
-            </span>
-            <span className="hidden group-hover:inline absolute -top-6 -left-10 bg-inherit text-white p-2 rounded text-xs whitespace-nowrap overflow-hidden">
+            <button onClick={colorchange} className="w-10 cursor-pointer ">
+
+              <i id="favorite" className="fa-regular fa-heart  m-1 favorite hover:text-3xl text-2xl hover:mt-1 hover:text-red-500 hover:mb-0.5 transition-all"></i>
+            </button>
+            <span id="saveInfo" className="hidden group-hover:inline absolute -top-6 -left-10 bg-inherit text-white p-2 rounded text-xs whitespace-nowrap overflow-hidden">
               Save to Your Library
             </span>
           </div>
 
           <div className="group relative inline-block">
-            <span className="material-symbols-outlined rounded-full p-1 cursor-pointer m-2 download">
+            <span className="material-symbols-outlined rounded-full p-1 cursor-pointer m-2 download hover:text-3xl hover:mt-0.5 w-10 hover:text-green-500 hover:mb-0.5">
               download
             </span>
             <span className="hidden group-hover:inline absolute -top-6 -left-2 bg-inherit text-white p-2 rounded text-xs whitespace-nowrap overflow-hidden">
