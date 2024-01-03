@@ -141,6 +141,20 @@ export default function MusicPlayer() {
             LyricsKeyList[iterator]
           ).style.backgroundColor = "white";
           iterator++;
+          // console.log(
+          //   "Raza Offset : ",
+          //   document.getElementById(LyricsKeyList[iterator]).offsetTop
+          // );
+          if (
+            document.getElementById("LyricsKaraokeList").offsetHeight - 100 <
+            document.getElementById(LyricsKeyList[iterator]).offsetTop
+          ) {
+            document.getElementById("LyricsKaraokeList").scrollTop =
+              document.getElementById(LyricsKeyList[iterator]).offsetTop - 50;
+          }
+
+          // document.getElementById("LyricsKaraokeList").scrollTop =
+          //   document.getElementById(LyricsKeyList[iterator]).offsetTop;
           if (iterator < LyricsKeyList.length)
             document.getElementById(
               LyricsKeyList[iterator]
@@ -333,10 +347,13 @@ export default function MusicPlayer() {
             alt="blog"
           />
           <div
-            className="lg:h-96 md:3/4 w-full object-cover object-right-top p-2 audioImage overflow-y-auto absolute invisible"
+            className="lg:h-96 md:3/4 w-full object-cover object-right-top p-2 audioImage  absolute invisible"
             id="LyricsKaraoke"
           >
-            <ul className="list-none" id="LyricsKaraokeList">
+            <ul
+              className="list-none overflow-y-auto h-full w-full"
+              id="LyricsKaraokeList"
+            >
               {Object.keys(songs[identifier].lyrics).map((item) => {
                 return (
                   <li key={item} id={item}>
