@@ -1,11 +1,11 @@
-import React, { createElement, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import NewMusicPlaylist from "./NewMusicPlaylist";
 import TrendingPlaylists from "./TrendingPlaylists";
 import ArtistsCardsHome from "./ArtistsCardsHome";
 import PopularPlaylists from "./PopularPlaylists";
 import { useParams } from "react-router-dom";
 import SongsContext from "../Memory/SongsContext";
-import PlaylistsContext from "../Memory/PlaylistsContext";
+
 import CurrentPlaylistContext from "../Memory/CurrentPlaylistContext";
 
 export default function MusicPlayer() {
@@ -34,7 +34,6 @@ export default function MusicPlayer() {
   const { identifier } = useParams();
   // console.log("identifier", identifier);
   const { songs } = useContext(SongsContext);
-  const { playlists } = useContext(PlaylistsContext);
 
   // Added an event listener so that when the user presses spacebar audio starts playing or stops playing
   const handleSpaceUpEvent = (event) => {
@@ -64,19 +63,33 @@ export default function MusicPlayer() {
   };
 
   // created a function to handle the switching of audio tracks.
-  function switchTrack(numTrack) {
+  function switchTrack(numTrack, flag = "default") {
     try {
       // Change the src attribute value of the audio element to the target audio track.
-      handlePauseButton();
-      audio.src = songs[playlist[numTrack]].audio;
-      handleKaraokeButton();
-      // console.log(audio.src);
-      // Initilize the audio progress bar and audio
-      audio.currentTime = 0;
-      time.style.width = 0;
+      if (flag === "default") {
+        handlePauseButton();
+        audio.src = songs[playlist[numTrack]].audio;
+        document.getElementById("karaokeOptionsInput").value = "normal";
+        handleKaraokeButton();
+        // console.log(audio.src);
+        // Initilize the audio progress bar and audio
+        audio.currentTime = 0;
+        time.style.width = 0;
 
-      // Play the song
-      handlePlayButton();
+        // Play the song
+        handlePlayButton();
+      } else if (flag === "karaokeAudioChange") {
+        handlePauseButton();
+        audio.src = songs[playlist[numTrack]].bgm;
+        handleKaraokeButton();
+        // console.log(audio.src);
+        // Initilize the audio progress bar and audio
+        audio.currentTime = 0;
+        time.style.width = 0;
+
+        // Play the song
+        handlePlayButton();
+      }
     } catch (error) {
       console.log("Some error fetching");
     }
@@ -121,89 +134,96 @@ export default function MusicPlayer() {
 
       // Now we will set an interval when the audio is playing and will clear the interval when the audio is paused
       audioPlay = setInterval(function () {
-        //Calculating and updating the current audio time tracker.
-        // Get the value of what second the song is at.
-        let currentAudioTime = Math.round(audio.currentTime);
+        try {
+          //Calculating and updating the current audio time tracker.
+          // Get the value of what second the song is at.
+          let currentAudioTime = Math.round(audio.currentTime);
 
-        if (
-          currentAudioTime > LyricsKeyList[iterator] &&
-          iterator < LyricsKeyList.length
-        ) {
-          // console.log(
-          //   "iterator : ",
-          //   iterator,
-          //   " current time  : ",
-          //   currentAudioTime,
-          //   " array time : ",
-          //   LyricsKeyList[iterator]
-          // );
-          document.getElementById(
-            LyricsKeyList[iterator]
-          ).style.backgroundColor = "white";
-          iterator++;
-          // console.log(
-          //   "Raza Offset : ",
-          //   document.getElementById(LyricsKeyList[iterator]).offsetTop
-          // );
           if (
-            document.getElementById("LyricsKaraokeList").offsetHeight - 100 <
-            document.getElementById(LyricsKeyList[iterator]).offsetTop
+            currentAudioTime > LyricsKeyList[iterator] &&
+            iterator < LyricsKeyList.length
           ) {
-            document.getElementById("LyricsKaraokeList").scrollTop =
-              document.getElementById(LyricsKeyList[iterator]).offsetTop - 50;
-          }
-
-          // document.getElementById("LyricsKaraokeList").scrollTop =
-          //   document.getElementById(LyricsKeyList[iterator]).offsetTop;
-          if (iterator < LyricsKeyList.length)
+            // console.log(
+            //   "iterator : ",
+            //   iterator,
+            //   " current time  : ",
+            //   currentAudioTime,
+            //   " array time : ",
+            //   LyricsKeyList[iterator]
+            // );
             document.getElementById(
               LyricsKeyList[iterator]
-            ).style.backgroundColor = "green";
-        }
+            ).style.backgroundColor = "white";
+            iterator++;
+            // console.log(
+            //   "Raza Offset : ",
+            //   document.getElementById(LyricsKeyList[iterator]).offsetTop
+            // );
+            if (
+              document.getElementById("LyricsKaraokeList").offsetHeight - 100 <
+              document.getElementById(LyricsKeyList[iterator]).offsetTop
+            ) {
+              document.getElementById("LyricsKaraokeList").scrollTop =
+                document.getElementById(LyricsKeyList[iterator]).offsetTop - 50;
+            }
 
-        //Calculate minutes
-        let minutesCurrent = Math.floor(currentAudioTime / 60);
-        // calculate seconds
-        let secondsCurrent = currentAudioTime % 60;
+            // document.getElementById("LyricsKaraokeList").scrollTop =
+            //   document.getElementById(LyricsKeyList[iterator]).offsetTop;
+            if (iterator < LyricsKeyList.length)
+              document.getElementById(
+                LyricsKeyList[iterator]
+              ).style.backgroundColor = "green";
+          }
 
-        // if seconds is a single character add a "0" at the starting. eg :- 01,02,03...etc.
-        if ((secondsCurrent + "").length < 2) {
-          secondsCurrent = "0" + secondsCurrent;
-        }
-        //Now here we will update the current audio time tracker
-        currentTimeAudio.innerHTML = minutesCurrent + ":" + secondsCurrent;
+          //Calculate minutes
+          let minutesCurrent = Math.floor(currentAudioTime / 60);
+          // calculate seconds
+          let secondsCurrent = currentAudioTime % 60;
 
-        //Here we are updating audio progress bar
-        // Get the value of what second the song is at
-        let audioTime = Math.round(audio.currentTime);
-        // We get songs with different durations
-        let audioLength = Math.round(audio.duration);
-        // Assign a width to an element at time
-        time.style.width = (audioTime * 100) / audioLength + "%";
+          // if seconds is a single character add a "0" at the starting. eg :- 01,02,03...etc.
+          if ((secondsCurrent + "").length < 2) {
+            secondsCurrent = "0" + secondsCurrent;
+          }
+          //Now here we will update the current audio time tracker
+          currentTimeAudio.innerHTML = minutesCurrent + ":" + secondsCurrent;
 
-        //Calculating and updating the total audio time tracker.
-        // Get the total duration of the audio.
-        let totalAudioTime = Math.round(audio.duration);
-        //Calculate minutes
-        let minutesTotal = Math.floor(totalAudioTime / 60);
-        // calculate seconds
-        let secondsTotal = totalAudioTime % 60;
+          //Here we are updating audio progress bar
+          // Get the value of what second the song is at
+          let audioTime = Math.round(audio.currentTime);
+          // We get songs with different durations
+          let audioLength = Math.round(audio.duration);
+          // Assign a width to an element at time
+          time.style.width = (audioTime * 100) / audioLength + "%";
 
-        // if seconds is a single character add a "0" at the starting. eg :- 01,02,03...etc.
-        if ((secondsTotal + "").length < 2) {
-          secondsTotal = "0" + secondsTotal;
-        }
-        totalTimeAudio.innerHTML = minutesTotal + ":" + secondsTotal;
+          //Calculating and updating the total audio time tracker.
+          // Get the total duration of the audio.
+          let totalAudioTime = Math.round(audio.duration);
+          //Calculate minutes
+          let minutesTotal = Math.floor(totalAudioTime / 60);
+          // calculate seconds
+          let secondsTotal = totalAudioTime % 60;
 
-        // Compare what second the track is now and how long in total
-        // And check that the track variable is less than three
-        if (audioTime === audioLength && track < playlist.length - 1) {
-          track++; // then Increase the variable
-          switchTrack(track); // change track
-          // Otherwise we check the same, but the track variable is greater than or equal to three
-        } else if (audioTime === audioLength && track >= playlist.length - 1) {
-          track = 0; // then we assign track to zero
-          switchTrack(track); //Change track
+          // if seconds is a single character add a "0" at the starting. eg :- 01,02,03...etc.
+          if ((secondsTotal + "").length < 2) {
+            secondsTotal = "0" + secondsTotal;
+          }
+          totalTimeAudio.innerHTML = minutesTotal + ":" + secondsTotal;
+
+          // Compare what second the track is now and how long in total
+          // And check that the track variable is less than three
+          if (audioTime === audioLength && track < playlist.length - 1) {
+            track++; // then Increase the variable
+            switchTrack(track); // change track
+            // Otherwise we check the same, but the track variable is greater than or equal to three
+          } else if (
+            audioTime === audioLength &&
+            track >= playlist.length - 1
+          ) {
+            track = 0; // then we assign track to zero
+            switchTrack(track); //Change track
+          }
+        } catch (error) {
+          console.log("Some error fetching");
         }
       }, 10);
     } catch (error) {
@@ -282,6 +302,7 @@ export default function MusicPlayer() {
       if (flag === "button") {
         document.querySelector(".audioImage").classList.toggle("invisible");
         document.getElementById("LyricsKaraoke").classList.toggle("invisible");
+        document.getElementById("karaokeOptions").classList.toggle("invisible");
       }
 
       let lyricsElement = Object.keys(songs[playlist[track]].lyrics).map(
@@ -294,6 +315,18 @@ export default function MusicPlayer() {
       // console.log(lyricsElement);
       let lyricsHTML = lyricsElement.join("");
       document.getElementById("LyricsKaraokeList").innerHTML = lyricsHTML;
+    } catch (error) {
+      console.log("Some error fetching");
+    }
+  };
+
+  const handelSelectedOptionsChange = (e) => {
+    try {
+      if (e.target.value === "normal") {
+        switchTrack(track);
+      } else if (e.target.value === "instrumental") {
+        switchTrack(track, "karaokeAudioChange");
+      }
     } catch (error) {
       console.log("Some error fetching");
     }
@@ -488,6 +521,34 @@ export default function MusicPlayer() {
               <button className="material-symbols-outlined w-10">laps</button>
             </div>
             {/* Karaoke Button */}
+
+            <div
+              className="relative inline-block text-left invisible cursor-pointer"
+              id="karaokeOptions"
+            >
+              <select
+                className="right-0 z-10 mt-2 w-32  shadow-md ring-1  ring-opacity-5 focus:outline-none  inline-flex  justify-center gap-x-1.5 rounded-md bg-white px-2 py-1 text-sm font-semibold text-gray-900  ring-inset  ring-gray-300 hover:bg-gray-50 cursor-pointer"
+                id="karaokeOptionsInput"
+                defaultValue={"normal"}
+                onChange={handelSelectedOptionsChange}
+              >
+                <option
+                  className="text-gray-700 block px-4 py-2 text-sm cursor-pointer"
+                  id="menu-item-0"
+                  value={"normal"}
+                >
+                  Normal
+                </option>
+                <option
+                  className="text-gray-700 block px-4 py-2 text-sm cursor-pointer"
+                  id="menu-item-1"
+                  value={"instrumental"}
+                >
+                  Instrumental
+                </option>
+              </select>
+            </div>
+
             <button
               className="karaoke material-icons w-10"
               onClick={() => handleKaraokeButton("button")}

@@ -8,18 +8,21 @@ const PlaylistsState = ({ children }) => {
       user: 1, //user id
       songs: ["song-1", "song-2", "song-3"],
       image: "link",
+      description: "desc1",
     },
     "playlist-2": {
       name: "playlist 2",
       user: 1, //user id
       songs: ["song-1"],
       image: "link",
+      description: "desc2",
     },
     "playlist-3": {
       name: "playlist 3",
       user: 1, //user id
       songs: ["song-1", "song-2"],
       image: "link",
+      description: "desc3",
     },
   });
 
