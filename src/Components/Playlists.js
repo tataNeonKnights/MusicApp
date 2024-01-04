@@ -153,7 +153,7 @@ export default function Playlists() {
           <input type="text" id="playlistSearch" name="name" className=" bg-white opacity-70 h-9 w-6 hidden rounded-3xl border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 ease-in-out " placeholder="Enter songs name" value={searchSongName} onChange={(e)=>handleOnChange(e)} />
 
           <div className="group relative inline-block">
-            <span className="material-symbols-outlined rounded-full p-1 cursor-pointer m-2" id="playlistSearchBar" onClick={searchSize}>
+            <span className="select-none material-symbols-outlined rounded-full p-1 cursor-pointer m-2" id="playlistSearchBar" onClick={searchSize}>
               search
             </span>
             <span className="hidden group-hover:inline absolute -top-6 -left-8 bg-inherit text-white p-2 rounded text-xs whitespace-nowrap overflow-hidden">
