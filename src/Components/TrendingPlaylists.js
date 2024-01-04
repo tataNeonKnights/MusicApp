@@ -16,3 +16,21 @@ export default function TrendingPlaylists() {
     // <!-- Trending Playlists -->
   );
 }
+
+
+{/* User Photo */}
+{/* <div className="flex justify-center mt-4 w-3/5 relative">
+<div className="container h-[200px] border-2 border-black rounded-sm overflow-hidden">
+  <img
+    className="w-full h-full object-cover"
+    src={banner}
+    alt="Banner"
+  />
+  <img
+    className="rounded-full absolute z-10 top-1/2 transform -translate-y-1/2 left-1/2 transform -translate-x-1/2 h-[150px]"
+    src={imgAdd}
+    alt="UserPhoto"
+  />
+</div> */}
+// </div>
+{/* User Photo */}
