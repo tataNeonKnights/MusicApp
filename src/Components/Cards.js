@@ -23,8 +23,7 @@ export default function Cards(props) {
             {props.item ? playlists[props.item].name : "default"}
           </h1>
           <p className="leading-relaxed mb-3">
-            Photo booth fam kinfolk cold-pressed sriracha leggings jianbing
-            microdosing tousled waistcoat.
+            {props.item ? playlists[props.item].description : "default"}
           </p>
         </div>
       </NavLink>
