@@ -1,10 +1,13 @@
-import React, {useEffect} from "react";
+import React, {useEffect,useState} from "react";
 import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
+  const [searchSongName,setSearchSongName]=useState("")
+  const [searchOpens,setSearchOpens]=useState(false)
   useEffect(() => {
     let navBar = document.getElementById("navBar");
     let oldScrollY = window.scrollY;
+
 
     window.addEventListener("scroll", (e) => {
       const currentScroll = window.scrollY;
@@ -17,6 +20,30 @@ export default function Navbar() {
       oldScrollY = currentScroll <= 0 ? 0 : currentScroll;
     });
   }, []);
+  const handleOnChange=(e)=>{
+    setSearchSongName(e.target.value)
+  }
+  
+  const searchNavSize = () => {
+    if (searchOpens===false) {
+      const searchBox = document.getElementById("homeSearch");
+      searchBox.classList.remove("w-6")
+      searchBox.classList.add("w-40")
+      searchBox.classList.remove("hidden")
+      setSearchOpens(true)
+     
+    }else if(searchOpens===true && searchSongName.length>0){
+      console.log("Searching in the database")
+    }
+     else {
+      const searchBox = document.getElementById("homeSearch");
+      searchBox.classList.remove("w-40")
+      searchBox.classList.add("w-6")
+      searchBox.classList.add("hidden")
+      setSearchOpens(false)
+    }
+  }
+
 
   return (
        <div className="top-0 z-10 shadow-md" id="navBar">
@@ -29,7 +56,16 @@ export default function Navbar() {
         <NavLink to="/" className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
           <span className="text-xl cursor-pointer">Spotify 2.0</span>
         </NavLink>
+       
+        
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
+        <input type="text" id="homeSearch" name="name" className=" bg-white opacity-70 h-9 w-6 hidden rounded-3xl border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 ease-in-out " placeholder="Enter songs name" value={searchSongName} onChange={(e)=>handleOnChange(e)} />
+
+          <div className="group relative inline-block">
+            <span className="select-none material-symbols-outlined rounded-full p-1 cursor-pointer m-2" id="navSearchBar" onClick={searchNavSize}>
+              search
+            </span>
+       </div>
           <NavLink to="/" className="mr-5 hover:text-gray-900 cursor-pointer">Home</NavLink>
           <a className="mr-5 hover:text-gray-900 cursor-pointer">
             Your Library

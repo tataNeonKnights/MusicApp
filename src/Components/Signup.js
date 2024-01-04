@@ -16,7 +16,7 @@ function Signup() {
               </h1>
               <form className="space-y-4 md:space-y-6 " action="#">
               <div className='flex flex-col items-start justify-center'>
-                      <label htmlFor="name" className="block mb-2 text-sm font-bold text-black ">Entert Your Name</label>
+                      <label htmlFor="name" className="block mb-2 text-sm font-bold text-black ">Enter Your Name</label>
                       <input type="text" name="name" id="name" className="bg-white text-black border border-gray-30  sm:text-sm rounded-lg block w-full p-2.5" placeholder="Enter your full Name" required=""/>
                   </div>
                   <div className='flex flex-col items-start justify-center'>
