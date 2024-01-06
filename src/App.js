@@ -14,6 +14,7 @@ import CurrentPlaylistState from "./Memory/CurrentPlaylistState";
 import LyricsSynchronizer from "./Helpers/LyricsSynchronizer";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
+import DriveUploadHelper from "./Helpers/DriveUploadHelper";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                 <Navbar />
                 <Routes>
                   <Route exact path="/" element={<Home />}></Route>
+                  <Route exact path="/DriveUploadHelper" element={<DriveUploadHelper />}></Route>
                   <Route exact path="/lyricsLrcGenerator" element={<LyricsSynchronizer />}></Route>
                   <Route
                     exact
