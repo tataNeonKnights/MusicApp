@@ -6,7 +6,7 @@ const PlaylistsState = ({ children }) => {
     "playlist-1": {
       name: "playlist 1",
       user: 1, //user id
-      songs: ["song-1", "song-2", "song-3"],
+      songs: ["song-1", "song-2", "song-3"],//song ids
       image: "link",
       description: "desc1",
     },
