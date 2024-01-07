@@ -30,19 +30,19 @@ const expressFileUpload = require("express-fileupload");
 
 router.use(expressFileUpload());
 
-router.post("/upload", fetchuser,async (req, res) => {
+router.post("/upload", fetchuser, async (req, res) => {
   try {
-    // console.log("mohiyaddeenraza");
+    console.log("mohiyaddeenraza ", req.files.file.data);
     // Converting the buffer received to readable stream
-    const stream = Readable.from(req.files.audio.data);
-    const audioFile = req.files.audio;
+    const stream = Readable.from(req.files.file.data);
+    const mediaFile = req.files.file;
     const userId = req.user.id;
-    // console.log(audioFile)
+    // console.log(mediaFile)
     // console.log("hi", userId);
 
     // google drive parent folder id
     const parentFolderId = "167qvY8H_-IpJitDqM0QslPc9gWcNM5PC";
-    const folderName = `User_${userId}_Audio`; // Using a consistent user folder name
+    const folderName = `User_${userId}`; // Using a consistent user folder name
     let customFolderId = null;
 
     // Check if the user folder exists in the parent folder
@@ -69,19 +69,19 @@ router.post("/upload", fetchuser,async (req, res) => {
 
     // Check if the file with the same name exists in the user folder
     const existingFile = await drive.files.list({
-      q: `'${customFolderId}' in parents and name = '${audioFile.name}' and trashed = false`,
+      q: `'${customFolderId}' in parents and name = '${mediaFile.name}' and trashed = false`,
       fields: "files(id)",
     });
 
     if (existingFile.data.files.length === 0) {
       const result = await drive.files.create({
         requestBody: {
-          name: audioFile.name,
-          mimeType: "audio/mpeg",
+          name: mediaFile.name,
+          mimeType: mediaFile.mimetype,
           parents: [customFolderId],
         },
         media: {
-          mimeType: "audio/mpeg",
+          mimeType: mediaFile.mimetype,
           body: stream,
         },
       });
@@ -95,6 +95,53 @@ router.post("/upload", fetchuser,async (req, res) => {
     } else {
       // File already exists
       res.status(409).json({ error: "File already exists" }); // Conflict status code for duplicate file
+    }
+  } catch (error) {
+    console.log("error :", error);
+    res.status(500).json({ error: "An error occurred" });
+  }
+});
+
+router.delete("/delete/:fileName", fetchuser, async (req, res) => {
+  try {
+    const fileName = req.params.fileName; // Extract the fileName from the request parameters
+    const userId = req.user.id;
+    const folderName = `User_${userId}`; // Using a consistent user folder name
+    const parentFolderId = "167qvY8H_-IpJitDqM0QslPc9gWcNM5PC";
+    let customFolderId = null;
+
+    // Check if the user folder exists in the parent folder
+    const listResponse = await drive.files.list({
+      q: `'${parentFolderId}' in parents and name = '${folderName}' and mimeType = 'application/vnd.google-apps.folder' and trashed = false`,
+      fields: "files(id)",
+    });
+
+    if (listResponse.data.files.length === 0) {
+      res.status(404).send("Not Found");
+    } else {
+      // User Folder exists, use its ID
+      customFolderId = listResponse.data.files[0].id;
+    }
+
+    // Check if the file with the same name exists in the user folder
+    const existingFile = await drive.files.list({
+      q: `'${customFolderId}' in parents and name = '${fileName}' and trashed = false`,
+      fields: "files(id)",
+    });
+
+    if (existingFile.data.files.length === 0) {
+      res.status(404).send("Not Found");
+    } else {
+      let fileId = existingFile.data.files[0].id;
+      const result = await drive.files.delete({
+        fileId: fileId,
+      });
+      // console.log(result)
+      if (result.status === 204) {
+        res.status(200).send("File deleted successfully");
+      } else {
+        res.status(400).send("Internal server error");
+      }
     }
   } catch (error) {
     console.log("error :", error);
