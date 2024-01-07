@@ -1,4 +1,4 @@
-# spotify_clone
+# MusicAppp
 
 ## Table of Contents
 
