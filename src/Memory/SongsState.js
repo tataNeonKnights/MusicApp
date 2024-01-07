@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import SongsContext from "./SongsContext";
 
 const SongsState = ({ children }) => {
+  const [userSongs, setUserSongs] = useState({});
+
   const [songs, setSongs] = useState({
     "song-1": {
       name: "Heartbreak anniversary",
@@ -64,6 +66,8 @@ const SongsState = ({ children }) => {
       user: 1,
       bgm: "https://drive.google.com/uc?export=download&id=1PMSYiLyPiur82ITgDLQxj8mBm9GLJn6s",
       duration: "3:18",
+      description: "desc1",
+      songid: "song-1",
     },
     "song-2": {
       name: "Ordinary person",
@@ -126,6 +130,8 @@ const SongsState = ({ children }) => {
       user: 1,
       bgm: "https://drive.google.com/uc?export=download&id=1mXRyeiD9XM-EAO__BIKRGcD_Ak5JhKqD",
       duration: "2:18",
+      description: "desc2",
+      songid: "song-2",
     },
     "song-3": {
       name: "Thank you",
@@ -188,12 +194,170 @@ const SongsState = ({ children }) => {
       user: 1,
       bgm: "https://drive.google.com/uc?export=download&id=1PMSYiLyPiur82ITgDLQxj8mBm9GLJn6s",
       duration: "4:20",
+      description: "desc3",
+      songid: "song-3",
     },
-    
   });
 
+  const uploadImage = async (imagefile) => {
+    const formData = new FormData();
+    formData.set("file", imagefile);
+    try {
+      const response = await fetch("http://localhost:5000/files/upload", {
+        headers: {
+          "auth-token":
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfX0.ZMhWoD4VG3mnVcO1K1JmigCpcOnI7jLpKXZv4S4JJuM",
+        },
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        return `https://drive.google.com/uc?export=download&id=${result.id}`;
+      } else {
+        console.log("error uploading audio file");
+      }
+    } catch (error) {
+      console.log("error uploading audio file");
+    }
+  };
+
+  const uploadAudio = async (audiofile) => {
+    const formData = new FormData();
+    formData.set("file", audiofile);
+
+    try {
+      const response = await fetch("http://localhost:5000/files/upload", {
+        headers: {
+          "auth-token":
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfX0.ZMhWoD4VG3mnVcO1K1JmigCpcOnI7jLpKXZv4S4JJuM",
+        },
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        return `https://drive.google.com/uc?export=download&id=${result.id}`;
+      } else {
+        console.log("error uploading audio file");
+      }
+    } catch (error) {
+      console.log("error uploading audio file");
+    }
+  };
+
+  const uploadInstrumental = async (instrumentalfile) => {
+    const formData = new FormData();
+    formData.set("file", instrumentalfile);
+    try {
+      const response = await fetch("http://localhost:5000/files/upload", {
+        headers: {
+          "auth-token":
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfX0.ZMhWoD4VG3mnVcO1K1JmigCpcOnI7jLpKXZv4S4JJuM",
+        },
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        return `https://drive.google.com/uc?export=download&id=${result.id}`;
+      } else {
+        console.log("error uploading audio file");
+      }
+    } catch (error) {
+      console.log("error uploading audio file");
+    }
+  };
+
+  const loadUserSongs = () => {
+    try {
+      let userSongsStore = Object.keys(songs).filter((item) => {
+        if (songs[item].user === 1) return item;
+      });
+
+      let userSongsStoreObject = {};
+
+      userSongsStore.forEach((item) => {
+        userSongsStoreObject[item] = songs[item];
+      });
+
+      console.log("raza", userSongsStoreObject);
+      setUserSongs(userSongsStoreObject);
+    } catch (error) {
+      console.log("some error occured");
+    }
+  };
+
+  const addSong = async (
+    name,
+    audio,
+    image,
+    lyrics,
+    user,
+    bgm,
+    description,
+    songid
+  ) => {
+    try {
+      const response = await fetch("https://dummy-url", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "auth-token": localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          name,
+          audio,
+          image,
+          lyrics,
+          user,
+          bgm,
+          description,
+          songid,
+        }),
+      });
+
+      const song = await response.json();
+      setSongs(songs.concat(song));
+    } catch (error) {
+      console.log("some error occured");
+    }
+  };
+
+  const deleteSong = async (name) => {
+    try {
+      const response = await fetch(`https://dummy-url/${name}`, {
+        method: "DELETE",
+        headers: {
+          "auth-token":
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfX0.ZMhWoD4VG3mnVcO1K1JmigCpcOnI7jLpKXZv4S4JJuM",
+        },
+      });
+
+      const result = await response.json();
+      // load songs - pending step
+    } catch (error) {
+      console.log("some error occured");
+    }
+  };
   return (
-    <SongsContext.Provider value={{ songs }}>{children}</SongsContext.Provider>
+    <SongsContext.Provider
+      value={{
+        songs,
+        loadUserSongs,
+        userSongs,
+        uploadAudio,
+        uploadInstrumental,
+        uploadImage,
+
+        addSong,
+      }}
+    >
+      {children}
+    </SongsContext.Provider>
   );
 };
 
