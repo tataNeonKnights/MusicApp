@@ -17,7 +17,7 @@ export default function NewSongs(props) {
         <div className="flex">
           {props.flag === "custom"
             ? Object.keys(userSongs).map((item) => {
-                return <SongsCards key={item} item={item} />;
+                return <SongsCards key={item} item={item} flag={props.flag}/>;
               })
             : Object.keys(songs).map((item) => {
                 return <SongsCards key={item} item={item} />;
