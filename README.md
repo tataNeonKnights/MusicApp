@@ -1,4 +1,4 @@
-# MusicAppp
+# MusicApp
 
 ## Table of Contents
 
