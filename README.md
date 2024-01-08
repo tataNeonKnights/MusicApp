@@ -29,10 +29,10 @@ Meet the talented individuals behind this project:
 
 ## About the Project
 
-The Spotify Clone project is a learning endeavor by our team, consisting of Akash Vasava, Mohiyaddeen Raza, Lipi Dey, and Binod Rai. The primary purpose of this project is to gain practical experience in web development and application design.
+The MusicApp  project is a learning endeavor by our team, consisting of Akash Vasava, Mohiyaddeen Raza, Lipi Dey, and Binod Rai. The primary purpose of this project is to gain practical experience in web development and application design.
 
 **Key Highlights:**
-- **Project Purpose**: This Spotify Clone is not intended for production use but rather serves as a practical playground for honing our web development skills.
+- **Project Purpose**: This MusicApp  is not intended for production use but rather serves as a practical playground for honing our web development skills.
 
 - **Technology Stack**: The project is built using HTML, Tailwind CSS, and JavaScript. These technologies are widely used in web development and offer a great opportunity for hands-on learning.
 
@@ -41,7 +41,7 @@ The Spotify Clone project is a learning endeavor by our team, consisting of Akas
 
 ## Features
 
-List the key features of your Spotify clone. You can use bullet points for this section, like:
+List the key features of your MusicApp . You can use bullet points for this section, like:
 
 - Music streaming and playlist management
 - Search and discover new music
@@ -49,7 +49,7 @@ List the key features of your Spotify clone. You can use bullet points for this 
 
 ## Getting Started
 
-To set up and run this Spotify Clone project locally, follow these steps:
+To set up and run this MusicApp  project locally, follow these steps:
 
 ### Prerequisites
 
@@ -61,9 +61,9 @@ Make sure you have the following software and tools installed on your system:
 
 ### Installation
 
-1. Clone the project repository to your local machine (if you have Git installed):
+1.  the project repository to your local machine (if you have Git installed):
    ```bash
-   git clone https://github.com/tataNeonKnights/spotify_clone.git
+   git  https://github.com/tataNeonKnights/MusicApp_.git
 
 
 ## Branch Naming Convention
