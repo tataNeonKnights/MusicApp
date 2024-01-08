@@ -28,12 +28,12 @@ export default function MusicPlayer() {
   let audioPlay;
 
   // const [playlist, setPlaylist] = useState([""]);
-  const { playlist, setPlaylist } = useContext(CurrentPlaylistContext);
+  let playlist;
   // console.log("playlist master data in music player : ", playlist);
 
   const { identifier } = useParams();
   // console.log("identifier", identifier);
-  const { songs } = useContext(SongsContext);
+  const { songs, getSongs } = useContext(SongsContext);
 
   // Added an event listener so that when the user presses spacebar audio starts playing or stops playing
   const handleSpaceUpEvent = (event) => {
@@ -334,6 +334,9 @@ export default function MusicPlayer() {
 
   useEffect(() => {
     try {
+      getSongs()
+      playlist = localStorage.getItem("playlist").split(",");
+      console.log("hi raza ", playlist);
       audio = document.getElementById("audio"); // Take the audio element
       // console.log("Mohiyaddeen raza audio : ", audio);
       time = document.querySelector(".timeBar"); // Take the audio progress
@@ -389,188 +392,191 @@ export default function MusicPlayer() {
       likeColor = true;
     }
   };
-
-  return (
-    <div className="">
-      <div className="flex flex-col justify-center items-center py-12 ">
-        {/* Audio Details */}
-        <div className="audioDetails flex flex-col p-4 lg:w-1/2 sm:w-3/4 relative">
-          <img
-            className="lg:h-96 md:3/4 w-full object-cover object-right-top p-2 audioImage"
-            src={songs[identifier].image}
-            alt="blog"
-          />
-          <div
-            className="lg:h-96 md:3/4 w-full object-cover object-right-top p-2 audioImage  absolute invisible"
-            id="LyricsKaraoke"
-          >
-            <ul
-              className="list-none overflow-y-auto h-full w-full"
-              id="LyricsKaraokeList"
+  try {
+    return (
+      <div className="">
+        <div className="flex flex-col justify-center items-center py-12 ">
+          {/* Audio Details */}
+          <div className="audioDetails flex flex-col p-4 lg:w-1/2 sm:w-3/4 relative">
+            <img
+              className="lg:h-96 md:3/4 w-full object-cover object-right-top p-2 audioImage"
+              src={songs[identifier].image}
+              alt="blog"
+            />
+            <div
+              className="lg:h-96 md:3/4 w-full object-cover object-right-top p-2 audioImage  absolute invisible"
+              id="LyricsKaraoke"
             >
-              {Object.keys(songs[identifier].lyrics).map((item) => {
-                return (
-                  <li key={item} id={item}>
-                    {songs[identifier].lyrics[item]}
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="audioTitle p-2 ">{songs[identifier].name}</div>
+              <ul
+                className="list-none overflow-y-auto h-full w-full"
+                id="LyricsKaraokeList"
+              >
+                {Object.keys(songs[identifier].lyrics).map((item) => {
+                  return (
+                    <li key={item} id={item}>
+                      {songs[identifier].lyrics[item]}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="audioTitle p-2 ">{songs[identifier].name}</div>
 
-            <div className="flex flex-row">
-              {/* Hamburger Menu with Dropdown List */}
-              <div className="dropdown inline-block  mr-1 relative">
-                <button className="hamburger material-icons text-gray-600">
-                  menu
-                </button>
-                <div className="dropdown-content top-4 right-0 absolute bg-white border shadow-md mt-2 py-2">
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                  >
-                    Item 1
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                  >
-                    Item 2
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                  >
-                    Item 3
-                  </a>
+              <div className="flex flex-row">
+                {/* Hamburger Menu with Dropdown List */}
+                <div className="dropdown inline-block  mr-1 relative">
+                  <button className="hamburger material-icons text-gray-600">
+                    menu
+                  </button>
+                  <div className="dropdown-content top-4 right-0 absolute bg-white border shadow-md mt-2 py-2">
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                    >
+                      Item 1
+                    </a>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                    >
+                      Item 2
+                    </a>
+                    <a
+                      href="#"
+                      className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                    >
+                      Item 3
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        {/* Audio Details */}
+          {/* Audio Details */}
 
-        {/* Audio Element */}
-        <audio id="audio" src=""></audio>
+          {/* Audio Element */}
+          <audio id="audio" src=""></audio>
 
-        {/* Audio Element */}
+          {/* Audio Element */}
 
-        {/* Controls */}
-        <div id="controls">
-          {/* Audio Time Tracker */}
-          <div className="timeTracker flex justify-between">
-            <div className="currentTimeAudio">1</div>
-            <div className="totalTimeAudio">2</div>
-          </div>
-          {/* Audio Time Tracker */}
+          {/* Controls */}
+          <div id="controls">
+            {/* Audio Time Tracker */}
+            <div className="timeTracker flex justify-between">
+              <div className="currentTimeAudio">1</div>
+              <div className="totalTimeAudio">2</div>
+            </div>
+            {/* Audio Time Tracker */}
 
-          {/* Progress Bar */}
-          <div
-            className="audio-track w-[720px] h-[10px] bg-gray-500 cursor-pointer "
-            onClick={handleProgressClick}
-          >
-            <div className="timeBar w-[0px] h-[10px] bg-green-700"></div>
-          </div>
-          {/* Progress Bar */}
+            {/* Progress Bar */}
+            <div
+              className="audio-track w-[720px] h-[10px] bg-gray-500 cursor-pointer "
+              onClick={handleProgressClick}
+            >
+              <div className="timeBar w-[0px] h-[10px] bg-green-700"></div>
+            </div>
+            {/* Progress Bar */}
 
-          {/* Button controls */}
-          <div className="buttonControls flex justify-between items-center h-[5vh]">
-            {/* Volume Up Button */}
-            <button className="material-symbols-outlined w-10">
-              volume_up
-            </button>
-            <div className="buttonMainControls flex w-full justify-center">
+            {/* Button controls */}
+            <div className="buttonControls flex justify-between items-center h-[5vh]">
+              {/* Volume Up Button */}
               <button className="material-symbols-outlined w-10">
-                shuffle
+                volume_up
               </button>
-              <button
-                className="prev  material-symbols-outlined w-10"
-                onClick={handlePrevButton}
-              >
-                skip_previous
-              </button>
-              <div
-                className="play_pause flex justify-center items-center transition-opacity duration-500 ease-in-out w-10"
-                onClick={handelPlayPause}
-              >
-                <button
-                  className="play material-symbols-outlined  "
-                  onClick={handlePlayButton}
-                >
-                  play_arrow
+              <div className="buttonMainControls flex w-full justify-center">
+                <button className="material-symbols-outlined w-10">
+                  shuffle
                 </button>
                 <button
-                  className="pause material-symbols-outlined hidden   "
-                  onClick={handlePauseButton}
+                  className="prev  material-symbols-outlined w-10"
+                  onClick={handlePrevButton}
                 >
-                  pause
+                  skip_previous
+                </button>
+                <div
+                  className="play_pause flex justify-center items-center transition-opacity duration-500 ease-in-out w-10"
+                  onClick={handelPlayPause}
+                >
+                  <button
+                    className="play material-symbols-outlined  "
+                    onClick={handlePlayButton}
+                  >
+                    play_arrow
+                  </button>
+                  <button
+                    className="pause material-symbols-outlined hidden   "
+                    onClick={handlePauseButton}
+                  >
+                    pause
+                  </button>
+                </div>
+                <button
+                  className="next material-symbols-outlined w-10"
+                  onClick={handleNextButton}
+                >
+                  skip_next
+                </button>
+                {/* Loop Button */}
+                <button className="material-symbols-outlined w-10">laps</button>
+              </div>
+              {/* Karaoke Button */}
+
+              <div
+                className="relative inline-block text-left invisible cursor-pointer"
+                id="karaokeOptions"
+              >
+                <select
+                  className="right-0 z-10 mt-2 w-32  shadow-md ring-1  ring-opacity-5 focus:outline-none  inline-flex  justify-center gap-x-1.5 rounded-md bg-white px-2 py-1 text-sm font-semibold text-gray-900  ring-inset  ring-gray-300 hover:bg-gray-50 cursor-pointer"
+                  id="karaokeOptionsInput"
+                  defaultValue={"normal"}
+                  onChange={handelSelectedOptionsChange}
+                >
+                  <option
+                    className="text-gray-700 block px-4 py-2 text-sm cursor-pointer"
+                    id="menu-item-0"
+                    value={"normal"}
+                  >
+                    Normal
+                  </option>
+                  <option
+                    className="text-gray-700 block px-4 py-2 text-sm cursor-pointer"
+                    id="menu-item-1"
+                    value={"instrumental"}
+                  >
+                    Instrumental
+                  </option>
+                </select>
+              </div>
+
+              <button
+                className="karaoke material-icons w-10"
+                onClick={() => handleKaraokeButton("button")}
+              >
+                mic
+              </button>
+
+              {/* Like Button */}
+              <div className="group relative inline-block">
+                <button onClick={colorchange} className="w-10 cursor-pointer ">
+                  <i
+                    id="favorite"
+                    className="fa-regular fa-heart transition-all  m-1 hover:text-3xl text-2xl hover:mt-1 hover:text-red-500 hover:mb-0.5"
+                  ></i>
                 </button>
               </div>
-              <button
-                className="next material-symbols-outlined w-10"
-                onClick={handleNextButton}
-              >
-                skip_next
-              </button>
-              {/* Loop Button */}
-              <button className="material-symbols-outlined w-10">laps</button>
             </div>
-            {/* Karaoke Button */}
-
-            <div
-              className="relative inline-block text-left invisible cursor-pointer"
-              id="karaokeOptions"
-            >
-              <select
-                className="right-0 z-10 mt-2 w-32  shadow-md ring-1  ring-opacity-5 focus:outline-none  inline-flex  justify-center gap-x-1.5 rounded-md bg-white px-2 py-1 text-sm font-semibold text-gray-900  ring-inset  ring-gray-300 hover:bg-gray-50 cursor-pointer"
-                id="karaokeOptionsInput"
-                defaultValue={"normal"}
-                onChange={handelSelectedOptionsChange}
-              >
-                <option
-                  className="text-gray-700 block px-4 py-2 text-sm cursor-pointer"
-                  id="menu-item-0"
-                  value={"normal"}
-                >
-                  Normal
-                </option>
-                <option
-                  className="text-gray-700 block px-4 py-2 text-sm cursor-pointer"
-                  id="menu-item-1"
-                  value={"instrumental"}
-                >
-                  Instrumental
-                </option>
-              </select>
-            </div>
-
-            <button
-              className="karaoke material-icons w-10"
-              onClick={() => handleKaraokeButton("button")}
-            >
-              mic
-            </button>
-
-            {/* Like Button */}
-            <div className="group relative inline-block">
-              <button onClick={colorchange} className="w-10 cursor-pointer ">
-                <i
-                  id="favorite"
-                  className="fa-regular fa-heart transition-all  m-1 hover:text-3xl text-2xl hover:mt-1 hover:text-red-500 hover:mb-0.5"
-                ></i>
-              </button>
-            </div>
+            {/* Button controls */}
           </div>
-          {/* Button controls */}
+          {/* {/* Controls */}
         </div>
-        {/* {/* Controls */}
+        <NewMusicPlaylist />
+        <TrendingPlaylists />
+        <ArtistsCardsHome />
+        <PopularPlaylists />
       </div>
-      <NewMusicPlaylist />
-      <TrendingPlaylists />
-      <ArtistsCardsHome />
-      <PopularPlaylists />
-    </div>
-  );
+    );
+  } catch (error) {
+    console.log("some error occured");
+  }
 }

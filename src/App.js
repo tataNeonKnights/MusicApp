@@ -20,58 +20,62 @@ import Songs from "./Components/Songs";
 import AddSong from "./Components/AddSong";
 
 function App() {
-  return (
-    <div className="App">
-      <PlaylistsState>
-        <SongsState>
-          <UsersState>
-            <CurrentPlaylistState>
-              <Router>
-                <Navbar />
-                <Routes>
-                  <Route exact path="/" element={<Home />}></Route>
-                  <Route exact path="/AddSong" element={<AddSong />}></Route>
-                  <Route
-                    exact
-                    path="/Songs/:songId"
-                    element={<Songs />}
-                  ></Route>
-                  <Route
-                    exact
-                    path="/MediaDashboard"
-                    element={<MediaDashBoard />}
-                  ></Route>
-                  <Route
-                    exact
-                    path="/DriveUploadHelper"
-                    element={<DriveUploadHelper />}
-                  ></Route>
-                  <Route
-                    exact
-                    path="/lyricsLrcGenerator"
-                    element={<LyricsSynchronizer />}
-                  ></Route>
-                  <Route
-                    exact
-                    path="/musicplayer/:identifier"
-                    element={<MusicPlayer />}
-                  ></Route>
-                  <Route
-                    exact
-                    path="/playlists/:playlistId"
-                    element={<Playlists />}
-                  ></Route>
-                  <Route exact path="/signup" element={<Signup />}></Route>
-                  <Route exact path="/login" element={<Login />}></Route>
-                </Routes>
-                <Footer />
-              </Router>
-            </CurrentPlaylistState>
-          </UsersState>
-        </SongsState>
-      </PlaylistsState>
-    </div>
-  );
+  try {
+    return (
+      <div className="App">
+        <PlaylistsState>
+          <SongsState>
+            <UsersState>
+              <CurrentPlaylistState>
+                <Router>
+                  <Navbar />
+                  <Routes>
+                    <Route exact path="/" element={<Home />}></Route>
+                    <Route exact path="/AddSong" element={<AddSong />}></Route>
+                    <Route
+                      exact
+                      path="/Songs/:songId"
+                      element={<Songs />}
+                    ></Route>
+                    <Route
+                      exact
+                      path="/MediaDashboard"
+                      element={<MediaDashBoard />}
+                    ></Route>
+                    <Route
+                      exact
+                      path="/DriveUploadHelper"
+                      element={<DriveUploadHelper />}
+                    ></Route>
+                    <Route
+                      exact
+                      path="/lyricsLrcGenerator"
+                      element={<LyricsSynchronizer />}
+                    ></Route>
+                    <Route
+                      exact
+                      path="/musicplayer/:identifier"
+                      element={<MusicPlayer />}
+                    ></Route>
+                    <Route
+                      exact
+                      path="/playlists/:playlistId"
+                      element={<Playlists />}
+                    ></Route>
+                    <Route exact path="/signup" element={<Signup />}></Route>
+                    <Route exact path="/login" element={<Login />}></Route>
+                  </Routes>
+                  <Footer />
+                </Router>
+              </CurrentPlaylistState>
+            </UsersState>
+          </SongsState>
+        </PlaylistsState>
+      </div>
+    );
+  } catch (error) {
+    console.log("some error occured");
+  }
 }
 
 export default App;
