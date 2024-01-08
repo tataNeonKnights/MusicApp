@@ -10,7 +10,7 @@ import Playlists from "./Components/Playlists";
 import PlaylistsState from "./Memory/PlaylistsState";
 import SongsState from "./Memory/SongsState";
 import UsersState from "./Memory/UsersState";
-import CurrentPlaylistState from "./Memory/CurrentPlaylistState";
+
 import LyricsSynchronizer from "./Helpers/LyricsSynchronizer";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
@@ -26,48 +26,46 @@ function App() {
         <PlaylistsState>
           <SongsState>
             <UsersState>
-              <CurrentPlaylistState>
-                <Router>
-                  <Navbar />
-                  <Routes>
-                    <Route exact path="/" element={<Home />}></Route>
-                    <Route exact path="/AddSong" element={<AddSong />}></Route>
-                    <Route
-                      exact
-                      path="/Songs/:songId"
-                      element={<Songs />}
-                    ></Route>
-                    <Route
-                      exact
-                      path="/MediaDashboard"
-                      element={<MediaDashBoard />}
-                    ></Route>
-                    <Route
-                      exact
-                      path="/DriveUploadHelper"
-                      element={<DriveUploadHelper />}
-                    ></Route>
-                    <Route
-                      exact
-                      path="/lyricsLrcGenerator"
-                      element={<LyricsSynchronizer />}
-                    ></Route>
-                    <Route
-                      exact
-                      path="/musicplayer/:identifier"
-                      element={<MusicPlayer />}
-                    ></Route>
-                    <Route
-                      exact
-                      path="/playlists/:playlistId"
-                      element={<Playlists />}
-                    ></Route>
-                    <Route exact path="/signup" element={<Signup />}></Route>
-                    <Route exact path="/login" element={<Login />}></Route>
-                  </Routes>
-                  <Footer />
-                </Router>
-              </CurrentPlaylistState>
+              <Router>
+                <Navbar />
+                <Routes>
+                  <Route exact path="/" element={<Home />}></Route>
+                  <Route exact path="/AddSong" element={<AddSong />}></Route>
+                  <Route
+                    exact
+                    path="/Songs/:songId"
+                    element={<Songs />}
+                  ></Route>
+                  <Route
+                    exact
+                    path="/MediaDashboard"
+                    element={<MediaDashBoard />}
+                  ></Route>
+                  <Route
+                    exact
+                    path="/DriveUploadHelper"
+                    element={<DriveUploadHelper />}
+                  ></Route>
+                  <Route
+                    exact
+                    path="/lyricsLrcGenerator"
+                    element={<LyricsSynchronizer />}
+                  ></Route>
+                  <Route
+                    exact
+                    path="/musicplayer/:identifier"
+                    element={<MusicPlayer />}
+                  ></Route>
+                  <Route
+                    exact
+                    path="/playlists/:playlistId"
+                    element={<Playlists />}
+                  ></Route>
+                  <Route exact path="/signup" element={<Signup />}></Route>
+                  <Route exact path="/login" element={<Login />}></Route>
+                </Routes>
+                <Footer />
+              </Router>
             </UsersState>
           </SongsState>
         </PlaylistsState>

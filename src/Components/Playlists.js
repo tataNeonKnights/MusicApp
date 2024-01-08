@@ -3,7 +3,7 @@ import { NavLink, useParams } from "react-router-dom";
 import PlaylistsContext from "../Memory/PlaylistsContext";
 import SongsContext from "../Memory/SongsContext";
 import UsersContext from "../Memory/UsersContext";
-import CurrentPlaylistContext from "../Memory/CurrentPlaylistContext";
+
 
 export default function Playlists() {
   let likeColor = true;

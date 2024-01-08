@@ -1,13 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
-import PlaylistsContext from "../Memory/PlaylistsContext";
 import SongsContext from "../Memory/SongsContext";
 import UsersContext from "../Memory/UsersContext";
-import CurrentPlaylistContext from "../Memory/CurrentPlaylistContext";
+
 
 export default function Songs() {
   let likeColor = true;
-  const { playlists } = useContext(PlaylistsContext);
   const { songId } = useParams();
   const { songs, getSongs } = useContext(SongsContext);
   const { users } = useContext(UsersContext);
