@@ -1,9 +1,6 @@
 package com.example.MusicAppTeam.Model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,13 +13,15 @@ public class SongModel {
     private long sId;
 
     private String songName;
-    private String audiSrc;
+    private String audioSrc;
     private String imgSrc;
 
     @Column(length = 10000000)
     private String lyrics;
     private String bgmSrc;
-    private String description;
+    private String songDescription;
+
+
 
 
     @Column(nullable = false,unique = true)
@@ -32,27 +31,32 @@ public class SongModel {
     @JsonIgnore
     private List<PlaylistModel> playlists;
 
-    @JsonBackReference
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id")
     private UserModel user;
-
-
-
 
     public SongModel() {
     }
 
-    public SongModel(long sId, String songName, String audiSrc, String imgSrc, String lyrics, String bgmSrc, String description, String songId, UserModel user) {
+    public SongModel(long sId, String songName, String audioSrc, String imgSrc, String lyrics, String bgmSrc, String songDescription, String songId, UserModel user) {
         this.sId = sId;
         this.songName = songName;
-        this.audiSrc = audiSrc;
+        this.audioSrc = audioSrc;
         this.imgSrc = imgSrc;
         this.lyrics = lyrics;
         this.bgmSrc = bgmSrc;
-        this.description = description;
+        this.songDescription = songDescription;
         this.songId = songId;
         this.user = user;
+    }
+
+    public String getSongDescription() {
+        return songDescription;
+    }
+
+    public void setSongDescription(String songDescription) {
+        this.songDescription = songDescription;
     }
 
     public long getsId() {
@@ -71,6 +75,7 @@ public class SongModel {
         this.songName = songName;
     }
 
+
     public String getLyrics() {
         return lyrics;
     }
@@ -87,12 +92,12 @@ public class SongModel {
         this.playlists = playlists;
     }
 
-    public String getAudiSrc() {
-        return audiSrc;
+    public String getAudioSrc() {
+        return audioSrc;
     }
 
-    public void setAudiSrc(String audiSrc) {
-        this.audiSrc = audiSrc;
+    public void setAudioSrc(String audioSrc) {
+        this.audioSrc = audioSrc;
     }
 
     public String getImgSrc() {
@@ -111,13 +116,7 @@ public class SongModel {
         this.bgmSrc = bgmSrc;
     }
 
-    public String getDescription() {
-        return description;
-    }
 
-    public void setDescription(String desc) {
-        this.description = description;
-    }
 
     public String getSongId() {
         return songId;

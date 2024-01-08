@@ -92,106 +92,111 @@ export default function AddSong() {
   useEffect(() => {
     console.log("mohiyaddeen ", songs);
   }, [songs]);
-  return (
-    <div className="p-10 flex items-center flex-col w-full">
-      <div className="font-bold text-2xl underline ">Add Song</div>
 
-      <div className="text-lg">Song Details</div>
-      <form
-        className="flex items-center w-full flex-wrap font-normal"
-        onSubmit={handleSubmit}
-      >
-        <div className="songNameContainer flex flex-col items-center w-1/2 p-2">
-          <label htmlFor="songName" className="self-start mb-2">
-            Name
-          </label>
-          <input
-            type="text"
-            name="songName"
-            id="songName"
-            className="w-full rounded  p-2 border border-solid border-black shadow-sm hover:shadow-lg focus:border-amber-500  focus:ring-amber-500 appearance-none focus:outline-none focus:ring-2 focus:bg-blue-50  transition-all"
-            placeholder="Enter song name"
-            value={sname}
-            onChange={handleNameChange}
-            required
-          />
-        </div>
-        <div className="songAudioContainer flex flex-col items-center w-1/2 p-2">
-          <label htmlFor="songAudio" className="self-start mb-2">
-            Audio File
-          </label>
-          <input
-            type="file"
-            name="songAudio"
-            id="songAudio"
-            className="w-full rounded  p-2 border border-solid border-black shadow-sm hover:shadow-lg focus:border-amber-500  focus:ring-amber-500 appearance-none focus:outline-none focus:ring-2 focus:bg-blue-50 transition-all"
-            onChange={handleAudioFileChange}
-            accept="audio/mp3"
-            required
-          />
-        </div>
-        <div className="songImageContainer flex flex-col items-center w-1/2 p-2">
-          <label htmlFor="songImage" className="self-start mb-2">
-            Audio Image
-          </label>
-          <input
-            type="file"
-            name="songImage"
-            id="songImage"
-            className="w-full rounded  p-2 border border-solid border-black shadow-sm hover:shadow-lg focus:border-amber-500  focus:ring-amber-500 appearance-none focus:outline-none focus:ring-2 focus:bg-blue-50 transition-all"
-            onChange={handleImageFileChange}
-            accept="image/*"
-          />
-        </div>
-        <div className="songLyricsContainer flex flex-col items-center w-1/2 p-2">
-          <label htmlFor="songLyrics" className="self-start mb-2">
-            Lyrics LRC File
-          </label>
-          <input
-            type="file"
-            name="songLyrics"
-            id="songLyrics"
-            className="w-full rounded  p-2 border border-solid border-black shadow-sm hover:shadow-lg focus:border-amber-500  focus:ring-amber-500 appearance-none focus:outline-none focus:ring-2 focus:bg-blue-50 transition-all"
-            onChange={handleLyricsFileChange}
-            accept=".lrc"
-          />
-        </div>
-        <div className="songInstrumentalContainer flex flex-col items-center w-1/2 p-2">
-          <label htmlFor="songInstrumental" className="self-start mb-2">
-            Instrumental Audio
-          </label>
-          <input
-            type="file"
-            name="songInstrumental"
-            id="songInstrumental"
-            className="w-full rounded  p-2 border border-solid border-black shadow-sm hover:shadow-lg focus:border-amber-500  focus:ring-amber-500 appearance-none focus:outline-none focus:ring-2 focus:bg-blue-50 transition-all"
-            onChange={handleInstrumentalFileChange}
-            accept="audio/mp3"
-          />
-        </div>
+  try {
+    return (
+      <div className="p-10 flex items-center flex-col w-full">
+        <div className="font-bold text-2xl underline ">Add Song</div>
 
-        <div className="songDescriptionContainer flex flex-col items-center w-1/2 p-2">
-          <label htmlFor="songDescription" className="self-start mb-2">
-            Description
-          </label>
-          <input
-            type="text"
-            name="songDescription"
-            id="songDescription"
-            className="w-full rounded  p-2 border border-solid border-black shadow-sm hover:shadow-lg focus:border-amber-500  focus:ring-amber-500 appearance-none focus:outline-none focus:ring-2 focus:bg-blue-50 transition-all"
-            placeholder="Enter your delivery pincode"
-            value={description}
-            onChange={handleDescriptionChange}
-            required
-          />
-        </div>
-        <button
-          className="p-2 m-6 bg-green-400 border-2 border-solid border-black rounded-lg"
-          type="submit"
+        <div className="text-lg">Song Details</div>
+        <form
+          className="flex items-center w-full flex-wrap font-normal"
+          onSubmit={handleSubmit}
         >
-          Add Song
-        </button>
-      </form>
-    </div>
-  );
+          <div className="songNameContainer flex flex-col items-center w-1/2 p-2">
+            <label htmlFor="songName" className="self-start mb-2">
+              Name
+            </label>
+            <input
+              type="text"
+              name="songName"
+              id="songName"
+              className="w-full rounded  p-2 border border-solid border-black shadow-sm hover:shadow-lg focus:border-amber-500  focus:ring-amber-500 appearance-none focus:outline-none focus:ring-2 focus:bg-blue-50  transition-all"
+              placeholder="Enter song name"
+              value={sname}
+              onChange={handleNameChange}
+              required
+            />
+          </div>
+          <div className="songAudioContainer flex flex-col items-center w-1/2 p-2">
+            <label htmlFor="songAudio" className="self-start mb-2">
+              Audio File
+            </label>
+            <input
+              type="file"
+              name="songAudio"
+              id="songAudio"
+              className="w-full rounded  p-2 border border-solid border-black shadow-sm hover:shadow-lg focus:border-amber-500  focus:ring-amber-500 appearance-none focus:outline-none focus:ring-2 focus:bg-blue-50 transition-all"
+              onChange={handleAudioFileChange}
+              accept="audio/mp3"
+              required
+            />
+          </div>
+          <div className="songImageContainer flex flex-col items-center w-1/2 p-2">
+            <label htmlFor="songImage" className="self-start mb-2">
+              Audio Image
+            </label>
+            <input
+              type="file"
+              name="songImage"
+              id="songImage"
+              className="w-full rounded  p-2 border border-solid border-black shadow-sm hover:shadow-lg focus:border-amber-500  focus:ring-amber-500 appearance-none focus:outline-none focus:ring-2 focus:bg-blue-50 transition-all"
+              onChange={handleImageFileChange}
+              accept="image/*"
+            />
+          </div>
+          <div className="songLyricsContainer flex flex-col items-center w-1/2 p-2">
+            <label htmlFor="songLyrics" className="self-start mb-2">
+              Lyrics LRC File
+            </label>
+            <input
+              type="file"
+              name="songLyrics"
+              id="songLyrics"
+              className="w-full rounded  p-2 border border-solid border-black shadow-sm hover:shadow-lg focus:border-amber-500  focus:ring-amber-500 appearance-none focus:outline-none focus:ring-2 focus:bg-blue-50 transition-all"
+              onChange={handleLyricsFileChange}
+              accept=".lrc"
+            />
+          </div>
+          <div className="songInstrumentalContainer flex flex-col items-center w-1/2 p-2">
+            <label htmlFor="songInstrumental" className="self-start mb-2">
+              Instrumental Audio
+            </label>
+            <input
+              type="file"
+              name="songInstrumental"
+              id="songInstrumental"
+              className="w-full rounded  p-2 border border-solid border-black shadow-sm hover:shadow-lg focus:border-amber-500  focus:ring-amber-500 appearance-none focus:outline-none focus:ring-2 focus:bg-blue-50 transition-all"
+              onChange={handleInstrumentalFileChange}
+              accept="audio/mp3"
+            />
+          </div>
+
+          <div className="songDescriptionContainer flex flex-col items-center w-1/2 p-2">
+            <label htmlFor="songDescription" className="self-start mb-2">
+              Description
+            </label>
+            <input
+              type="text"
+              name="songDescription"
+              id="songDescription"
+              className="w-full rounded  p-2 border border-solid border-black shadow-sm hover:shadow-lg focus:border-amber-500  focus:ring-amber-500 appearance-none focus:outline-none focus:ring-2 focus:bg-blue-50 transition-all"
+              placeholder="Enter your delivery pincode"
+              value={description}
+              onChange={handleDescriptionChange}
+              required
+            />
+          </div>
+          <button
+            className="p-2 m-6 bg-green-400 border-2 border-solid border-black rounded-lg"
+            type="submit"
+          >
+            Add Song
+          </button>
+        </form>
+      </div>
+    );
+  } catch (error) {
+    console.log("some error occured");
+  }
 }

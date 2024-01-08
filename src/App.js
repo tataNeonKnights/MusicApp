@@ -10,7 +10,7 @@ import Playlists from "./Components/Playlists";
 import PlaylistsState from "./Memory/PlaylistsState";
 import SongsState from "./Memory/SongsState";
 import UsersState from "./Memory/UsersState";
-import CurrentPlaylistState from "./Memory/CurrentPlaylistState";
+
 import LyricsSynchronizer from "./Helpers/LyricsSynchronizer";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
@@ -20,12 +20,12 @@ import Songs from "./Components/Songs";
 import AddSong from "./Components/AddSong";
 
 function App() {
-  return (
-    <div className="App">
-      <PlaylistsState>
-        <SongsState>
-          <UsersState>
-            <CurrentPlaylistState>
+  try {
+    return (
+      <div className="App">
+        <PlaylistsState>
+          <SongsState>
+            <UsersState>
               <Router>
                 <Navbar />
                 <Routes>
@@ -66,12 +66,14 @@ function App() {
                 </Routes>
                 <Footer />
               </Router>
-            </CurrentPlaylistState>
-          </UsersState>
-        </SongsState>
-      </PlaylistsState>
-    </div>
-  );
+            </UsersState>
+          </SongsState>
+        </PlaylistsState>
+      </div>
+    );
+  } catch (error) {
+    console.log("some error occured");
+  }
 }
 
 export default App;

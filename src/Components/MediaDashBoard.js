@@ -19,17 +19,21 @@ export default function MediaDashBoard() {
     // console.log("hi",playlists)
   }, []);
 
-  return (
-    <div>
-      <div className="controlsMaster flex items-center justify-center">
-        <NavLink to={"/addsong"}>
-          <button className="p-2 m-6 bg-green-400 border-2 border-solid border-black rounded-lg">
-            Add Song
-          </button>
-        </NavLink>
+  try {
+    return (
+      <div>
+        <div className="controlsMaster flex items-center justify-center">
+          <NavLink to={"/addsong"}>
+            <button className="p-2 m-6 bg-green-400 border-2 border-solid border-black rounded-lg">
+              Add Song
+            </button>
+          </NavLink>
+        </div>
+        <NewMusicPlaylist flag="custom" />
+        <NewSongs flag="custom" />
       </div>
-      <NewMusicPlaylist flag="custom" />
-      <NewSongs flag="custom" />
-    </div>
-  );
+    );
+  } catch (error) {
+    console.log("some error occured");
+  }
 }

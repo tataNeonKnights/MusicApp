@@ -29,7 +29,7 @@ public class PlaylistModel {
     private List<SongModel> songsList;
 
 
-    @JsonBackReference
+
     @ManyToOne
     @JoinColumn(name = "id")
     private UserModel user;
