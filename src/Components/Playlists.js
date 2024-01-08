@@ -13,14 +13,16 @@ export default function Playlists() {
   const { users } = useContext(UsersContext);
   // console.log(songs);
 
-  const { playlist, setPlaylist } = useContext(CurrentPlaylistContext);
+  // const { playlist, setPlaylist } = useContext(CurrentPlaylistContext);
   const [searchSongName, setSearchSongName] = useState("");
   const [searchOpens, setSearchOpens] = useState(false);
 
   useEffect(() => {
     let playlistData = playlists[playlistId].songs;
     // console.log("playlist master data : ",playlistData)
-    setPlaylist(playlistData);
+    localStorage.clear()
+    localStorage.setItem("playlist",playlistData.toString())
+    // console.log("bye hi ",playlistData)
   }, [searchSongName]);
 
   const colorchange = () => {

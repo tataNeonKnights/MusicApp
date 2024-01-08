@@ -9,7 +9,7 @@ export default function Songs() {
   let likeColor = true;
   const { playlists } = useContext(PlaylistsContext);
   const { songId } = useParams();
-  const { songs,getSongs } = useContext(SongsContext);
+  const { songs, getSongs } = useContext(SongsContext);
   const { users } = useContext(UsersContext);
   // console.log(songs);
 
@@ -18,12 +18,14 @@ export default function Songs() {
   const [searchOpens, setSearchOpens] = useState(false);
 
   useEffect(() => {
-    console.log("hi")
+    // console.log("hi")
+
     let playlistData = [songId];
     // console.log("playlist master data : ",playlistData)
     // setPlaylist(playlistData);
-    localStorage.clear()
-    localStorage.setItem("playlist",playlistData.toString())
+    // console.log("bye raza ",songs)
+    localStorage.clear();
+    localStorage.setItem("playlist", playlistData.toString());
   }, [songId]);
 
   const colorchange = () => {
