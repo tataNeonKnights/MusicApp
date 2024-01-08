@@ -1,0 +1,323 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "SpotifyNeon",
+    "dateExported": "2024-01-08T10:01:54.114Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "d0982452-d9a8-4033-a009-65ae0b6b7490",
+            "name": "Authentication",
+            "containerId": "",
+            "created": "2023-12-18T15:09:56.687Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "85dc22ed-2c5c-489a-9c80-433a52ef7e43",
+            "name": "songs",
+            "containerId": "",
+            "created": "2024-01-07T16:51:45.563Z",
+            "sortNum": 30000
+        },
+        {
+            "_id": "00475e38-d63d-4533-9cd6-dafe1e35c3c9",
+            "name": "Playlists",
+            "containerId": "",
+            "created": "2024-01-07T18:02:17.216Z",
+            "sortNum": 40000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "39840fda-6bfb-4838-a920-48c912e81ca4",
+            "colId": "9096c3ba-0890-43dd-96e4-835b7f107308",
+            "containerId": "d0982452-d9a8-4033-a009-65ae0b6b7490",
+            "name": "login user",
+            "url": "http://localhost:8080/api/auth/login",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-12-18T15:10:08.540Z",
+            "modified": "2023-12-27T06:28:07.033Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"email\": \"raza@gmail.com\",\n    \"password\": \"1234\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "829a46be-afd9-4ed7-a444-609ca3f5ccdf",
+            "colId": "9096c3ba-0890-43dd-96e4-835b7f107308",
+            "containerId": "85dc22ed-2c5c-489a-9c80-433a52ef7e43",
+            "name": "create song",
+            "url": "http://localhost:8080/api/auth/addsong",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-01-07T16:51:55.807Z",
+            "modified": "2024-01-08T09:54:30.185Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"songName\": \"song1\",\n  \"audiSrc\": \"https://drive.google.com/uc?export=download&id=16fFZ9UmNQU9PKU50hz3VO89qs0jDURy6\",\n  \"imgSrc\": \"https://drive.google.com/uc?export=download&id=1DMDspHFihmBKwbuPoDFvvuER6t_V4Ibp\",\n  \"lyrics\": \"{\\\"2\\\":\\\" \\\",\\\"14\\\":\\\"Ooh\\\",\\\"18\\\":\\\"Balloons are deflatin'\\\",\\\"22\\\":\\\"Guess they look lifeless like me\\\",\\\"26\\\":\\\"We miss you on your side of the bed, mmm\\\",\\\"33\\\":\\\"Still got your things here\\\",\\\"36\\\":\\\"And they stare at me like souvenirs\\\",\\\"40\\\":\\\"Don't wanna let you out my head\\\",\\\"46\\\":\\\"Just like the day that I met you\\\",\\\"49\\\":\\\"The day I thought forever\\\",\\\"51\\\":\\\"Said that you love me\\\",\\\"53\\\":\\\"But that'll last for never\\\",\\\"55\\\":\\\"It's cold outside\\\",\\\"57\\\":\\\"Like when you walked out my life\\\",\\\"58\\\":\\\"Why you walked out my life?\\\",\\\"62\\\":\\\"I get like this every time\\\",\\\"68\\\":\\\"On these days that feel like you and me\\\",\\\"73\\\":\\\"Heartbreak anniversary\\\",\\\"76\\\":\\\"'Cause I remember every time\\\",\\\"83\\\":\\\"On these days that feel like you and me\\\",\\\"88\\\":\\\"Heartbreak anniversary\\\",\\\"89\\\":\\\"Do you ever think of me?\\\",\\\"93\\\":\\\"No\\\",\\\"98\\\":\\\"(Ooh) No-no, no\\\",\\\"101\\\":\\\"(Ooh, ooh, ooh) Ooh, nah\\\",\\\"106\\\":\\\"I'm buildin' my hopes up\\\",\\\"110\\\":\\\"Like presents unopened 'til this day\\\",\\\"114\\\":\\\"I still see the messages you read, mmm\\\",\\\"120\\\":\\\"I'm foolishly patient\\\",\\\"124\\\":\\\"(Foolishly patient)\\\",\\\"125\\\":\\\"Can't get past the taste of your lips\\\",\\\"128\\\":\\\"(Taste of your lips)\\\",\\\"129\\\":\\\"Don't wanna let you out my head\\\",\\\"135\\\":\\\"Just like the day that I met you\\\",\\\"137\\\":\\\"The day I thought forever\\\",\\\"139\\\":\\\"Said that you love me\\\",\\\"141\\\":\\\"But that'll last for never\\\",\\\"143\\\":\\\"It's cold outside\\\",\\\"145\\\":\\\"Like when you walked out my life\\\",\\\"147\\\":\\\"Why you walked out my life?\\\",\\\"150\\\":\\\"I get like this every time\\\",\\\"156\\\":\\\"On these days that feel like you and me\\\",\\\"161\\\":\\\"Heartbreak anniversary\\\",\\\"165\\\":\\\"'Cause I remember every time\\\",\\\"172\\\":\\\"On these days that feel like you and me\\\",\\\"176\\\":\\\"Heartbreak anniversary\\\",\\\"178\\\":\\\"Do you ever think of me?\\\",\\\"182\\\":\\\"Of me\\\",\\\"186\\\":\\\"'Cause I think of you, think of you\\\",\\\"194\\\":\\\"\\\"}\",\n  \"bgmSrc\": \"https://drive.google.com/uc?export=download&id=1PMSYiLyPiur82ITgDLQxj8mBm9GLJn6s\",\n  \"description\": \"desc1\",\n  \"songId\": \"song-3\",\n  \"user\": {\n    \"name\": \"raza\",\n    \"email\": \"r6@gmail.com\",\n    \"password\": \"1234\",\n    \"id\":1\n  }\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "d9278348-6dd5-49e6-88a9-d16a864c8518",
+            "colId": "9096c3ba-0890-43dd-96e4-835b7f107308",
+            "containerId": "00475e38-d63d-4533-9cd6-dafe1e35c3c9",
+            "name": "create playlist",
+            "url": "http://localhost:8080/api/auth/addplaylist",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2024-01-07T18:02:35.390Z",
+            "modified": "2024-01-08T05:52:56.589Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"pName\": \"playlist1\",\n  \"pImageSrc\": \"https://drive.google.com/uc?export=download&id=1DMDspHFihmBKwbuPoDFvvuER6t_V4Ibp\",\n  \"pDesc\": \"desc1\",\n  \"playlistCustomId\": \"playlist-1\",\n  \"user\": {\n    \"name\": \"raza\",\n    \"email\": \"r6@gmail.com\",\n    \"password\": \"1234\",\n    \"id\":1\n  }\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "cd0f973e-5c99-4a8d-81c5-8db7da30670e",
+            "colId": "9096c3ba-0890-43dd-96e4-835b7f107308",
+            "containerId": "00475e38-d63d-4533-9cd6-dafe1e35c3c9",
+            "name": "Update Playlist details",
+            "url": "http://localhost:8080/api/auth/updateplaylist",
+            "method": "PUT",
+            "sortNum": 11250,
+            "created": "2024-01-08T09:17:05.057Z",
+            "modified": "2024-01-08T09:57:53.802Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"pName\": \"playlistOneTwo\",\n  \"pImageSrc\": \"https://drive.google.com/uc?export=download&id=1DMDspHFihmBKwbuPoDFvvuER6t_V4Ibp\",\n  \"pDesc\": \"desc1\",\n  \"playlistCustomId\": \"playlist-1\",\n  \"user\": {\n    \"name\": \"raza\",\n    \"email\": \"r6@gmail.com\",\n    \"password\": \"1234\",\n    \"id\":1\n  }\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "73813a94-4137-40ed-bba5-320224381ae3",
+            "colId": "9096c3ba-0890-43dd-96e4-835b7f107308",
+            "containerId": "85dc22ed-2c5c-489a-9c80-433a52ef7e43",
+            "name": "Update Song Details",
+            "url": "http://localhost:8080/api/auth/updatesong",
+            "method": "PUT",
+            "sortNum": 12500,
+            "created": "2024-01-08T08:33:44.670Z",
+            "modified": "2024-01-08T09:57:29.271Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"songName\": \"songTow\",\n  \"audiSrc\": \"https://drive.google.com/uc?export=download&id=16fFZ9UmNQU9PKU50hz3VO89qs0jDURy6\",\n  \"imgSrc\": \"https://drive.google.com/uc?export=download&id=1DMDspHFihmBKwbuPoDFvvuER6t_V4Ibp\",\n  \"lyrics\": \"{\\\"2\\\":\\\" \\\",\\\"14\\\":\\\"Ooh\\\",\\\"18\\\":\\\"Balloons are deflatin'\\\",\\\"22\\\":\\\"Guess they look lifeless like me\\\",\\\"26\\\":\\\"We miss you on your side of the bed, mmm\\\",\\\"33\\\":\\\"Still got your things here\\\",\\\"36\\\":\\\"And they stare at me like souvenirs\\\",\\\"40\\\":\\\"Don't wanna let you out my head\\\",\\\"46\\\":\\\"Just like the day that I met you\\\",\\\"49\\\":\\\"The day I thought forever\\\",\\\"51\\\":\\\"Said that you love me\\\",\\\"53\\\":\\\"But that'll last for never\\\",\\\"55\\\":\\\"It's cold outside\\\",\\\"57\\\":\\\"Like when you walked out my life\\\",\\\"58\\\":\\\"Why you walked out my life?\\\",\\\"62\\\":\\\"I get like this every time\\\",\\\"68\\\":\\\"On these days that feel like you and me\\\",\\\"73\\\":\\\"Heartbreak anniversary\\\",\\\"76\\\":\\\"'Cause I remember every time\\\",\\\"83\\\":\\\"On these days that feel like you and me\\\",\\\"88\\\":\\\"Heartbreak anniversary\\\",\\\"89\\\":\\\"Do you ever think of me?\\\",\\\"93\\\":\\\"No\\\",\\\"98\\\":\\\"(Ooh) No-no, no\\\",\\\"101\\\":\\\"(Ooh, ooh, ooh) Ooh, nah\\\",\\\"106\\\":\\\"I'm buildin' my hopes up\\\",\\\"110\\\":\\\"Like presents unopened 'til this day\\\",\\\"114\\\":\\\"I still see the messages you read, mmm\\\",\\\"120\\\":\\\"I'm foolishly patient\\\",\\\"124\\\":\\\"(Foolishly patient)\\\",\\\"125\\\":\\\"Can't get past the taste of your lips\\\",\\\"128\\\":\\\"(Taste of your lips)\\\",\\\"129\\\":\\\"Don't wanna let you out my head\\\",\\\"135\\\":\\\"Just like the day that I met you\\\",\\\"137\\\":\\\"The day I thought forever\\\",\\\"139\\\":\\\"Said that you love me\\\",\\\"141\\\":\\\"But that'll last for never\\\",\\\"143\\\":\\\"It's cold outside\\\",\\\"145\\\":\\\"Like when you walked out my life\\\",\\\"147\\\":\\\"Why you walked out my life?\\\",\\\"150\\\":\\\"I get like this every time\\\",\\\"156\\\":\\\"On these days that feel like you and me\\\",\\\"161\\\":\\\"Heartbreak anniversary\\\",\\\"165\\\":\\\"'Cause I remember every time\\\",\\\"172\\\":\\\"On these days that feel like you and me\\\",\\\"176\\\":\\\"Heartbreak anniversary\\\",\\\"178\\\":\\\"Do you ever think of me?\\\",\\\"182\\\":\\\"Of me\\\",\\\"186\\\":\\\"'Cause I think of you, think of you\\\",\\\"194\\\":\\\"\\\"}\",\n  \"bgmSrc\": \"https://drive.google.com/uc?export=download&id=1PMSYiLyPiur82ITgDLQxj8mBm9GLJn6s\",\n  \"description\": \"desc1\",\n  \"songId\": \"song-2\",\n  \"user\": {\n    \"name\": \"raza\",\n    \"email\": \"r6@gmail.com\",\n    \"password\": \"1234\",\n    \"id\":1\n  }\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "d8090f9d-d1b7-4850-8388-f6f181781f31",
+            "colId": "9096c3ba-0890-43dd-96e4-835b7f107308",
+            "containerId": "00475e38-d63d-4533-9cd6-dafe1e35c3c9",
+            "name": "Delete playlist",
+            "url": "http://localhost:8080/api/auth/deleteplaylist/playlist-1",
+            "method": "DELETE",
+            "sortNum": 12500,
+            "created": "2024-01-08T09:10:38.265Z",
+            "modified": "2024-01-08T09:10:58.192Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"songName\": \"song1\",\n  \"audiSrc\": \"https://drive.google.com/uc?export=download&id=16fFZ9UmNQU9PKU50hz3VO89qs0jDURy6\",\n  \"imgSrc\": \"https://drive.google.com/uc?export=download&id=1DMDspHFihmBKwbuPoDFvvuER6t_V4Ibp\",\n  \"lyrics\": \"{\\\"2\\\":\\\" \\\",\\\"14\\\":\\\"Ooh\\\",\\\"18\\\":\\\"Balloons are deflatin'\\\",\\\"22\\\":\\\"Guess they look lifeless like me\\\",\\\"26\\\":\\\"We miss you on your side of the bed, mmm\\\",\\\"33\\\":\\\"Still got your things here\\\",\\\"36\\\":\\\"And they stare at me like souvenirs\\\",\\\"40\\\":\\\"Don't wanna let you out my head\\\",\\\"46\\\":\\\"Just like the day that I met you\\\",\\\"49\\\":\\\"The day I thought forever\\\",\\\"51\\\":\\\"Said that you love me\\\",\\\"53\\\":\\\"But that'll last for never\\\",\\\"55\\\":\\\"It's cold outside\\\",\\\"57\\\":\\\"Like when you walked out my life\\\",\\\"58\\\":\\\"Why you walked out my life?\\\",\\\"62\\\":\\\"I get like this every time\\\",\\\"68\\\":\\\"On these days that feel like you and me\\\",\\\"73\\\":\\\"Heartbreak anniversary\\\",\\\"76\\\":\\\"'Cause I remember every time\\\",\\\"83\\\":\\\"On these days that feel like you and me\\\",\\\"88\\\":\\\"Heartbreak anniversary\\\",\\\"89\\\":\\\"Do you ever think of me?\\\",\\\"93\\\":\\\"No\\\",\\\"98\\\":\\\"(Ooh) No-no, no\\\",\\\"101\\\":\\\"(Ooh, ooh, ooh) Ooh, nah\\\",\\\"106\\\":\\\"I'm buildin' my hopes up\\\",\\\"110\\\":\\\"Like presents unopened 'til this day\\\",\\\"114\\\":\\\"I still see the messages you read, mmm\\\",\\\"120\\\":\\\"I'm foolishly patient\\\",\\\"124\\\":\\\"(Foolishly patient)\\\",\\\"125\\\":\\\"Can't get past the taste of your lips\\\",\\\"128\\\":\\\"(Taste of your lips)\\\",\\\"129\\\":\\\"Don't wanna let you out my head\\\",\\\"135\\\":\\\"Just like the day that I met you\\\",\\\"137\\\":\\\"The day I thought forever\\\",\\\"139\\\":\\\"Said that you love me\\\",\\\"141\\\":\\\"But that'll last for never\\\",\\\"143\\\":\\\"It's cold outside\\\",\\\"145\\\":\\\"Like when you walked out my life\\\",\\\"147\\\":\\\"Why you walked out my life?\\\",\\\"150\\\":\\\"I get like this every time\\\",\\\"156\\\":\\\"On these days that feel like you and me\\\",\\\"161\\\":\\\"Heartbreak anniversary\\\",\\\"165\\\":\\\"'Cause I remember every time\\\",\\\"172\\\":\\\"On these days that feel like you and me\\\",\\\"176\\\":\\\"Heartbreak anniversary\\\",\\\"178\\\":\\\"Do you ever think of me?\\\",\\\"182\\\":\\\"Of me\\\",\\\"186\\\":\\\"'Cause I think of you, think of you\\\",\\\"194\\\":\\\"\\\"}\",\n  \"bgmSrc\": \"https://drive.google.com/uc?export=download&id=1PMSYiLyPiur82ITgDLQxj8mBm9GLJn6s\",\n  \"description\": \"desc1\",\n  \"songId\": \"song-2\",\n  \"user\": {\n    \"name\": \"raza\",\n    \"email\": \"r6@gmail.com\",\n    \"password\": \"1234\",\n    \"id\":1\n  }\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "0852936a-c234-4e1f-b3bf-a400e3ee7e11",
+            "colId": "9096c3ba-0890-43dd-96e4-835b7f107308",
+            "containerId": "d0982452-d9a8-4033-a009-65ae0b6b7490",
+            "name": "create user",
+            "url": "http://localhost:8080/api/auth/adduser",
+            "method": "POST",
+            "sortNum": 15000,
+            "created": "2023-12-27T06:26:44.861Z",
+            "modified": "2024-01-07T16:41:51.193Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n    \"name\": \"raza\",\n    \"email\": \"r6@gmail.com\",\n    \"password\": \"1234\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "91c84254-d90b-4957-bc0f-916872993521",
+            "colId": "9096c3ba-0890-43dd-96e4-835b7f107308",
+            "containerId": "00475e38-d63d-4533-9cd6-dafe1e35c3c9",
+            "name": "Add Songs to playlist",
+            "url": "http://localhost:8080/api/auth/addsongsplaylist/playlist-1",
+            "method": "PUT",
+            "sortNum": 15000,
+            "created": "2024-01-08T06:14:00.314Z",
+            "modified": "2024-01-08T07:56:33.866Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "[\"song-1\",\"song-3\",\"song-2\"]",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "8ac00149-33a5-44c7-9288-bcc304974fff",
+            "colId": "9096c3ba-0890-43dd-96e4-835b7f107308",
+            "containerId": "85dc22ed-2c5c-489a-9c80-433a52ef7e43",
+            "name": "Delete Song",
+            "url": "http://localhost:8080/api/auth/deletesong/song-1",
+            "method": "DELETE",
+            "sortNum": 15000,
+            "created": "2024-01-08T07:43:49.974Z",
+            "modified": "2024-01-08T09:27:27.121Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"songName\": \"song1\",\n  \"audiSrc\": \"https://drive.google.com/uc?export=download&id=16fFZ9UmNQU9PKU50hz3VO89qs0jDURy6\",\n  \"imgSrc\": \"https://drive.google.com/uc?export=download&id=1DMDspHFihmBKwbuPoDFvvuER6t_V4Ibp\",\n  \"lyrics\": \"{\\\"2\\\":\\\" \\\",\\\"14\\\":\\\"Ooh\\\",\\\"18\\\":\\\"Balloons are deflatin'\\\",\\\"22\\\":\\\"Guess they look lifeless like me\\\",\\\"26\\\":\\\"We miss you on your side of the bed, mmm\\\",\\\"33\\\":\\\"Still got your things here\\\",\\\"36\\\":\\\"And they stare at me like souvenirs\\\",\\\"40\\\":\\\"Don't wanna let you out my head\\\",\\\"46\\\":\\\"Just like the day that I met you\\\",\\\"49\\\":\\\"The day I thought forever\\\",\\\"51\\\":\\\"Said that you love me\\\",\\\"53\\\":\\\"But that'll last for never\\\",\\\"55\\\":\\\"It's cold outside\\\",\\\"57\\\":\\\"Like when you walked out my life\\\",\\\"58\\\":\\\"Why you walked out my life?\\\",\\\"62\\\":\\\"I get like this every time\\\",\\\"68\\\":\\\"On these days that feel like you and me\\\",\\\"73\\\":\\\"Heartbreak anniversary\\\",\\\"76\\\":\\\"'Cause I remember every time\\\",\\\"83\\\":\\\"On these days that feel like you and me\\\",\\\"88\\\":\\\"Heartbreak anniversary\\\",\\\"89\\\":\\\"Do you ever think of me?\\\",\\\"93\\\":\\\"No\\\",\\\"98\\\":\\\"(Ooh) No-no, no\\\",\\\"101\\\":\\\"(Ooh, ooh, ooh) Ooh, nah\\\",\\\"106\\\":\\\"I'm buildin' my hopes up\\\",\\\"110\\\":\\\"Like presents unopened 'til this day\\\",\\\"114\\\":\\\"I still see the messages you read, mmm\\\",\\\"120\\\":\\\"I'm foolishly patient\\\",\\\"124\\\":\\\"(Foolishly patient)\\\",\\\"125\\\":\\\"Can't get past the taste of your lips\\\",\\\"128\\\":\\\"(Taste of your lips)\\\",\\\"129\\\":\\\"Don't wanna let you out my head\\\",\\\"135\\\":\\\"Just like the day that I met you\\\",\\\"137\\\":\\\"The day I thought forever\\\",\\\"139\\\":\\\"Said that you love me\\\",\\\"141\\\":\\\"But that'll last for never\\\",\\\"143\\\":\\\"It's cold outside\\\",\\\"145\\\":\\\"Like when you walked out my life\\\",\\\"147\\\":\\\"Why you walked out my life?\\\",\\\"150\\\":\\\"I get like this every time\\\",\\\"156\\\":\\\"On these days that feel like you and me\\\",\\\"161\\\":\\\"Heartbreak anniversary\\\",\\\"165\\\":\\\"'Cause I remember every time\\\",\\\"172\\\":\\\"On these days that feel like you and me\\\",\\\"176\\\":\\\"Heartbreak anniversary\\\",\\\"178\\\":\\\"Do you ever think of me?\\\",\\\"182\\\":\\\"Of me\\\",\\\"186\\\":\\\"'Cause I think of you, think of you\\\",\\\"194\\\":\\\"\\\"}\",\n  \"bgmSrc\": \"https://drive.google.com/uc?export=download&id=1PMSYiLyPiur82ITgDLQxj8mBm9GLJn6s\",\n  \"description\": \"desc1\",\n  \"songId\": \"song-2\",\n  \"user\": {\n    \"name\": \"raza\",\n    \"email\": \"r6@gmail.com\",\n    \"password\": \"1234\",\n    \"id\":1\n  }\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "3886ef91-3da1-4f96-a3aa-9adfc3f92ff2",
+            "colId": "9096c3ba-0890-43dd-96e4-835b7f107308",
+            "containerId": "d0982452-d9a8-4033-a009-65ae0b6b7490",
+            "name": "Get users",
+            "url": "http://localhost:8080/api/auth/getusers",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-12-18T15:10:49.725Z",
+            "modified": "2024-01-08T09:19:28.385Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "a18aaee3-a407-48f0-810b-96f02309a3bb",
+            "colId": "9096c3ba-0890-43dd-96e4-835b7f107308",
+            "containerId": "00475e38-d63d-4533-9cd6-dafe1e35c3c9",
+            "name": "get playlists",
+            "url": "http://localhost:8080/api/auth/getplaylists",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-01-07T18:15:59.326Z",
+            "modified": "2024-01-07T18:16:16.872Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "55570236-dd6d-4cfb-b79c-188326fe9ff9",
+            "colId": "9096c3ba-0890-43dd-96e4-835b7f107308",
+            "containerId": "85dc22ed-2c5c-489a-9c80-433a52ef7e43",
+            "name": "Get songs",
+            "url": "http://localhost:8080/api/auth/getusers",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2024-01-08T05:50:37.481Z",
+            "modified": "2024-01-08T05:50:37.481Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "342662e3-e6ab-4095-98b5-2ac792379309",
+            "colId": "9096c3ba-0890-43dd-96e4-835b7f107308",
+            "containerId": "d0982452-d9a8-4033-a009-65ae0b6b7490",
+            "name": "Get user",
+            "url": "http://localhost:8080/api/auth/getuser/7",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-12-18T15:11:33.085Z",
+            "modified": "2023-12-19T06:06:12.965Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                }
+            ],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
