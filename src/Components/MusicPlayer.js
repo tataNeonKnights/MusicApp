@@ -41,391 +41,390 @@ export default function MusicPlayer() {
   // console.log("identifier", identifier);
 
   // State variable for keep tracking of whether the audio is playing or not
-  const [playing, setPlaying] = useState(false);
   // let playing;
 
   // SetInterval tracker for when the audio plays
   let audioPlay;
 
   const { songs, getSongs } = useContext(SongsContext);
+  try {
+    // Method to handle when the user presses spacebar audio starts playing or stops playing
+    const handleSpaceUpEvent = (event) => {
+      try {
+        console.log("bye bye : ", audioRef.current);
+        if (event.code === "Space" || event.key === " ") {
+          if (btnPlayRef.current.classList.contains("hidden") === true) {
+            handlePauseButton();
+          } else {
+            handlePlayButton();
+          }
+        }
+      } catch (error) {
+        console.log("Some error fetching");
+      }
+    };
 
-  // Method to handle when the user presses spacebar audio starts playing or stops playing
-  const handleSpaceUpEvent = (event) => {
-    try {
-      if (event.code === "Space" || event.key === " ") {
-        if (playing === true) {
+    //Method to handle when the user hits spacebar and to prevent default behaviour of spacebar which is to scroll the page
+    const handleSpaceDownEvent = (event) => {
+      try {
+        if (event.code === "Space" || event.key === " ") {
+          event.preventDefault();
+        }
+      } catch (error) {
+        console.log("Some error fetching");
+      }
+    };
+
+    // created a function to handle the switching of audio tracks.
+    function switchTrack(numTrack, flag = "default") {
+      try {
+        // default is when the Iterface is on normal mode and not in KARAOKE mode
+        if (flag === "default") {
+          // Pause the song
           handlePauseButton();
-        } else {
-          // console.log("clicked in space");
+          audioRef.current.src = songs[playlist[numTrack]].audio;
+          // console.log(audioRef.current.src);
+
+          karaokeOptionsInputRef.current.value = "normal";
+          handleKaraokeButton();
+
+          // Initilize the audio progress bar and audio
+          audioRef.current.currentTime = 0;
+          timeRef.current.style.width = 0;
+
+          // Play the song
+          handlePlayButton();
+        } else if (flag === "karaokeAudioChange") {
+          // Pause the song
+          handlePauseButton();
+          audioRef.current.src = songs[playlist[numTrack]].bgm;
+          // console.log(audioRef.current.src);
+          handleKaraokeButton();
+
+          // Initilize the audio progress bar and audio
+          audioRef.current.currentTime = 0;
+          timeRef.current.style.width = 0;
+
+          // Play the song
           handlePlayButton();
         }
+      } catch (error) {
+        console.log("Some error fetching");
       }
-    } catch (error) {
-      console.log("Some error fetching");
     }
-  };
 
-  //Method to handle when the user hits spacebar and to prevent default behaviour of spacebar which is to scroll the page
-  const handleSpaceDownEvent = (event) => {
-    try {
-      if (event.code === "Space" || event.key === " ") {
-        event.preventDefault();
+    //Method to handle toggle play and pause icons
+    const handelPlayPause = (playingParam) => {
+      try {
+        // console.log("play pause called");
+        if (playingParam === true) {
+          btnPlayRef.current.classList.add("hidden");
+          btnPauseRef.current.classList.remove("hidden");
+        } else {
+          btnPlayRef.current.classList.remove("hidden");
+          btnPauseRef.current.classList.add("hidden");
+        }
+      } catch (error) {
+        console.log("Some error fetching");
       }
-    } catch (error) {
-      console.log("Some error fetching");
-    }
-  };
+    };
 
-  // created a function to handle the switching of audio tracks.
-  function switchTrack(numTrack, flag = "default") {
-    try {
-      // default is when the Iterface is on normal mode and not in KARAOKE mode
-      if (flag === "default") {
-        // Pause the song
-        handlePauseButton();
-        audioRef.current.src = songs[playlist[numTrack]].audio;
-        // console.log(audioRef.current.src);
+    //Method to handle the playing of audio
+    const handlePlayButton = async () => {
+      try {
+        // Retreiving track index from localstorage
+        let track = parseInt(localStorage.getItem("track"));
 
-        karaokeOptionsInputRef.current.value = "normal";
-        handleKaraokeButton();
+        //play the audio
+        await audioRef.current.play();
 
-        // Initilize the audio progress bar and audio
-        audioRef.current.currentTime = 0;
-        timeRef.current.style.width = 0;
+        //Setting the title and image with respect to the audio playing
+        audioTitleRef.current.innerHTML = songs[playlist[track]].name;
+        audioImageRef.current.src = songs[playlist[track]].image;
 
-        // Play the song
-        handlePlayButton();
-      } else if (flag === "karaokeAudioChange") {
-        // Pause the song
-        handlePauseButton();
-        audioRef.current.src = songs[playlist[numTrack]].bgm;
-        // console.log(audioRef.current.src);
-        handleKaraokeButton();
+        // Toggling the icons for play pause
+        handelPlayPause(true);
 
-        // Initilize the audio progress bar and audio
-        audioRef.current.currentTime = 0;
-        timeRef.current.style.width = 0;
+        // Logic For Lyrics Synchronization
+        // Retreiving all the keys from the lyrics object which are in seconds
+        let LyricsKeyList = Object.keys(songs[playlist[track]].lyrics);
+        // console.log(LyricsKeyList);
+        let iterator = 0;
 
-        // Play the song
-        handlePlayButton();
-      }
-    } catch (error) {
-      console.log("Some error fetching");
-    }
-  }
+        // Resetting the UI
+        LyricsKeyList.forEach((item) => {
+          document.getElementById(item).style.backgroundColor = "white";
+        });
 
-  //Method to handle toggle play and pause icons
-  const handelPlayPause = (playingParam) => {
-    try {
-      // console.log("play pause called");
-      if (playingParam === true) {
-        btnPlayRef.current.classList.add("hidden");
-        btnPauseRef.current.classList.remove("hidden");
-      } else {
-        btnPlayRef.current.classList.remove("hidden");
-        btnPauseRef.current.classList.add("hidden");
-      }
-    } catch (error) {
-      console.log("Some error fetching");
-    }
-  };
+        // Now we will set an interval when the audio is playing and will clear the interval when the audio is paused
+        audioPlay = setInterval(function () {
+          try {
+            //Calculating and updating the current audio time tracker.
+            // Get the value of what second the song is at.
+            let currentAudioTime = Math.round(audioRef.current.currentTime);
 
-  //Method to handle the playing of audio
-  const handlePlayButton = async () => {
-    try {
-      // Retreiving track index from localstorage
-      let track = parseInt(localStorage.getItem("track"));
-
-      //play the audio
-      await audioRef.current.play();
-
-      //Setting the title and image with respect to the audio playing
-      audioTitleRef.current.innerHTML = songs[playlist[track]].name;
-      audioImageRef.current.src = songs[playlist[track]].image;
-
-      // Toggling the icons for play pause
-      handelPlayPause(true);
-      setPlaying(true);
-
-      // Logic For Lyrics Synchronization
-      // Retreiving all the keys from the lyrics object which are in seconds
-      let LyricsKeyList = Object.keys(songs[playlist[track]].lyrics);
-      // console.log(LyricsKeyList);
-      let iterator = 0;
-
-      // Resetting the UI
-      LyricsKeyList.forEach((item) => {
-        document.getElementById(item).style.backgroundColor = "white";
-      });
-
-      // Now we will set an interval when the audio is playing and will clear the interval when the audio is paused
-      audioPlay = setInterval(function () {
-        try {
-          //Calculating and updating the current audio time tracker.
-          // Get the value of what second the song is at.
-          let currentAudioTime = Math.round(audioRef.current.currentTime);
-
-          // Logic for synchronising lyrics with audio's current time
-          if (
-            currentAudioTime > LyricsKeyList[iterator] &&
-            iterator < LyricsKeyList.length
-          ) {
-            // console.log(
-            //   "iterator : ",
-            //   iterator,
-            //   " current time  : ",
-            //   currentAudioTime,
-            //   " array time : ",
-            //   LyricsKeyList[iterator]
-            // );
-            document.getElementById(
-              LyricsKeyList[iterator]
-            ).style.backgroundColor = "white";
-            iterator++;
-            // console.log(
-            //   "Raza Offset : ",
-            //   document.getElementById(LyricsKeyList[iterator]).offsetTop
-            // );
+            // Logic for synchronising lyrics with audio's current time
             if (
-              lyricsKaraokeListRef.current.offsetHeight - 100 <
-              document.getElementById(LyricsKeyList[iterator]).offsetTop
+              currentAudioTime > LyricsKeyList[iterator] &&
+              iterator < LyricsKeyList.length
             ) {
-              lyricsKaraokeListRef.current.scrollTop =
-                document.getElementById(LyricsKeyList[iterator]).offsetTop - 50;
-            }
-
-            // document.getElementById("LyricsKaraokeList").scrollTop =
-            //   document.getElementById(LyricsKeyList[iterator]).offsetTop;
-            if (iterator < LyricsKeyList.length)
+              // console.log(
+              //   "iterator : ",
+              //   iterator,
+              //   " current time  : ",
+              //   currentAudioTime,
+              //   " array time : ",
+              //   LyricsKeyList[iterator]
+              // );
               document.getElementById(
                 LyricsKeyList[iterator]
-              ).style.backgroundColor = "green";
-          }
+              ).style.backgroundColor = "white";
+              iterator++;
+              // console.log(
+              //   "Raza Offset : ",
+              //   document.getElementById(LyricsKeyList[iterator]).offsetTop
+              // );
+              if (
+                lyricsKaraokeListRef.current.offsetHeight - 100 <
+                document.getElementById(LyricsKeyList[iterator]).offsetTop
+              ) {
+                lyricsKaraokeListRef.current.scrollTop =
+                  document.getElementById(LyricsKeyList[iterator]).offsetTop -
+                  50;
+              }
 
+              // document.getElementById("LyricsKaraokeList").scrollTop =
+              //   document.getElementById(LyricsKeyList[iterator]).offsetTop;
+              if (iterator < LyricsKeyList.length)
+                document.getElementById(
+                  LyricsKeyList[iterator]
+                ).style.backgroundColor = "green";
+            }
+
+            //Calculate minutes
+            let minutesCurrent = Math.floor(currentAudioTime / 60);
+            // calculate seconds
+            let secondsCurrent = currentAudioTime % 60;
+
+            // if seconds is a single character add a "0" at the starting. eg :- 01,02,03...etc.
+            if ((secondsCurrent + "").length < 2) {
+              secondsCurrent = "0" + secondsCurrent;
+            }
+            //Now here we will update the current audio time tracker
+            currentTimeAudioRef.current.innerHTML =
+              minutesCurrent + ":" + secondsCurrent;
+
+            //Here we are updating audio progress bar
+            // Get the value of what second the song is at
+            let audioTime = Math.round(audioRef.current.currentTime);
+            // We get songs with different durations
+            let audioLength = Math.round(audioRef.current.duration);
+            // Assign a width to an element at time
+            timeRef.current.style.width = (audioTime * 100) / audioLength + "%";
+
+            // Compare what second the track is now and how long in total
+            // And check that the track variable is less than the queue playlist length
+            if (audioTime === audioLength && track < playlist.length - 1) {
+              // then Increase the variable
+              localStorage.setItem("track", (track + 1).toString());
+              switchTrack(track + 1); // change track
+              // Otherwise we check the same, but the track variable is greater than or equal to queue playlist length
+            } else if (
+              audioTime === audioLength &&
+              track >= playlist.length - 1
+            ) {
+              // then we assign track to zero
+              localStorage.setItem("track", (0).toString());
+              switchTrack(0); //Change track
+            }
+          } catch (error) {
+            console.log("some error occured");
+          }
+        }, 10);
+      } catch (error) {
+        console.log("some error occured");
+      }
+    };
+
+    //Method to handle pause button to pause the audio
+    const handlePauseButton = () => {
+      try {
+        // console.log("clicked");
+        audioRef.current.pause(); // Stops the song
+        handelPlayPause(false);
+        clearInterval(audioPlay); // stops the interval
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    //Method to handle prev button to go back on the playlist
+    const handlePrevButton = () => {
+      try {
+        let track = parseInt(localStorage.getItem("track"));
+        if (track > 0) {
+          localStorage.setItem("track", (track - 1).toString());
+          switchTrack(track - 1);
+        } else {
+          localStorage.setItem("track", (playlist.length - 1).toString());
+          switchTrack(playlist.length - 1);
+        }
+      } catch (error) {
+        console.log("Some error fetching");
+      }
+    };
+
+    //Method to handle next button to go forward on the playlist
+    const handleNextButton = () => {
+      try {
+        let track = parseInt(localStorage.getItem("track"));
+        if (track < playlist.length - 1) {
+          localStorage.setItem("track", (track + 1).toString());
+          switchTrack(track + 1);
+        } else {
+          localStorage.setItem("track", (0).toString());
+          switchTrack(0);
+        }
+      } catch (error) {
+        console.log("Some error fetching");
+      }
+    };
+
+    //Method to handle audio progress bar because when a user clicks on the progress bar it should reflect the relative progress
+    const handleProgressClick = (event) => {
+      try {
+        // console.log(event.nativeEvent);
+
+        let clickLocation = event.nativeEvent.offsetX;
+        // console.log("click location : ", clickLocation);
+
+        let widthTimeBar = (clickLocation * 100) / 720 + "%";
+        timeRef.current.style.width = widthTimeBar;
+
+        let audioLength = Math.round(audioRef.current.duration);
+        let temp = parseInt((clickLocation / 720) * audioLength);
+        // console.log("temp : ", temp);
+        audioRef.current.currentTime = temp;
+
+        handlePlayButton();
+      } catch (error) {
+        console.log("Some error fetching");
+      }
+    };
+
+    // Method to handle Karaoke button
+    const handleKaraokeButton = async (flag = "default") => {
+      try {
+        // There are two user flows, one is when user clicks on Karaoke button and another flow is when user changes to another track
+
+        let track = parseInt(localStorage.getItem("track"));
+        // console.log(flag);
+        if (flag === "button") {
+          // Toggling Lyrics UI
+          audioImageRef.current.classList.toggle("invisible");
+          lyricsKaraokeRef.current.classList.toggle("invisible");
+          karaokeOptionsRef.current.classList.toggle("invisible");
+        }
+
+        // Populating Lyrics
+        let lyricsElement = Object.keys(songs[playlist[track]].lyrics).map(
+          (item) => {
+            return `<li key=${item} id=${item}>${
+              songs[playlist[track]].lyrics[item]
+            } </li>`;
+          }
+        );
+        // console.log(lyricsElement);
+        let lyricsHTML = lyricsElement.join("");
+        lyricsKaraokeListRef.current.innerHTML = lyricsHTML;
+      } catch (error) {
+        console.log("Some error fetching");
+      }
+    };
+
+    // Method to handle Karaoke audio change options
+    const handelSelectedOptionsChange = (e) => {
+      try {
+        let track = parseInt(localStorage.getItem("track"));
+        if (e.target.value === "normal") {
+          switchTrack(track);
+        } else if (e.target.value === "instrumental") {
+          switchTrack(track, "karaokeAudioChange");
+        }
+      } catch (error) {
+        console.log("Some error fetching");
+      }
+    };
+
+    useEffect(() => {
+      try {
+        // console.log("hi raza ", playlist);
+        // console.log("Mohiyaddeen raza audio : ", audioRef.current);
+
+        // Setting track iterator to localstorage to persist data
+        localStorage.setItem(
+          "track",
+          playlist.findIndex((ele) => ele === identifier).toString()
+        );
+        // Inititializing Audio element
+        audioRef.current.src = songs[identifier].audio;
+        currentTimeAudioRef.current.innerHTML = "0:00";
+
+        // Updating the total time on the UI
+        audioRef.current.onloadedmetadata = () => {
+          // console.log("Duration: ", audioRef.current.duration);
+          //Calculating and updating the total audio time tracker.
+          // Get the total duration of the audio.
+          let totalAudioTime = Math.round(audioRef.current.duration);
+          // console.log("mohiyaddeen asd : ", totalAudioTime);
+          let minutesTotal = Math.floor(totalAudioTime / 60);
           //Calculate minutes
-          let minutesCurrent = Math.floor(currentAudioTime / 60);
           // calculate seconds
-          let secondsCurrent = currentAudioTime % 60;
-
+          let secondsTotal = totalAudioTime % 60;
           // if seconds is a single character add a "0" at the starting. eg :- 01,02,03...etc.
-          if ((secondsCurrent + "").length < 2) {
-            secondsCurrent = "0" + secondsCurrent;
+          if ((secondsTotal + "").length < 2) {
+            secondsTotal = "0" + secondsTotal;
           }
-          //Now here we will update the current audio time tracker
-          currentTimeAudioRef.current.innerHTML =
-            minutesCurrent + ":" + secondsCurrent;
+          totalTimeAudioRef.current.innerHTML =
+            minutesTotal + ":" + secondsTotal;
+        };
 
-          //Here we are updating audio progress bar
-          // Get the value of what second the song is at
-          let audioTime = Math.round(audioRef.current.currentTime);
-          // We get songs with different durations
-          let audioLength = Math.round(audioRef.current.duration);
-          // Assign a width to an element at time
-          timeRef.current.style.width = (audioTime * 100) / audioLength + "%";
+        // console.log("mohiyaddeen raza asd : ", songs[identifier]);
 
-          // Compare what second the track is now and how long in total
-          // And check that the track variable is less than the queue playlist length
-          if (audioTime === audioLength && track < playlist.length - 1) {
-            // then Increase the variable
-            localStorage.setItem("track", (track + 1).toString());
-            switchTrack(track + 1); // change track
-            // Otherwise we check the same, but the track variable is greater than or equal to queue playlist length
-          } else if (
-            audioTime === audioLength &&
-            track >= playlist.length - 1
-          ) {
-            // then we assign track to zero
-            localStorage.setItem("track", (0).toString());
-            switchTrack(0); //Change track
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      }, 10);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+        document.addEventListener("keydown", handleSpaceDownEvent);
+        document.addEventListener("keyup", handleSpaceUpEvent);
 
-  //Method to handle pause button to pause the audio
-  const handlePauseButton = () => {
-    try {
-      // console.log("clicked");
-      audioRef.current.pause(); // Stops the song
-      handelPlayPause(false);
-      setPlaying(false);
-      clearInterval(audioPlay); // stops the interval
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  //Method to handle prev button to go back on the playlist
-  const handlePrevButton = () => {
-    try {
-      let track = parseInt(localStorage.getItem("track"));
-      if (track > 0) {
-        localStorage.setItem("track", (track - 1).toString());
-        switchTrack(track - 1);
+        // Cleaning up the event listener on keydown and keyup
+        return () => {
+          document.removeEventListener("keydown", handleSpaceDownEvent);
+          document.removeEventListener("keyup", handleSpaceUpEvent);
+        };
+      } catch (error) {
+        console.log("Some error fetching");
+      }
+    }, [songs]);
+    let likeColor = true;
+    const colorchange = () => {
+      const likeInfo = document.getElementById("saveInfo");
+      if (likeColor) {
+        const favorite = document.getElementById("favorite");
+        favorite.classList.remove("fa-regular", "fa-heart");
+        favorite.classList.add("fa-solid");
+        favorite.classList.add("fa-heart");
+        favorite.classList.add("text-red-600");
+        likeColor = false;
+        // likeInfo.innerHTML="Remove from your library"
       } else {
-        localStorage.setItem("track", (playlist.length - 1).toString());
-        switchTrack(playlist.length - 1);
+        const favorite = document.getElementById("favorite");
+        favorite.classList.remove("fa-solid", "fa-heart");
+        favorite.classList.remove("text-red-600");
+        favorite.classList.add("fa-regular");
+        favorite.classList.add("fa-heart");
+        // likeInfo.innerHTML="Save to your library"
+        likeColor = true;
       }
-    } catch (error) {
-      console.log("Some error fetching");
-    }
-  };
+    };
 
-  //Method to handle next button to go forward on the playlist
-  const handleNextButton = () => {
-    try {
-      let track = parseInt(localStorage.getItem("track"));
-      if (track < playlist.length - 1) {
-        localStorage.setItem("track", (track + 1).toString());
-        switchTrack(track + 1);
-      } else {
-        localStorage.setItem("track", (0).toString());
-        switchTrack(0);
-      }
-    } catch (error) {
-      console.log("Some error fetching");
-    }
-  };
-
-  //Method to handle audio progress bar because when a user clicks on the progress bar it should reflect the relative progress
-  const handleProgressClick = (event) => {
-    try {
-      // console.log(event.nativeEvent);
-
-      let clickLocation = event.nativeEvent.offsetX;
-      // console.log("click location : ", clickLocation);
-
-      let widthTimeBar = (clickLocation * 100) / 720 + "%";
-      timeRef.current.style.width = widthTimeBar;
-
-      let audioLength = Math.round(audioRef.current.duration);
-      let temp = parseInt((clickLocation / 720) * audioLength);
-      // console.log("temp : ", temp);
-      audioRef.current.currentTime = temp;
-
-      handlePlayButton();
-    } catch (error) {
-      console.log("Some error fetching");
-    }
-  };
-
-  // Method to handle Karaoke button
-  const handleKaraokeButton = async (flag = "default") => {
-    try {
-      // There are two user flows, one is when user clicks on Karaoke button and another flow is when user changes to another track
-
-      let track = parseInt(localStorage.getItem("track"));
-      // console.log(flag);
-      if (flag === "button") {
-        // Toggling Lyrics UI
-        audioImageRef.current.classList.toggle("invisible");
-        lyricsKaraokeRef.current.classList.toggle("invisible");
-        karaokeOptionsRef.current.classList.toggle("invisible");
-      }
-
-      // Populating Lyrics
-      let lyricsElement = Object.keys(songs[playlist[track]].lyrics).map(
-        (item) => {
-          return `<li key=${item} id=${item}>${
-            songs[playlist[track]].lyrics[item]
-          } </li>`;
-        }
-      );
-      // console.log(lyricsElement);
-      let lyricsHTML = lyricsElement.join("");
-      lyricsKaraokeListRef.current.innerHTML = lyricsHTML;
-    } catch (error) {
-      console.log("Some error fetching");
-    }
-  };
-
-  // Method to handle Karaoke audio change options
-  const handelSelectedOptionsChange = (e) => {
-    try {
-      let track = parseInt(localStorage.getItem("track"));
-      if (e.target.value === "normal") {
-        switchTrack(track);
-      } else if (e.target.value === "instrumental") {
-        switchTrack(track, "karaokeAudioChange");
-      }
-    } catch (error) {
-      console.log("Some error fetching");
-    }
-  };
-
-  useEffect(() => {
-    try {
-      // console.log("hi raza ", playlist);
-      // console.log("Mohiyaddeen raza audio : ", audioRef.current);
-
-      // Setting track iterator to localstorage to persist data
-      localStorage.setItem(
-        "track",
-        playlist.findIndex((ele) => ele === identifier).toString()
-      );
-      // Inititializing Audio element
-      audioRef.current.src = songs[identifier].audio;
-      currentTimeAudioRef.current.innerHTML = "0:00";
-
-      // Updating the total time on the UI
-      audioRef.current.onloadedmetadata = () => {
-        // console.log("Duration: ", audioRef.current.duration);
-        //Calculating and updating the total audio time tracker.
-        // Get the total duration of the audio.
-        let totalAudioTime = Math.round(audioRef.current.duration);
-        // console.log("mohiyaddeen asd : ", totalAudioTime);
-        let minutesTotal = Math.floor(totalAudioTime / 60);
-        //Calculate minutes
-        // calculate seconds
-        let secondsTotal = totalAudioTime % 60;
-        // if seconds is a single character add a "0" at the starting. eg :- 01,02,03...etc.
-        if ((secondsTotal + "").length < 2) {
-          secondsTotal = "0" + secondsTotal;
-        }
-        totalTimeAudioRef.current.innerHTML = minutesTotal + ":" + secondsTotal;
-      };
-
-      // console.log("mohiyaddeen raza asd : ", songs[identifier]);
-
-      document.addEventListener("keydown", handleSpaceDownEvent);
-      document.addEventListener("keyup", handleSpaceUpEvent);
-
-      // Cleaning up the event listener on keydown and keyup
-      return () => {
-        document.removeEventListener("keydown", handleSpaceDownEvent);
-        document.removeEventListener("keyup", handleSpaceUpEvent);
-      };
-    } catch (error) {
-      console.log("Some error fetching");
-    }
-  }, [songs]);
-  let likeColor = true;
-  const colorchange = () => {
-    const likeInfo = document.getElementById("saveInfo");
-    if (likeColor) {
-      const favorite = document.getElementById("favorite");
-      favorite.classList.remove("fa-regular", "fa-heart");
-      favorite.classList.add("fa-solid");
-      favorite.classList.add("fa-heart");
-      favorite.classList.add("text-red-600");
-      likeColor = false;
-      // likeInfo.innerHTML="Remove from your library"
-    } else {
-      const favorite = document.getElementById("favorite");
-      favorite.classList.remove("fa-solid", "fa-heart");
-      favorite.classList.remove("text-red-600");
-      favorite.classList.add("fa-regular");
-      favorite.classList.add("fa-heart");
-      // likeInfo.innerHTML="Save to your library"
-      likeColor = true;
-    }
-  };
-  try {
     return (
       <div className="">
         <div className="flex flex-col justify-center items-center py-12 ">

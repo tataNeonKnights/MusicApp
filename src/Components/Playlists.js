@@ -4,7 +4,6 @@ import PlaylistsContext from "../Memory/PlaylistsContext";
 import SongsContext from "../Memory/SongsContext";
 import UsersContext from "../Memory/UsersContext";
 
-
 export default function Playlists() {
   let likeColor = true;
   const { playlists } = useContext(PlaylistsContext);
@@ -18,12 +17,17 @@ export default function Playlists() {
   const [searchOpens, setSearchOpens] = useState(false);
 
   useEffect(() => {
-    let playlistData = playlists[playlistId].songs;
-    // console.log("playlist master data : ",playlistData)
-    localStorage.clear()
-    localStorage.setItem("playlist",playlistData.toString())
-    // console.log("bye hi ",playlistData)
-  }, [searchSongName]);
+    try {
+      console.log(playlists);
+      let playlistData = playlists[playlistId].songs;
+      // console.log("playlist master data : ",playlistData)
+      localStorage.clear();
+      localStorage.setItem("playlist", playlistData.toString());
+      // console.log("bye hi ",playlistData)
+    } catch (error) {
+      console.log("some error occured");
+    }
+  }, []);
 
   const colorchange = () => {
     const likeInfo = document.getElementById("saveInfo");
