@@ -3,7 +3,6 @@ import { NavLink, useParams } from "react-router-dom";
 import SongsContext from "../Memory/SongsContext";
 import UsersContext from "../Memory/UsersContext";
 
-
 export default function Songs() {
   let likeColor = true;
   const { songId } = useParams();
@@ -16,14 +15,18 @@ export default function Songs() {
   const [searchOpens, setSearchOpens] = useState(false);
 
   useEffect(() => {
-    // console.log("hi")
-
-    let playlistData = [songId];
-    // console.log("playlist master data : ",playlistData)
-    // setPlaylist(playlistData);
-    // console.log("bye raza ",songs)
-    localStorage.clear();
-    localStorage.setItem("playlist", playlistData.toString());
+    try {
+      // console.log("hi")
+      // console.log("asdasd", songs);
+      let playlistData = [songId];
+      // console.log("playlist master data : ",playlistData)
+      // setPlaylist(playlistData);
+      // console.log("bye raza ",songs)
+      localStorage.clear();
+      localStorage.setItem("playlist", playlistData.toString());
+    } catch (error) {
+      console.log("some error occured");
+    }
   }, [songId]);
 
   const colorchange = () => {
