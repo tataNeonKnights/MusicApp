@@ -30,7 +30,13 @@ public class SongsService {
 
     public List<SongModel> getAllSongs()
     {
-        return songsRepository.findAll();
+        List<SongModel> songlist = songsRepository.findAll();
+        for(int i=0;i<songlist.size();i++){
+            songlist.get(i).getUser().setEmail(null);
+            songlist.get(i).getUser().setName(null);
+            songlist.get(i).getUser().setPassword(null);
+        }
+        return songlist;
     }
 
     public SongModel getSongById(long id){
@@ -44,6 +50,7 @@ public class SongsService {
     }
 
     public String deleteSong(SongModel songModel){
+
         songsRepository.delete(songModel);
         return "success";
     }

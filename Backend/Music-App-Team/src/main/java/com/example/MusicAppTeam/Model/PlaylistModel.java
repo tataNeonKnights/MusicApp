@@ -13,7 +13,9 @@ public class PlaylistModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long pId;
+    @Column(nullable = false,unique = true)
     private String playlistCustomId;
+    @Column(nullable = false)
     private String pName;
     private String pImageSrc;
     private String pDesc;
@@ -29,7 +31,7 @@ public class PlaylistModel {
     private List<SongModel> songsList;
 
 
-    @JsonBackReference
+
     @ManyToOne
     @JoinColumn(name = "id")
     private UserModel user;

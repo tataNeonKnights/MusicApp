@@ -6,6 +6,7 @@ import com.example.MusicAppTeam.Service.UsersService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.lang.Error;
 
 import java.util.List;
 
@@ -29,6 +30,33 @@ public class UsersController {
     public List<UserModel> getUsers()
     {
         return usersService.getAllUsers();
+    }
+    @PostMapping("/signin")
+    public UserModel signin(@RequestBody UserModel user){
+        UserModel addedUser=usersService.getUserByEmail(user);
+        if(addedUser!=null){
+            if(addedUser.getPassword().equals(user.getPassword())){
+                addedUser.setPassword(null);
+                return addedUser;
+            }else{
+                return null;
+            }
+
+        }else{
+            return null;
+        }
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<UserModel> getUserById(@PathVariable("id") long id){
+       try{
+           UserModel userModel =usersService.getUserById(id);
+
+               userModel.setPassword(null);
+               return new ResponseEntity<UserModel>(userModel,HttpStatus.OK);
+
+       }catch (Error err){
+           return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+       }
     }
 
 

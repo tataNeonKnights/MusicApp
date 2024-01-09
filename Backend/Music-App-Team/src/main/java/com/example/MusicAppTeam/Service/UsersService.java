@@ -30,5 +30,8 @@ public class UsersService {
     public UserModel getUserById(long id){
         return usersRepository.findById(id).orElseThrow(()-> new Error("error not found"));
     }
+    public UserModel getUserByEmail(UserModel user){
+        return usersRepository.findByEmail(user.getEmail());
+    }
 
 }

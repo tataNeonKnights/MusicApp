@@ -32,7 +32,7 @@ public class SongModel {
     @JsonIgnore
     private List<PlaylistModel> playlists;
 
-    @JsonBackReference
+
     @ManyToOne
     @JoinColumn(name = "id")
     private UserModel user;
@@ -115,7 +115,7 @@ public class SongModel {
         return description;
     }
 
-    public void setDescription(String desc) {
+    public void setDescription(String description) {
         this.description = description;
     }
 

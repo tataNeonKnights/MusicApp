@@ -28,9 +28,6 @@ public class PlaylistsService {
         return playlistsRepository.findAll();
     }
 
-//    public PlaylistModel addSongsPlaylist(List<String> songlist,PlaylistModel playlist){
-//
-//    }
 
     public PlaylistModel getPlaylistByPlaylistCustomId(String playlistCustomId){
         return playlistsRepository.findByplaylistCustomId(playlistCustomId);

@@ -36,9 +36,15 @@ public class PlaylistsController {
     }
 
     @GetMapping("/getplaylists")
-    public List<PlaylistModel> getPlaylists()
-    {
-        return playlistsService.getAllPlaylists();
+    public List<PlaylistModel> getPlaylists(){
+        List<PlaylistModel> playlistList = playlistsService.getAllPlaylists();
+        for(int i =0;i<playlistList.size();i++){
+            playlistList.get(i).getUser().setEmail(null);
+            playlistList.get(i).getUser().setName(null);
+            playlistList.get(i).getUser().setPassword(null);
+        }
+
+        return playlistList;
     }
 
     @PutMapping("/addsongsplaylist/{playlistid}")
@@ -59,21 +65,35 @@ public class PlaylistsController {
     @PutMapping("/updateplaylist")
     public ResponseEntity<PlaylistModel> updateASong(@RequestBody PlaylistModel NewPlaylistModel){
         PlaylistModel OriginalPlaylistModel = playlistsService.getPlaylistByPlaylistCustomId(NewPlaylistModel.getPlaylistCustomId());
-
-        OriginalPlaylistModel.setUser(NewPlaylistModel.getUser());
+if(OriginalPlaylistModel!=null){
+    if(NewPlaylistModel.getpDesc()!=null){
         OriginalPlaylistModel.setpDesc(NewPlaylistModel.getpDesc());
+    }
+    if(NewPlaylistModel.getpName()!=null){
         OriginalPlaylistModel.setpName(NewPlaylistModel.getpName());
+    }
+    if(NewPlaylistModel.getUser()!=null){
+        OriginalPlaylistModel.setUser(NewPlaylistModel.getUser());
+    }
+    if(NewPlaylistModel.getpImageSrc()!=null){
         OriginalPlaylistModel.setpImageSrc(NewPlaylistModel.getpImageSrc());
-
-
-        return new ResponseEntity<PlaylistModel>(playlistsService.savePlaylist(OriginalPlaylistModel), HttpStatus.CREATED);
+    }
+    return new ResponseEntity<PlaylistModel>(playlistsService.savePlaylist(OriginalPlaylistModel), HttpStatus.CREATED);
+}else{
+    return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+}
     }
 
     @DeleteMapping("/deleteplaylist/{playlistCustomId}")
     public ResponseEntity<String> deleteASong(@PathVariable("playlistCustomId") String playlistCustomId){
         PlaylistModel playlistModel = playlistsService.getPlaylistByPlaylistCustomId(playlistCustomId);
+if(playlistModel!=null){
+    playlistsService.deletePlaylist(playlistModel);
+    return new ResponseEntity<String>("Playlist Deleted Succesfully !", HttpStatus.CREATED);
+}else{
+    return new ResponseEntity<String>("User Not Found", HttpStatus.BAD_REQUEST);
+}
 
-        return new ResponseEntity<String>(playlistsService.deletePlaylist(playlistModel), HttpStatus.CREATED);
     }
 
 

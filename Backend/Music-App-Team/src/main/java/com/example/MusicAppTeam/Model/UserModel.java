@@ -1,5 +1,6 @@
 package com.example.MusicAppTeam.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -18,11 +19,11 @@ public class UserModel {
     private String password;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonIgnore
     private List<PlaylistModel> userPlaylists;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonManagedReference
+
     private List<SongModel> userSongs;
 
 

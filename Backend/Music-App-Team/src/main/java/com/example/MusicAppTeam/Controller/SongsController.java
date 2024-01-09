@@ -24,26 +24,51 @@ public class SongsController {
     }
     @PostMapping("/addsong")
     public ResponseEntity<SongModel> addSong(@RequestBody SongModel songModel){
+        System.out.println(songModel.getDescription());
         return new ResponseEntity<SongModel>(songsService.saveSong(songModel), HttpStatus.CREATED);
     }
 
     @PutMapping("/updatesong")
-    public ResponseEntity<SongModel> updateASong(@RequestBody SongModel NewSongModel){
+    public String updateASong(@RequestBody SongModel NewSongModel){
         SongModel OriginalSongModel = songsService.getSongBysongId(NewSongModel.getSongId());
+        if(OriginalSongModel!=null){
+            if(NewSongModel.getUser()!=null){
+                OriginalSongModel.setUser(NewSongModel.getUser());
+            }
+            if(NewSongModel.getSongName()!=null){
+                OriginalSongModel.setSongName(NewSongModel.getSongName());
+            }
+            if(NewSongModel.getDescription()!=null){
+                OriginalSongModel.setDescription(NewSongModel.getDescription());
+            }
+            if(NewSongModel.getAudiSrc()!=null){
+                OriginalSongModel.setAudiSrc(NewSongModel.getAudiSrc());
+            }
+            if(NewSongModel.getBgmSrc()!=null)
+            {
+                OriginalSongModel.setBgmSrc(NewSongModel.getBgmSrc());
+            }
+            if(NewSongModel.getLyrics()!=null){
+                OriginalSongModel.setLyrics(NewSongModel.getLyrics());
+            }
+            if (NewSongModel.getImgSrc()!=null){
+                OriginalSongModel.setImgSrc(NewSongModel.getImgSrc());
+            }
+            songsService.saveSong(OriginalSongModel);
+            OriginalSongModel.getUser().setEmail(null);
+            OriginalSongModel.getUser().setName(null);
+            OriginalSongModel.getUser().setPassword(null);
 
-        OriginalSongModel.setSongName(NewSongModel.getSongName());
-        OriginalSongModel.setDescription(NewSongModel.getDescription());
-        OriginalSongModel.setAudiSrc(NewSongModel.getAudiSrc());
-        OriginalSongModel.setBgmSrc(NewSongModel.getBgmSrc());
-        OriginalSongModel.setImgSrc(NewSongModel.getImgSrc());
-        OriginalSongModel.setLyrics(NewSongModel.getLyrics());
-        OriginalSongModel.setUser(NewSongModel.getUser());
+            return "Song Updated Successfully";
+        }else{
 
-        return new ResponseEntity<SongModel>(songsService.saveSong(OriginalSongModel), HttpStatus.CREATED);
+            return "Song not Found";
+        }
+
     }
 
     @DeleteMapping("/deletesong/{songid}")
-    public ResponseEntity<String> deleteASong(@PathVariable("songid") String songid){
+    public String deleteASong(@PathVariable("songid") String songid){
         SongModel songModel = songsService.getSongBysongId(songid);
         if(songModel!=null)
         {
@@ -52,8 +77,12 @@ public class SongsController {
             {
                 playlistModel.getSongsList().remove(songModel);
             }
+            songsService.deleteSong(songModel);
+            return "Song Deleted Successfully" ;
+        }else {
+            return "Song not found";
         }
-        return new ResponseEntity<String>(songsService.deleteSong(songModel), HttpStatus.OK);
+
     }
 
 
