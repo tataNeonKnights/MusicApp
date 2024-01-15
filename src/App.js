@@ -2,7 +2,7 @@ import "./App.css";
 
 import Footer from "./Components/Footer";
 import Home from "./Components/Home";
-import MusicPlayer from "./Components/MusicPlayer";
+import MusicPlayer1 from "./Components/MusicPlayer1";
 import Navbar from "./Components/Navbar";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -19,7 +19,23 @@ import MediaDashBoard from "./Components/MediaDashBoard";
 import Songs from "./Components/Songs";
 import AddSong from "./Components/AddSong";
 
+import { initializeApp } from "firebase/app";
+import { getStorage} from "firebase/storage";
+import MusicPlayer from "./Components/MusicPlayer";
+
 function App() {
+  const app = initializeApp({
+    apiKey: "AIzaSyBhGNzCMq6Ry9baeT7QbkslIwmFLXku-FM",
+    authDomain: "musicapp-5037d.firebaseapp.com",
+    projectId: "musicapp-5037d",
+    storageBucket: "musicapp-5037d.appspot.com",
+    messagingSenderId: "113458820380",
+    appId: "1:113458820380:web:663fb17452cb70d00236d9",
+    measurementId: "G-6YPWVJ7DSR",
+  });
+
+  // Firebase storage reference
+  const storage = getStorage(app);
   try {
     return (
       <div className="App">
@@ -30,6 +46,7 @@ function App() {
                 <Navbar />
                 <Routes>
                   <Route exact path="/" element={<Home />}></Route>
+
                   <Route exact path="/AddSong" element={<AddSong />}></Route>
                   <Route
                     exact
@@ -53,8 +70,13 @@ function App() {
                   ></Route>
                   <Route
                     exact
+                    path="/musicplayer1/:identifier"
+                    element={<MusicPlayer1 storage={storage}/>}
+                  ></Route>
+                  <Route
+                    exact
                     path="/musicplayer/:identifier"
-                    element={<MusicPlayer />}
+                    element={<MusicPlayer storage={storage}/>}
                   ></Route>
                   <Route
                     exact
