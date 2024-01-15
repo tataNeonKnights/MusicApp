@@ -51,21 +51,23 @@ export default function AddSong() {
       if (imageFile) {
         imageDriveId = await uploadImage(imageFile);
       }
-      // console.log("lrc : ", LrcData);
-      // console.log("audio  : ", audioDriveId);
-      // console.log("instrumental : ", instrumentalDriveId);
-      // console.log("image : ", imageDriveId);
+      console.log("lrc : ", LrcData);
+      console.log("audio  : ", audioDriveId);
+      console.log("instrumental : ", instrumentalDriveId);
+      console.log("image : ", imageDriveId);
 
-      addSong(
-        sname,
-        audioDriveId,
-        imageDriveId,
-        LrcData,
-        1,
-        instrumentalDriveId,
-        description,
-        "song-4"
-      );
+      
+
+      // addSong(
+      //   sname,
+      //   audioDriveId,
+      //   imageDriveId,
+      //   LrcData,
+      //   1,
+      //   instrumentalDriveId,
+      //   description,
+      //   "song-4"
+      // );
     } catch (error) {
       console.log(error);
     }

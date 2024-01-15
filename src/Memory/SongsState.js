@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import SongsContext from "./SongsContext";
+import { initializeApp } from "firebase/app";
+import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 const SongsState = ({ children }) => {
   const [userSongs, setUserSongs] = useState({});
@@ -238,9 +240,10 @@ const SongsState = ({ children }) => {
 
   const uploadImage = async (imagefile) => {
     const formData = new FormData();
+    formData.set("userId", 1);
     formData.set("file", imagefile);
     try {
-      const response = await fetch("http://localhost:5000/files/upload", {
+      const response = await fetch("http://localhost:8081/api/audio/upload", {
         headers: {
           "auth-token":
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfX0.ZMhWoD4VG3mnVcO1K1JmigCpcOnI7jLpKXZv4S4JJuM",
@@ -250,8 +253,8 @@ const SongsState = ({ children }) => {
       });
 
       if (response.ok) {
-        const result = await response.json();
-        return `https://drive.google.com/uc?export=download&id=${result.id}`;
+        const result = await response.text();
+        return result;
       } else {
         console.log("error uploading audio file");
       }
@@ -262,10 +265,11 @@ const SongsState = ({ children }) => {
 
   const uploadAudio = async (audiofile) => {
     const formData = new FormData();
+    formData.set("userId", 1);
     formData.set("file", audiofile);
 
     try {
-      const response = await fetch("http://localhost:5000/files/upload", {
+      const response = await fetch("http://localhost:8081/api/audio/upload", {
         headers: {
           "auth-token":
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfX0.ZMhWoD4VG3mnVcO1K1JmigCpcOnI7jLpKXZv4S4JJuM",
@@ -275,8 +279,8 @@ const SongsState = ({ children }) => {
       });
 
       if (response.ok) {
-        const result = await response.json();
-        return `https://drive.google.com/uc?export=download&id=${result.id}`;
+        const result = await response.text();
+        return result;
       } else {
         console.log("error uploading audio file");
       }
@@ -287,9 +291,11 @@ const SongsState = ({ children }) => {
 
   const uploadInstrumental = async (instrumentalfile) => {
     const formData = new FormData();
+    formData.set("userId", 1);
     formData.set("file", instrumentalfile);
+
     try {
-      const response = await fetch("http://localhost:5000/files/upload", {
+      const response = await fetch("http://localhost:8081/api/audio/upload", {
         headers: {
           "auth-token":
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfX0.ZMhWoD4VG3mnVcO1K1JmigCpcOnI7jLpKXZv4S4JJuM",
@@ -299,8 +305,8 @@ const SongsState = ({ children }) => {
       });
 
       if (response.ok) {
-        const result = await response.json();
-        return `https://drive.google.com/uc?export=download&id=${result.id}`;
+        const result = await response.text();
+        return result;
       } else {
         console.log("error uploading audio file");
       }
@@ -395,6 +401,7 @@ const SongsState = ({ children }) => {
         uploadImage,
         getSongs,
         addSong,
+    
       }}
     >
       {children}

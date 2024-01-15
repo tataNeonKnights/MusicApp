@@ -16,11 +16,14 @@ function DriveUploadHelper() {
 
     const formData = new FormData();
     formData.set("file", selectedFile);
+    formData.set("userId", 1);
+
+
 
     // console.log(formData);
 
     try {
-      const response = await fetch("http://localhost:5000/files/upload", {
+      const response = await fetch("http://localhost:8080/api/audio/upload", {
         headers: {
           "auth-token":
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfX0.ZMhWoD4VG3mnVcO1K1JmigCpcOnI7jLpKXZv4S4JJuM",
@@ -30,10 +33,11 @@ function DriveUploadHelper() {
       });
 
       if (response.ok) {
-        const result = await response.json();
+        const result = await response.text();
+        console.log(result)
         document.getElementById(
           "fileUploadEle"
-        ).innerHTML = `File uploaded Successfully, File id : ${result.id}`;
+        ).innerHTML = `File uploaded Successfully, File link : ${result}`;
       } else {
         document.getElementById("fileUploadEle").innerHTML =
           "Error uploading File";
@@ -46,15 +50,19 @@ function DriveUploadHelper() {
   };
 
   const handleDelete = async () => {
+    const formData1 = new FormData();
+    formData1.set("fileName", "Heartbreak-Anniversary.mp3");
+    formData1.set("userId", 1);
     try {
       const response = await fetch(
-        "http://localhost:5000/files/delete/Heartbreak-Anniversary.mp3",
+        "http://localhost:8080/api/audio/delete",
         {
           headers: {
             "auth-token":
               "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfX0.ZMhWoD4VG3mnVcO1K1JmigCpcOnI7jLpKXZv4S4JJuM",
           },
           method: "DELETE",
+          body:formData1
         }
       );
 
@@ -89,6 +97,9 @@ function DriveUploadHelper() {
         Delete
       </button>
       <div id="fileUploadEle"></div>
+      <div className="audioChecker">
+        
+      </div>
     </div>
   );
 }

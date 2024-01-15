@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "SpotifyNeon",
-    "dateExported": "2024-01-08T10:01:54.114Z",
+    "dateExported": "2024-01-15T13:31:37.890Z",
     "version": "1.1",
     "folders": [
         {
@@ -60,7 +60,7 @@
             "method": "POST",
             "sortNum": 10000,
             "created": "2024-01-07T16:51:55.807Z",
-            "modified": "2024-01-08T09:54:30.185Z",
+            "modified": "2024-01-14T06:10:53.705Z",
             "headers": [
                 {
                     "name": "Content-Type",
@@ -70,7 +70,7 @@
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"songName\": \"song1\",\n  \"audiSrc\": \"https://drive.google.com/uc?export=download&id=16fFZ9UmNQU9PKU50hz3VO89qs0jDURy6\",\n  \"imgSrc\": \"https://drive.google.com/uc?export=download&id=1DMDspHFihmBKwbuPoDFvvuER6t_V4Ibp\",\n  \"lyrics\": \"{\\\"2\\\":\\\" \\\",\\\"14\\\":\\\"Ooh\\\",\\\"18\\\":\\\"Balloons are deflatin'\\\",\\\"22\\\":\\\"Guess they look lifeless like me\\\",\\\"26\\\":\\\"We miss you on your side of the bed, mmm\\\",\\\"33\\\":\\\"Still got your things here\\\",\\\"36\\\":\\\"And they stare at me like souvenirs\\\",\\\"40\\\":\\\"Don't wanna let you out my head\\\",\\\"46\\\":\\\"Just like the day that I met you\\\",\\\"49\\\":\\\"The day I thought forever\\\",\\\"51\\\":\\\"Said that you love me\\\",\\\"53\\\":\\\"But that'll last for never\\\",\\\"55\\\":\\\"It's cold outside\\\",\\\"57\\\":\\\"Like when you walked out my life\\\",\\\"58\\\":\\\"Why you walked out my life?\\\",\\\"62\\\":\\\"I get like this every time\\\",\\\"68\\\":\\\"On these days that feel like you and me\\\",\\\"73\\\":\\\"Heartbreak anniversary\\\",\\\"76\\\":\\\"'Cause I remember every time\\\",\\\"83\\\":\\\"On these days that feel like you and me\\\",\\\"88\\\":\\\"Heartbreak anniversary\\\",\\\"89\\\":\\\"Do you ever think of me?\\\",\\\"93\\\":\\\"No\\\",\\\"98\\\":\\\"(Ooh) No-no, no\\\",\\\"101\\\":\\\"(Ooh, ooh, ooh) Ooh, nah\\\",\\\"106\\\":\\\"I'm buildin' my hopes up\\\",\\\"110\\\":\\\"Like presents unopened 'til this day\\\",\\\"114\\\":\\\"I still see the messages you read, mmm\\\",\\\"120\\\":\\\"I'm foolishly patient\\\",\\\"124\\\":\\\"(Foolishly patient)\\\",\\\"125\\\":\\\"Can't get past the taste of your lips\\\",\\\"128\\\":\\\"(Taste of your lips)\\\",\\\"129\\\":\\\"Don't wanna let you out my head\\\",\\\"135\\\":\\\"Just like the day that I met you\\\",\\\"137\\\":\\\"The day I thought forever\\\",\\\"139\\\":\\\"Said that you love me\\\",\\\"141\\\":\\\"But that'll last for never\\\",\\\"143\\\":\\\"It's cold outside\\\",\\\"145\\\":\\\"Like when you walked out my life\\\",\\\"147\\\":\\\"Why you walked out my life?\\\",\\\"150\\\":\\\"I get like this every time\\\",\\\"156\\\":\\\"On these days that feel like you and me\\\",\\\"161\\\":\\\"Heartbreak anniversary\\\",\\\"165\\\":\\\"'Cause I remember every time\\\",\\\"172\\\":\\\"On these days that feel like you and me\\\",\\\"176\\\":\\\"Heartbreak anniversary\\\",\\\"178\\\":\\\"Do you ever think of me?\\\",\\\"182\\\":\\\"Of me\\\",\\\"186\\\":\\\"'Cause I think of you, think of you\\\",\\\"194\\\":\\\"\\\"}\",\n  \"bgmSrc\": \"https://drive.google.com/uc?export=download&id=1PMSYiLyPiur82ITgDLQxj8mBm9GLJn6s\",\n  \"description\": \"desc1\",\n  \"songId\": \"song-3\",\n  \"user\": {\n    \"name\": \"raza\",\n    \"email\": \"r6@gmail.com\",\n    \"password\": \"1234\",\n    \"id\":1\n  }\n}",
+                "raw": "{\n  \"songName\": \"song1\",\n  \"audioSrc\": \"https://drive.google.com/uc?export=download&id=1ahFnoyTqvuc7ANi803avz50ISM5cfszb\",\n  \"imgSrc\": \"https://drive.google.com/uc?export=download&id=1DMDspHFihmBKwbuPoDFvvuER6t_V4Ibp\",\n  \"lyrics\": \"{\\\"2\\\":\\\" \\\",\\\"14\\\":\\\"Ooh\\\",\\\"18\\\":\\\"Balloons are deflatin'\\\",\\\"22\\\":\\\"Guess they look lifeless like me\\\",\\\"26\\\":\\\"We miss you on your side of the bed, mmm\\\",\\\"33\\\":\\\"Still got your things here\\\",\\\"36\\\":\\\"And they stare at me like souvenirs\\\",\\\"40\\\":\\\"Don't wanna let you out my head\\\",\\\"46\\\":\\\"Just like the day that I met you\\\",\\\"49\\\":\\\"The day I thought forever\\\",\\\"51\\\":\\\"Said that you love me\\\",\\\"53\\\":\\\"But that'll last for never\\\",\\\"55\\\":\\\"It's cold outside\\\",\\\"57\\\":\\\"Like when you walked out my life\\\",\\\"58\\\":\\\"Why you walked out my life?\\\",\\\"62\\\":\\\"I get like this every time\\\",\\\"68\\\":\\\"On these days that feel like you and me\\\",\\\"73\\\":\\\"Heartbreak anniversary\\\",\\\"76\\\":\\\"'Cause I remember every time\\\",\\\"83\\\":\\\"On these days that feel like you and me\\\",\\\"88\\\":\\\"Heartbreak anniversary\\\",\\\"89\\\":\\\"Do you ever think of me?\\\",\\\"93\\\":\\\"No\\\",\\\"98\\\":\\\"(Ooh) No-no, no\\\",\\\"101\\\":\\\"(Ooh, ooh, ooh) Ooh, nah\\\",\\\"106\\\":\\\"I'm buildin' my hopes up\\\",\\\"110\\\":\\\"Like presents unopened 'til this day\\\",\\\"114\\\":\\\"I still see the messages you read, mmm\\\",\\\"120\\\":\\\"I'm foolishly patient\\\",\\\"124\\\":\\\"(Foolishly patient)\\\",\\\"125\\\":\\\"Can't get past the taste of your lips\\\",\\\"128\\\":\\\"(Taste of your lips)\\\",\\\"129\\\":\\\"Don't wanna let you out my head\\\",\\\"135\\\":\\\"Just like the day that I met you\\\",\\\"137\\\":\\\"The day I thought forever\\\",\\\"139\\\":\\\"Said that you love me\\\",\\\"141\\\":\\\"But that'll last for never\\\",\\\"143\\\":\\\"It's cold outside\\\",\\\"145\\\":\\\"Like when you walked out my life\\\",\\\"147\\\":\\\"Why you walked out my life?\\\",\\\"150\\\":\\\"I get like this every time\\\",\\\"156\\\":\\\"On these days that feel like you and me\\\",\\\"161\\\":\\\"Heartbreak anniversary\\\",\\\"165\\\":\\\"'Cause I remember every time\\\",\\\"172\\\":\\\"On these days that feel like you and me\\\",\\\"176\\\":\\\"Heartbreak anniversary\\\",\\\"178\\\":\\\"Do you ever think of me?\\\",\\\"182\\\":\\\"Of me\\\",\\\"186\\\":\\\"'Cause I think of you, think of you\\\",\\\"194\\\":\\\"\\\"}\",\n  \"bgmSrc\": \"https://drive.google.com/uc?export=download&id=1PMSYiLyPiur82ITgDLQxj8mBm9GLJn6s\",\n  \"songDescription\": \"desc2\",\n  \"songId\": \"song-1\",\n  \"user\": {\n    \"name\": \"raza\",\n    \"email\": \"r6@gmail.com\",\n    \"password\": \"1234\",\n    \"id\":1\n  }\n}",
                 "form": []
             },
             "tests": []
@@ -108,7 +108,7 @@
             "method": "PUT",
             "sortNum": 11250,
             "created": "2024-01-08T09:17:05.057Z",
-            "modified": "2024-01-08T09:57:53.802Z",
+            "modified": "2024-01-08T15:20:23.450Z",
             "headers": [
                 {
                     "name": "Content-Type",
@@ -132,7 +132,7 @@
             "method": "PUT",
             "sortNum": 12500,
             "created": "2024-01-08T08:33:44.670Z",
-            "modified": "2024-01-08T09:57:29.271Z",
+            "modified": "2024-01-14T08:01:56.392Z",
             "headers": [
                 {
                     "name": "Content-Type",
@@ -142,7 +142,7 @@
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"songName\": \"songTow\",\n  \"audiSrc\": \"https://drive.google.com/uc?export=download&id=16fFZ9UmNQU9PKU50hz3VO89qs0jDURy6\",\n  \"imgSrc\": \"https://drive.google.com/uc?export=download&id=1DMDspHFihmBKwbuPoDFvvuER6t_V4Ibp\",\n  \"lyrics\": \"{\\\"2\\\":\\\" \\\",\\\"14\\\":\\\"Ooh\\\",\\\"18\\\":\\\"Balloons are deflatin'\\\",\\\"22\\\":\\\"Guess they look lifeless like me\\\",\\\"26\\\":\\\"We miss you on your side of the bed, mmm\\\",\\\"33\\\":\\\"Still got your things here\\\",\\\"36\\\":\\\"And they stare at me like souvenirs\\\",\\\"40\\\":\\\"Don't wanna let you out my head\\\",\\\"46\\\":\\\"Just like the day that I met you\\\",\\\"49\\\":\\\"The day I thought forever\\\",\\\"51\\\":\\\"Said that you love me\\\",\\\"53\\\":\\\"But that'll last for never\\\",\\\"55\\\":\\\"It's cold outside\\\",\\\"57\\\":\\\"Like when you walked out my life\\\",\\\"58\\\":\\\"Why you walked out my life?\\\",\\\"62\\\":\\\"I get like this every time\\\",\\\"68\\\":\\\"On these days that feel like you and me\\\",\\\"73\\\":\\\"Heartbreak anniversary\\\",\\\"76\\\":\\\"'Cause I remember every time\\\",\\\"83\\\":\\\"On these days that feel like you and me\\\",\\\"88\\\":\\\"Heartbreak anniversary\\\",\\\"89\\\":\\\"Do you ever think of me?\\\",\\\"93\\\":\\\"No\\\",\\\"98\\\":\\\"(Ooh) No-no, no\\\",\\\"101\\\":\\\"(Ooh, ooh, ooh) Ooh, nah\\\",\\\"106\\\":\\\"I'm buildin' my hopes up\\\",\\\"110\\\":\\\"Like presents unopened 'til this day\\\",\\\"114\\\":\\\"I still see the messages you read, mmm\\\",\\\"120\\\":\\\"I'm foolishly patient\\\",\\\"124\\\":\\\"(Foolishly patient)\\\",\\\"125\\\":\\\"Can't get past the taste of your lips\\\",\\\"128\\\":\\\"(Taste of your lips)\\\",\\\"129\\\":\\\"Don't wanna let you out my head\\\",\\\"135\\\":\\\"Just like the day that I met you\\\",\\\"137\\\":\\\"The day I thought forever\\\",\\\"139\\\":\\\"Said that you love me\\\",\\\"141\\\":\\\"But that'll last for never\\\",\\\"143\\\":\\\"It's cold outside\\\",\\\"145\\\":\\\"Like when you walked out my life\\\",\\\"147\\\":\\\"Why you walked out my life?\\\",\\\"150\\\":\\\"I get like this every time\\\",\\\"156\\\":\\\"On these days that feel like you and me\\\",\\\"161\\\":\\\"Heartbreak anniversary\\\",\\\"165\\\":\\\"'Cause I remember every time\\\",\\\"172\\\":\\\"On these days that feel like you and me\\\",\\\"176\\\":\\\"Heartbreak anniversary\\\",\\\"178\\\":\\\"Do you ever think of me?\\\",\\\"182\\\":\\\"Of me\\\",\\\"186\\\":\\\"'Cause I think of you, think of you\\\",\\\"194\\\":\\\"\\\"}\",\n  \"bgmSrc\": \"https://drive.google.com/uc?export=download&id=1PMSYiLyPiur82ITgDLQxj8mBm9GLJn6s\",\n  \"description\": \"desc1\",\n  \"songId\": \"song-2\",\n  \"user\": {\n    \"name\": \"raza\",\n    \"email\": \"r6@gmail.com\",\n    \"password\": \"1234\",\n    \"id\":1\n  }\n}",
+                "raw": "{\n  \"songName\": \"song3\",\n  \"audioSrc\": \"/musicapp/Users/1/Heartbreak-Anniversary.mp3\",\n  \"imgSrc\": \"/musicapp/Users/1/heartbreak.jpg\",\n  \"lyrics\": \"{\\\"2\\\":\\\" \\\",\\\"14\\\":\\\"Song3\\\",\\\"18\\\":\\\"Balloons are deflatin'\\\",\\\"22\\\":\\\"Guess they look lifeless like me\\\",\\\"26\\\":\\\"We miss you on your side of the bed, mmm\\\",\\\"33\\\":\\\"Still got your things here\\\",\\\"36\\\":\\\"And they stare at me like souvenirs\\\",\\\"40\\\":\\\"Don't wanna let you out my head\\\",\\\"46\\\":\\\"Just like the day that I met you\\\",\\\"49\\\":\\\"The day I thought forever\\\",\\\"51\\\":\\\"Said that you love me\\\",\\\"53\\\":\\\"But that'll last for never\\\",\\\"55\\\":\\\"It's cold outside\\\",\\\"57\\\":\\\"Like when you walked out my life\\\",\\\"58\\\":\\\"Why you walked out my life?\\\",\\\"62\\\":\\\"I get like this every time\\\",\\\"68\\\":\\\"On these days that feel like you and me\\\",\\\"73\\\":\\\"Heartbreak anniversary\\\",\\\"76\\\":\\\"'Cause I remember every time\\\",\\\"83\\\":\\\"On these days that feel like you and me\\\",\\\"88\\\":\\\"Heartbreak anniversary\\\",\\\"89\\\":\\\"Do you ever think of me?\\\",\\\"93\\\":\\\"No\\\",\\\"98\\\":\\\"(Ooh) No-no, no\\\",\\\"101\\\":\\\"(Ooh, ooh, ooh) Ooh, nah\\\",\\\"106\\\":\\\"I'm buildin' my hopes up\\\",\\\"110\\\":\\\"Like presents unopened 'til this day\\\",\\\"114\\\":\\\"I still see the messages you read, mmm\\\",\\\"120\\\":\\\"I'm foolishly patient\\\",\\\"124\\\":\\\"(Foolishly patient)\\\",\\\"125\\\":\\\"Can't get past the taste of your lips\\\",\\\"128\\\":\\\"(Taste of your lips)\\\",\\\"129\\\":\\\"Don't wanna let you out my head\\\",\\\"135\\\":\\\"Just like the day that I met you\\\",\\\"137\\\":\\\"The day I thought forever\\\",\\\"139\\\":\\\"Said that you love me\\\",\\\"141\\\":\\\"But that'll last for never\\\",\\\"143\\\":\\\"It's cold outside\\\",\\\"145\\\":\\\"Like when you walked out my life\\\",\\\"147\\\":\\\"Why you walked out my life?\\\",\\\"150\\\":\\\"I get like this every time\\\",\\\"156\\\":\\\"On these days that feel like you and me\\\",\\\"161\\\":\\\"Heartbreak anniversary\\\",\\\"165\\\":\\\"'Cause I remember every time\\\",\\\"172\\\":\\\"On these days that feel like you and me\\\",\\\"176\\\":\\\"Heartbreak anniversary\\\",\\\"178\\\":\\\"Do you ever think of me?\\\",\\\"182\\\":\\\"Of me\\\",\\\"186\\\":\\\"'Cause I think of you, think of you\\\",\\\"194\\\":\\\"\\\",\\\"199\\\":\\\"\\\"}\",\n  \"bgmSrc\": \"/musicapp/Users/1/Heartbreak-Anniversary-bgm.mp3\",\n  \"songDescription\": \"desc2\",\n  \"songId\": \"song-3\",\n  \"user\": {\n    \"name\": \"raza\",\n    \"email\": \"r6@gmail.com\",\n    \"password\": \"1234\",\n    \"id\":1\n  }\n}",
                 "form": []
             },
             "tests": []
@@ -224,11 +224,11 @@
             "colId": "9096c3ba-0890-43dd-96e4-835b7f107308",
             "containerId": "85dc22ed-2c5c-489a-9c80-433a52ef7e43",
             "name": "Delete Song",
-            "url": "http://localhost:8080/api/auth/deletesong/song-1",
+            "url": "http://localhost:8080/api/auth/deletesong/song-3",
             "method": "DELETE",
             "sortNum": 15000,
             "created": "2024-01-08T07:43:49.974Z",
-            "modified": "2024-01-08T09:27:27.121Z",
+            "modified": "2024-01-11T14:54:38.966Z",
             "headers": [
                 {
                     "name": "Content-Type",
@@ -286,11 +286,11 @@
             "colId": "9096c3ba-0890-43dd-96e4-835b7f107308",
             "containerId": "85dc22ed-2c5c-489a-9c80-433a52ef7e43",
             "name": "Get songs",
-            "url": "http://localhost:8080/api/auth/getusers",
+            "url": "http://localhost:8080/api/auth/getsongs",
             "method": "GET",
             "sortNum": 20000,
             "created": "2024-01-08T05:50:37.481Z",
-            "modified": "2024-01-08T05:50:37.481Z",
+            "modified": "2024-01-08T12:25:57.958Z",
             "headers": [
                 {
                     "name": "Content-Type",
