@@ -8,12 +8,14 @@ export default function SongsCards(props) {
   // console.log("props", props.item);
 
   const handleDeleteButton = () => {
-    deleteSong(songs[props.item].name);
+    deleteSong(props.item,songs);
+
   };
 
   try {
     return (
       <div className="border-2 border-gray-200 border-opacity-60 h-full w-1/5 m-2 flex-none transition-transform transform hover:scale-104 shadow-md hover:shadow-lg hover:brightness-90 cursor-pointer rounded-md overflow-hidden">
+        
         <NavLink to={`/songs/${props.item}`}>
           <img
             className="lg:h-50 md:h-50 w-50 object-cover object-center rounded-lg"

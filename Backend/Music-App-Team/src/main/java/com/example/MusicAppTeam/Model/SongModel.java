@@ -13,6 +13,7 @@ public class SongModel {
     private long sId;
 
     private String songName;
+    @Column(nullable = false)
     private String audioSrc;
     private String imgSrc;
 

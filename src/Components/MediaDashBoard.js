@@ -17,7 +17,7 @@ export default function MediaDashBoard() {
     loadUserPlaylists();
     loadUserSongs();
     // console.log("hi",playlists)
-  }, []);
+  }, [songs]);
 
   try {
     return (
@@ -30,6 +30,7 @@ export default function MediaDashBoard() {
           </NavLink>
         </div>
         <NewMusicPlaylist flag="custom" />
+        <div id="deleteInfo" className="text-3xl text-red-500"></div>
         <NewSongs flag="custom" />
       </div>
     );

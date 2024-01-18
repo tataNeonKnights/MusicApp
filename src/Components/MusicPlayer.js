@@ -8,6 +8,33 @@ import SongsContext from "../Memory/SongsContext";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 
 export default function MusicPlayer(props) {
+  let likeColor = true;
+  const colorchange = () => {
+
+    const likeInfo = document.getElementById("saveInfo");
+    if (likeColor) {
+      const favorite = document.getElementById("favorite");
+      favorite.classList.remove("fa-regular", "fa-heart");
+      favorite.classList.add("fa-solid");
+      favorite.classList.add("fa-heart");
+      favorite.classList.add("text-red-600");
+      likeColor = false;
+
+      // likeInfo.innerHTML="Remove from your library"
+    } else {
+      const favorite = document.getElementById("favorite");
+      favorite.classList.remove("fa-solid", "fa-heart");
+      favorite.classList.remove("text-red-600");
+      favorite.classList.add("fa-regular");
+      favorite.classList.add("fa-heart");
+      // likeInfo.innerHTML="Save to your library"
+      likeColor = true;
+
+    }
+  };
+
+
+
   // To Switch tracks, using useNavigate() will not trigger a page refresh
   const navigate = useNavigate();
 
@@ -85,26 +112,18 @@ export default function MusicPlayer(props) {
           const nextTrackId = playlist[currentIndex + 1];
 
           // This state can be accesse using location that we defined in the top
-          navigate(`/musicplayer/${nextTrackId}`, {
-            state: { flag: "Change" },
-          });
+          navigate(`/musicplayer/${nextTrackId}`);
         } else if (currentIndex >= playlist.length - 1) {
           const nextTrackId = playlist[0];
-          navigate(`/musicplayer/${nextTrackId}`, {
-            state: { flag: "Change" },
-          });
+          navigate(`/musicplayer/${nextTrackId}`);
         }
       } else if (direction === "prev") {
         if (currentIndex > 0) {
           const prevTrackId = playlist[currentIndex - 1];
-          navigate(`/musicplayer/${prevTrackId}`, {
-            state: { flag: "Change" },
-          });
+          navigate(`/musicplayer/${prevTrackId}`);
         } else {
           const prevTrackId = playlist[playlist.length - 1];
-          navigate(`/musicplayer/${prevTrackId}`, {
-            state: { flag: "Change" },
-          });
+          navigate(`/musicplayer/${prevTrackId}`);
         }
       }
     } catch (error) {
@@ -204,12 +223,12 @@ export default function MusicPlayer(props) {
             // Set title
             audioTitleRef.current.innerText = selectedSong.name;
 
-            const totalAudioTime = Math.round(audioRef.current.duration);
+            let totalAudioTime = Math.round(audioRef.current.duration);
             // console.log("mohiyaddeen asd : ", totalAudioTime);
-            const minutesTotal = Math.floor(totalAudioTime / 60);
+            let minutesTotal = Math.floor(totalAudioTime / 60);
             //Calculate minutes
             // calculate seconds
-            const secondsTotal = totalAudioTime % 60;
+            let secondsTotal = totalAudioTime % 60;
             // if seconds is a single character add a "0" at the starting. eg :- 01,02,03...etc.
             if ((secondsTotal + "").length < 2) {
               secondsTotal = "0" + secondsTotal;
@@ -217,13 +236,13 @@ export default function MusicPlayer(props) {
             totalTimeAudioRef.current.innerHTML =
               minutesTotal + ":" + secondsTotal;
 
-            // console.log("hi bye hi ", flag);
-            // Check if the next button or prev button was clicked
-            if (location.state) {
-              if (location.state.flag === "Change") {
-                handlePlayButton();
-              }
-            }
+            // // console.log("hi bye hi ", flag);
+            // // Check if the next button or prev button was clicked
+            // if (location.state) {
+            //   if (location.state.flag === "Change") {
+            //     handlePlayButton();
+            //   }
+            // }
             const lyricsElement = Object.keys(selectedSong.lyrics).map(
               (item) => {
                 return `<li key=${item} id=${item}>${selectedSong.lyrics[item]} </li>`;
@@ -246,46 +265,48 @@ export default function MusicPlayer(props) {
         if (audioRef.current) {
           let currentAudioTime = Math.round(audioRef.current.currentTime);
 
-          // Logic for Lyrics Seeker that will synchronize with audio's current time
-          let LyricsKeyList = Object.keys(songs[identifier].lyrics);
+          if (songs[identifier].lyrics) {
+            // Logic for Lyrics Seeker that will synchronize with audio's current time
+            let LyricsKeyList = Object.keys(songs[identifier].lyrics);
 
-          if (
-            currentAudioTime > LyricsKeyList[iteratorRef.current] &&
-            iteratorRef.current < LyricsKeyList.length &&
-            LyricsKeyList[iteratorRef.current] !== "undefined"
-          ) {
-            let currentLyricKey = LyricsKeyList[iteratorRef.current];
+            if (
+              currentAudioTime > LyricsKeyList[iteratorRef.current] &&
+              iteratorRef.current < LyricsKeyList.length &&
+              LyricsKeyList[iteratorRef.current] !== "undefined"
+            ) {
+              let currentLyricKey = LyricsKeyList[iteratorRef.current];
 
-            if (currentLyricKey) {
-              let currentLyricElement =
-                document.getElementById(currentLyricKey);
-              if (currentLyricElement) {
-                currentLyricElement.style.backgroundColor = "white";
-                iteratorRef.current += 1;
+              if (currentLyricKey) {
+                let currentLyricElement =
+                  document.getElementById(currentLyricKey);
+                if (currentLyricElement) {
+                  currentLyricElement.style.backgroundColor = "white";
+                  iteratorRef.current += 1;
 
-                currentLyricElement = document.getElementById(
-                  LyricsKeyList[iteratorRef.current]
-                );
-                // console.log(
-                //   "ssss currentAudio : ",
-                //   currentAudioTime,
-                //   " current LYrics : ",
-                //   currentLyricElement
-                // );
+                  currentLyricElement = document.getElementById(
+                    LyricsKeyList[iteratorRef.current]
+                  );
+                  // console.log(
+                  //   "ssss currentAudio : ",
+                  //   currentAudioTime,
+                  //   " current LYrics : ",
+                  //   currentLyricElement
+                  // );
 
-                if (
-                  currentLyricElement !== "undefined" &&
-                  iteratorRef.current < LyricsKeyList.length
-                ) {
-                  // You can also scroll the lyrics list to keep the current lyric in view
                   if (
-                    lyricsKaraokeListRef.current.offsetHeight - 300 <
-                    currentLyricElement.offsetTop
+                    currentLyricElement !== "undefined" &&
+                    iteratorRef.current < LyricsKeyList.length
                   ) {
-                    lyricsKaraokeListRef.current.scrollTop =
-                      currentLyricElement.offsetTop - 50;
+                    // You can also scroll the lyrics list to keep the current lyric in view
+                    if (
+                      lyricsKaraokeListRef.current.offsetHeight - 300 <
+                      currentLyricElement.offsetTop
+                    ) {
+                      lyricsKaraokeListRef.current.scrollTop =
+                        currentLyricElement.offsetTop - 50;
+                    }
+                    currentLyricElement.style.backgroundColor = "green";
                   }
-                  currentLyricElement.style.backgroundColor = "green";
                 }
               }
             }
@@ -368,6 +389,7 @@ export default function MusicPlayer(props) {
       console.log(error);
     }
   }, [songs, identifier]);
+
   try {
     return (
       <div className="">
@@ -547,7 +569,7 @@ export default function MusicPlayer(props) {
               {/* Like Button */}
               <div className="group relative inline-block">
                 <button
-                  // onClick={colorchange}
+                  onClick={colorchange}
                   className="w-10 cursor-pointer "
                 >
                   <i
