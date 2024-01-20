@@ -15,6 +15,12 @@ export default function Navbar() {
           <a className="mr-5 hover:text-gray-900 cursor-pointer">
             Your Library
           </a>
+          {/* <a className="mr-5 hover:text-gray-900 cursor-pointer">
+            About Us
+          </a>
+          <a className="mr-5 hover:text-gray-900 cursor-pointer">
+            Contact Us
+          </a> */}
         </nav>
 
         <div className="dropdown inline-block relative mr-7">

@@ -14,6 +14,9 @@ import CurrentPlaylistState from "./Memory/CurrentPlaylistState";
 import LyricsSynchronizer from "./Helpers/LyricsSynchronizer";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
+import AboutPage from "./Components/AboutPage";
+import ContactUsPage from "./Components/ContactUsPage";
+
 
 
 function App() {
@@ -28,6 +31,8 @@ function App() {
                 <Routes>
                   <Route exact path="/" element={<Home />}></Route>
                   <Route exact path="/lyricsLrcGenerator" element={<LyricsSynchronizer />}></Route>
+                  <Route exact path="/AboutUs" element={<AboutPage />}></Route>
+                  <Route exact path="/ContactPage" element={<ContactUsPage />}></Route>
                   <Route
                     exact
                     path="/musicplayer/:identifier"
@@ -55,6 +60,7 @@ function App() {
           </UsersState>
         </SongsState>
       </PlaylistsState>
+      
     </div>
   );
 }
