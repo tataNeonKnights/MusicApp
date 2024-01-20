@@ -8,7 +8,15 @@ import PopularPlaylists from "./PopularPlaylists";
 import NewSongs from "./NewSongs";
 import SongsContext from "../Memory/SongsContext";
 
+
 export default function Home() {
+  
+  const {getSongs}=useContext(SongsContext);
+  console.log("this is getsongs",getSongs)
+ useEffect(()=>{
+getSongs();
+  
+},[])
 
   try {
     return (

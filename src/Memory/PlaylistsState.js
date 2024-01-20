@@ -83,7 +83,7 @@ const PlaylistsState = ({ children }) => {
         userPlaylistsStoreObject[item] = playlists[item];
       });
 
-      console.log(userPlaylistsStoreObject);
+      // console.log(userPlaylistsStoreObject);
       setUserPlaylists(userPlaylistsStoreObject);
     } catch (error) {
       console.log("some error occured");

@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SongsContext from "./SongsContext";
 import { initializeApp } from "firebase/app";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 
 const SongsState = ({ children }) => {
   const [userSongs, setUserSongs] = useState({});
+  const [loading, setLoading] = useState(false);
+  const statusRef = useRef(null)
+
+
+
 
   // const [songs, setSongs] = useState({
   //   "song-1": {
@@ -234,7 +239,7 @@ const SongsState = ({ children }) => {
         setSongs(songsMasterData);
       }
     } catch (error) {
-      return error.message;
+      console.log("some error")
     }
   };
 
@@ -243,7 +248,7 @@ const SongsState = ({ children }) => {
     formData.set("userId", 1);
     formData.set("file", imagefile);
     try {
-      const response = await fetch("http://localhost:8081/api/audio/upload", {
+      const response = await fetch("http://localhost:8080/api/audio/upload", {
         headers: {
           "auth-token":
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfX0.ZMhWoD4VG3mnVcO1K1JmigCpcOnI7jLpKXZv4S4JJuM",
@@ -259,6 +264,10 @@ const SongsState = ({ children }) => {
         console.log("error uploading audio file");
       }
     } catch (error) {
+      if (statusRef.current) {
+        statusRef.current.innerHTML = `Upload failed`
+      }
+
       console.log("error uploading audio file");
     }
   };
@@ -269,7 +278,7 @@ const SongsState = ({ children }) => {
     formData.set("file", audiofile);
 
     try {
-      const response = await fetch("http://localhost:8081/api/audio/upload", {
+      const response = await fetch("http://localhost:8080/api/audio/upload", {
         headers: {
           "auth-token":
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfX0.ZMhWoD4VG3mnVcO1K1JmigCpcOnI7jLpKXZv4S4JJuM",
@@ -285,6 +294,10 @@ const SongsState = ({ children }) => {
         console.log("error uploading audio file");
       }
     } catch (error) {
+      if (statusRef.current) {
+        statusRef.current.innerHTML = `Upload failed`
+      }
+
       console.log("error uploading audio file");
     }
   };
@@ -295,7 +308,7 @@ const SongsState = ({ children }) => {
     formData.set("file", instrumentalfile);
 
     try {
-      const response = await fetch("http://localhost:8081/api/audio/upload", {
+      const response = await fetch("http://localhost:8080/api/audio/upload", {
         headers: {
           "auth-token":
             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfX0.ZMhWoD4VG3mnVcO1K1JmigCpcOnI7jLpKXZv4S4JJuM",
@@ -311,6 +324,10 @@ const SongsState = ({ children }) => {
         console.log("error uploading audio file");
       }
     } catch (error) {
+      if (statusRef.current) {
+        statusRef.current.innerHTML = `Upload failed`
+      }
+
       console.log("error uploading audio file");
     }
   };
@@ -327,7 +344,6 @@ const SongsState = ({ children }) => {
         userSongsStoreObject[item] = songs[item];
       });
 
-      console.log("raza", userSongsStoreObject);
       setUserSongs(userSongsStoreObject);
     } catch (error) {
       console.log("some error occured");
@@ -344,35 +360,71 @@ const SongsState = ({ children }) => {
     description,
     songid
   ) => {
+
     try {
-      const response = await fetch("https://dummy-url", {
+
+
+      const response = await fetch("http://localhost:8080/api/auth/addsong", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "auth-token": localStorage.getItem("token"),
         },
         body: JSON.stringify({
-          name,
-          audio,
-          image,
-          lyrics,
-          user,
-          bgm,
-          description,
-          songid,
+          songName: name,
+          audioSrc: audio,
+          imgSrc: image,
+          lyrics: JSON.stringify(lyrics),
+          user: {
+            id: user
+          },
+          bgmSrc: bgm,
+          songDescription: description,
+          songId: songid,
         }),
       });
+      // console.log("uploaded")
+      if (response.ok) {
+        if (statusRef.current) {
+          statusRef.current.classList.remove("text-red-600")
+          statusRef.current.classList.add("text-green-600")
 
-      const song = await response.json();
-      setSongs(songs.concat(song));
+          statusRef.current.innerHTML = `Song Uploaded `
+          setTimeout(() => {
+            statusRef.current.innerHTML = ''
+          }, 4000)
+        }
+
+
+      } else {
+        if (statusRef.current) {
+          statusRef.current.classList.remove("text-green-600")
+          statusRef.current.classList.add("text-red-600")
+          statusRef.current.innerHTML = `Upload failed !`
+          setTimeout(() => {
+            statusRef.current.innerHTML = ''
+          }, 4000)
+        }
+      }
+
     } catch (error) {
-      console.log("some error occured");
-    }
-  };
+      if (statusRef.current) {
+        statusRef.current.classList.remove("text-green-600")
+        statusRef.current.classList.add("text-red-600")
+        statusRef.current.innerHTML = `Upload failed !`
+        setTimeout(() => {
+          statusRef.current.innerHTML = ''
+        }, 4000)
+      }
 
-  const deleteSong = async (name) => {
+      console.log("Some Error Occurs");
+    }
+
+  };
+  const deleteSong = async (songId, songs) => {
+
     try {
-      const response = await fetch(`https://dummy-url/${name}`, {
+      const response = await fetch(`http://localhost:8080/api/auth/deletesong/${songId}`, {
         method: "DELETE",
         headers: {
           "auth-token":
@@ -380,15 +432,41 @@ const SongsState = ({ children }) => {
         },
       });
 
-      const result = await response.json();
+      setSongs(() => {
+        let songsTemp = Object.keys(songs)
+        let songsUpdatedObj = {}
+
+        songsTemp.forEach((item) => {
+          if (item !== songId) {
+            songsUpdatedObj[item] = songs[item]
+          }
+        })
+
+        console.log("hi hi ghi bye bye bye ", songsUpdatedObj)
+
+        return songsUpdatedObj
+      })
+
+
+      const result = await response.text();
+      console.log("hi bye sadj ", result)
+
       // load songs - pending step
+      if (response.ok) {
+        const deleteMessageBox = document.getElementById("deleteInfo");
+        deleteMessageBox.innerHTML = `Song => ${songs[songId].name}<= Deleted`;
+      } else {
+        const deleteMessageBox = document.getElementById("deleteInfo");
+        deleteMessageBox.innerHTML = "Something Went Wrong";
+      }
     } catch (error) {
-      console.log("some error occured");
+      console.log("Some Error Occurs");
     }
+
   };
 
   useEffect(() => {
-    getSongs();
+    getSongs()
   }, []);
   return (
     <SongsContext.Provider
@@ -401,7 +479,11 @@ const SongsState = ({ children }) => {
         uploadImage,
         getSongs,
         addSong,
-    
+        deleteSong,
+        loading,
+        setLoading,
+        statusRef
+
       }}
     >
       {children}

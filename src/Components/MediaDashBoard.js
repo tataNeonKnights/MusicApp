@@ -9,6 +9,7 @@ import NewSongs from "./NewSongs";
 export default function MediaDashBoard() {
   const { playlists, userPlaylists, loadUserPlaylists } =
     useContext(PlaylistsContext);
+    // useContext(SongsContext)
   const { playlistId } = useParams();
   const { songs, loadUserSongs, userSongs } = useContext(SongsContext);
   const { users } = useContext(UsersContext);
@@ -17,7 +18,7 @@ export default function MediaDashBoard() {
     loadUserPlaylists();
     loadUserSongs();
     // console.log("hi",playlists)
-  }, []);
+  }, [songs]);
 
   try {
     return (
@@ -30,6 +31,7 @@ export default function MediaDashBoard() {
           </NavLink>
         </div>
         <NewMusicPlaylist flag="custom" />
+        <div id="deleteInfo" className="text-3xl text-red-500"></div>
         <NewSongs flag="custom" />
       </div>
     );
