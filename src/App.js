@@ -4,6 +4,8 @@ import Footer from "./Components/Footer";
 import Home from "./Components/Home";
 import MusicPlayer1 from "./Components/MusicPlayer1";
 import Navbar from "./Components/Navbar";
+import AboutPage from "./Components/AboutPage";
+import ContactUsPage from "./Components/ContactUsPage";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Playlists from "./Components/Playlists";
@@ -46,6 +48,8 @@ function App() {
                 <Navbar />
                 <Routes>
                   <Route exact path="/" element={<Home />}></Route>
+                  <Route exact path="/AboutUs" element={<AboutPage />}></Route>
+                  <Route exact path="/ContactPage" element={<ContactUsPage />}></Route>
 
                   <Route exact path="/AddSong" element={<AddSong />}></Route>
                   <Route
