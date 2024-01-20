@@ -8,8 +8,12 @@ export default function AddSong() {
   const [imageFile, setImageFile] = useState(null);
   const [lyricsFile, setLyricsFile] = useState(null);
   const [instrumentalFile, setInstrumentalFile] = useState(null);
-  const { uploadAudio, uploadInstrumental, uploadImage, addSong, songs,resp } =
+
+  const { uploadAudio, uploadInstrumental, uploadImage, addSong, songs, loading, setLoading, statusRef } =
     useContext(SongsContext);
+  useEffect(() => {
+    // console.log("mohiyaddeen ", songs);
+  }, [songs, loading]);
 
   const parseLyrics = (data) => {
     try {
@@ -30,22 +34,20 @@ export default function AddSong() {
 
       // console.log("lines : ", lines);
     } catch (error) {
-      console.log(error);
+      console.log("Some Error Occurs");
     }
   };
-  let x = 100;
-  const handleSubmit = async (e) => {
-    // console.log("this is add song response",resp)
-    document.getElementById('loader').style.display = 'block';
-    setTimeout(() => {
-      // Hide the loader when the upload is complete
-      document.getElementById('loader').style.display = 'none';
+  let x = 128;
 
-      // Add logic to handle the upload completion, e.g., show a success message
-      // console.log('Song uploaded successfully!');
-    }, 3500);
+  const handleSubmit = async (e) => {
+    // document.getElementById("loader").style.display = "block";
+    
+
     e.preventDefault();
+
     try {
+      setLoading(true)
+
       let instrumentalDriveId = null;
       let LrcData = null;
       let imageDriveId = null;
@@ -65,8 +67,8 @@ export default function AddSong() {
       // console.log("instrumental : ", instrumentalDriveId);
       // console.log("image : ", imageDriveId);
 
-// console.log(response)
-
+      // console.log(response)
+     
       addSong(
         sname,
         audioDriveId,
@@ -76,13 +78,16 @@ export default function AddSong() {
         instrumentalDriveId,
         description,
         `song-${x}`
-      );
-    
+      )
+      x++;
+      setLoading(false)
+     
     } catch (error) {
+
       console.log("Some error Occurs");
-      
     }
-    x++;
+
+
     // console.log(x)
     //Need to implemetn custom alert
     // setSname("");
@@ -91,10 +96,24 @@ export default function AddSong() {
     // setImageFile(null)
     // setLyricsFile(null)
     // setInstrumentalFile(null)
+    // if(status){
+    //   document.getElementById("uploadStatus").innerHTML=`Song "${sname}" Uploaded`;
+    //   document.getElementById("uploadStatus").classList.remove("text-red-600");
+    //   document.getElementById("uploadStatus").classList.add("text-green-600");
+    //   setTimeout(()=>{
+    //         document.getElementById("uploadStatus").innerHTML='';
+    //       },4000)
 
+    //   }else{
 
+    //     document.getElementById("uploadStatus").innerHTML="Upload Failed !"
+    //     document.getElementById("uploadStatus").classList.remove("text-green-600");
+    //     document.getElementById("uploadStatus").classList.add("text-red-600");
+    //     setTimeout(()=>{
+    //       document.getElementById("uploadStatus").innerHTML='';
+    //     },4000)
 
-
+    // }
   };
 
   const handleNameChange = (e) => {
@@ -115,19 +134,19 @@ export default function AddSong() {
   const handleInstrumentalFileChange = (e) => {
     setInstrumentalFile(e.target.files[0]);
   };
-  useEffect(() => {
-    console.log("mohiyaddeen ", songs);
-  }, [songs]);
+
 
   try {
     return (
-      <><div id="uploadStatus" className=" uploadStatus  fixed flex justify-center w-screen h-10 text-green-600 text-3xl font-bold items-center bg-opacity-0 bg-red-600 transition-all ">
-        <div className="messageUpload">
-          
-        </div>
-      </div>
-        <div className="p-10 flex items-center flex-col w-full">
+      <>
+        {<div
+          id="uploadStatus"
+          className=" uploadStatus  fixed flex justify-center w-screen h-10 text-3xl font-bold items-center bg-opacity-0  transition-all "
+          ref={statusRef}
+        >
 
+        </div>}
+        <div className="p-10 flex items-center flex-col w-full">
           <div className="font-bold text-2xl underline ">Add Song</div>
 
           <div className="text-lg">Song Details</div>
@@ -219,7 +238,8 @@ export default function AddSong() {
                 required
               />
             </div>
-            <div id="loader"></div>
+
+            {loading && <div id="loader"></div>}
             <button
               className="p-2 m-6 bg-green-400 border-2 border-solid border-black rounded-lg"
               type="submit"

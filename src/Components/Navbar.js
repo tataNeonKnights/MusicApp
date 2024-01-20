@@ -92,24 +92,24 @@ export default function Navbar() {
                 menu
               </button>
               <div className="dropdown-content absolute top-7 right-0  bg-white border shadow-md mt-2 py-2">
-                <a
-                  href="#"
+                <NavLink
+                  to="/MediaDashboard"
                   className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                 >
-                  Item 1
-                </a>
-                <a
-                  href="#"
+                  Media Dashboard
+                </NavLink>
+                <NavLink
+                  to="/AddSong"
                   className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                 >
-                  Item 2
-                </a>
-                <a
-                  href="#"
+                  Add Song
+                </NavLink>
+                <NavLink
+                 to="/"
                   className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                 >
                   Item 3
-                </a>
+                </NavLink>
               </div>
             </div>
           </div>

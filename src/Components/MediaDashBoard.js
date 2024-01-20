@@ -9,6 +9,7 @@ import NewSongs from "./NewSongs";
 export default function MediaDashBoard() {
   const { playlists, userPlaylists, loadUserPlaylists } =
     useContext(PlaylistsContext);
+    // useContext(SongsContext)
   const { playlistId } = useParams();
   const { songs, loadUserSongs, userSongs } = useContext(SongsContext);
   const { users } = useContext(UsersContext);
