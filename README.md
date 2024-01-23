@@ -34,7 +34,7 @@ The MusicApp  project is a learning endeavor by our team, consisting of Akash Va
 **Key Highlights:**
 - **Project Purpose**: This MusicApp  is not intended for production use but rather serves as a practical playground for honing our web development skills.
 
-- **Technology Stack**: The project is built using HTML, Tailwind CSS, and JavaScript. These technologies are widely used in web development and offer a great opportunity for hands-on learning.
+- **Technology Stack**: The project is built using React.js, Tailwind CSS, SpringBoot, and MySql + firebase. These technologies are widely used in web development and offer a great opportunity for hands-on learning.
 
 - **Closed Project**: Please note that this project is not open source, and its primary focus is on internal learning and skill development within our team. It is not meant for public contributions but rather a platform for our personal growth in web development.
 
