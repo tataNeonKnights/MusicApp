@@ -6,10 +6,8 @@ import { getDownloadURL, getStorage, ref } from "firebase/storage";
 const SongsState = ({ children }) => {
   const [userSongs, setUserSongs] = useState({});
   const [loading, setLoading] = useState(false);
-  const statusRef = useRef(null)
-
-
-
+  const statusRef = useRef(null);
+  const deleteInfoRef = useRef(null);
 
   // const [songs, setSongs] = useState({
   //   "song-1": {
@@ -239,7 +237,7 @@ const SongsState = ({ children }) => {
         setSongs(songsMasterData);
       }
     } catch (error) {
-      console.log("some error")
+      console.log("some error");
     }
   };
 
@@ -265,7 +263,7 @@ const SongsState = ({ children }) => {
       }
     } catch (error) {
       if (statusRef.current) {
-        statusRef.current.innerHTML = `Upload failed`
+        statusRef.current.innerHTML = `Upload failed`;
       }
 
       console.log("error uploading audio file");
@@ -295,7 +293,7 @@ const SongsState = ({ children }) => {
       }
     } catch (error) {
       if (statusRef.current) {
-        statusRef.current.innerHTML = `Upload failed`
+        statusRef.current.innerHTML = `Upload failed`;
       }
 
       console.log("error uploading audio file");
@@ -325,7 +323,7 @@ const SongsState = ({ children }) => {
       }
     } catch (error) {
       if (statusRef.current) {
-        statusRef.current.innerHTML = `Upload failed`
+        statusRef.current.innerHTML = `Upload failed`;
       }
 
       console.log("error uploading audio file");
@@ -360,10 +358,7 @@ const SongsState = ({ children }) => {
     description,
     songid
   ) => {
-
     try {
-
-
       const response = await fetch("http://localhost:8080/api/auth/addsong", {
         method: "POST",
         headers: {
@@ -376,7 +371,7 @@ const SongsState = ({ children }) => {
           imgSrc: image,
           lyrics: JSON.stringify(lyrics),
           user: {
-            id: user
+            id: user,
           },
           bgmSrc: bgm,
           songDescription: description,
@@ -385,88 +380,108 @@ const SongsState = ({ children }) => {
       });
       // console.log("uploaded")
       if (response.ok) {
+        const result = await response.json();
+        // console.log("result : ", result);
+        setSongs((prevSongs) => ({
+          ...prevSongs,
+          [result.songId]: {
+            name: result.songName,
+            audio: result.audioSrc,
+            image: result.imgSrc,
+            lyrics: JSON.parse(result.lyrics),
+            user: result.user.id,
+            bgm: result.bgmSrc,
+            description: result.songDescription,
+            songid: result.songId,
+          },
+        }));
+
         if (statusRef.current) {
-          statusRef.current.classList.remove("text-red-600")
-          statusRef.current.classList.add("text-green-600")
+          statusRef.current.classList.remove("text-red-600");
+          statusRef.current.classList.add("text-green-600");
 
-          statusRef.current.innerHTML = `Song Uploaded `
+          statusRef.current.innerHTML = `Song Uploaded `;
           setTimeout(() => {
-            statusRef.current.innerHTML = ''
-          }, 4000)
+            if (statusRef.current) {
+              statusRef.current.innerHTML = "";
+            }
+          }, 4000);
         }
-
-
       } else {
         if (statusRef.current) {
-          statusRef.current.classList.remove("text-green-600")
-          statusRef.current.classList.add("text-red-600")
-          statusRef.current.innerHTML = `Upload failed !`
+          statusRef.current.classList.remove("text-green-600");
+          statusRef.current.classList.add("text-red-600");
+          statusRef.current.innerHTML = `Upload failed !`;
           setTimeout(() => {
-            statusRef.current.innerHTML = ''
-          }, 4000)
+            if (statusRef.current) {
+              statusRef.current.innerHTML = "";
+            }
+          }, 4000);
         }
       }
-
     } catch (error) {
       if (statusRef.current) {
-        statusRef.current.classList.remove("text-green-600")
-        statusRef.current.classList.add("text-red-600")
-        statusRef.current.innerHTML = `Upload failed !`
+        statusRef.current.classList.remove("text-green-600");
+        statusRef.current.classList.add("text-red-600");
+        statusRef.current.innerHTML = `Upload failed !`;
         setTimeout(() => {
-          statusRef.current.innerHTML = ''
-        }, 4000)
+          if (statusRef.current) {
+            statusRef.current.innerHTML = "";
+          }
+        }, 4000);
       }
 
       console.log("Some Error Occurs");
     }
-
   };
   const deleteSong = async (songId, songs) => {
-
     try {
-      const response = await fetch(`http://localhost:8080/api/auth/deletesong/${songId}`, {
-        method: "DELETE",
-        headers: {
-          "auth-token":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfX0.ZMhWoD4VG3mnVcO1K1JmigCpcOnI7jLpKXZv4S4JJuM",
-        },
-      });
+      const response = await fetch(
+        `http://localhost:8080/api/auth/deletesong/${songId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "auth-token":
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxfX0.ZMhWoD4VG3mnVcO1K1JmigCpcOnI7jLpKXZv4S4JJuM",
+          },
+        }
+      );
 
       setSongs(() => {
-        let songsTemp = Object.keys(songs)
-        let songsUpdatedObj = {}
+        let songsTemp = Object.keys(songs);
+        let songsUpdatedObj = {};
 
         songsTemp.forEach((item) => {
           if (item !== songId) {
-            songsUpdatedObj[item] = songs[item]
+            songsUpdatedObj[item] = songs[item];
           }
-        })
+        });
 
-        console.log("hi hi ghi bye bye bye ", songsUpdatedObj)
+        console.log("hi hi ghi bye bye bye ", songsUpdatedObj);
 
-        return songsUpdatedObj
-      })
-
+        return songsUpdatedObj;
+      });
 
       const result = await response.text();
-      console.log("hi bye sadj ", result)
+      console.log("hi bye sadj ", result);
 
       // load songs - pending step
       if (response.ok) {
-        const deleteMessageBox = document.getElementById("deleteInfo");
-        deleteMessageBox.innerHTML = `Song => ${songs[songId].name}<= Deleted`;
+        if (deleteInfoRef.current) {
+          deleteInfoRef.current.innerHTML = `Song => ${songs[songId].name}<= Deleted`;
+        }
       } else {
-        const deleteMessageBox = document.getElementById("deleteInfo");
-        deleteMessageBox.innerHTML = "Something Went Wrong";
+        if (deleteInfoRef.current) {
+          deleteInfoRef.current.innerHTML = "Something Went Wrong";
+        }
       }
     } catch (error) {
       console.log("Some Error Occurs");
     }
-
   };
 
   useEffect(() => {
-    getSongs()
+    getSongs();
   }, []);
   return (
     <SongsContext.Provider
@@ -482,8 +497,8 @@ const SongsState = ({ children }) => {
         deleteSong,
         loading,
         setLoading,
-        statusRef
-
+        statusRef,
+        deleteInfoRef,
       }}
     >
       {children}

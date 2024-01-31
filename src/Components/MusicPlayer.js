@@ -10,7 +10,6 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 export default function MusicPlayer(props) {
   let likeColor = true;
   const colorchange = () => {
-
     const likeInfo = document.getElementById("saveInfo");
     if (likeColor) {
       const favorite = document.getElementById("favorite");
@@ -19,21 +18,16 @@ export default function MusicPlayer(props) {
       favorite.classList.add("fa-heart");
       favorite.classList.add("text-red-600");
       likeColor = false;
-
-      // likeInfo.innerHTML="Remove from your library"
     } else {
       const favorite = document.getElementById("favorite");
       favorite.classList.remove("fa-solid", "fa-heart");
       favorite.classList.remove("text-red-600");
       favorite.classList.add("fa-regular");
       favorite.classList.add("fa-heart");
-      // likeInfo.innerHTML="Save to your library"
-      likeColor = true;
 
+      likeColor = true;
     }
   };
-
-
 
   // To Switch tracks, using useNavigate() will not trigger a page refresh
   const navigate = useNavigate();
@@ -568,10 +562,7 @@ export default function MusicPlayer(props) {
 
               {/* Like Button */}
               <div className="group relative inline-block">
-                <button
-                  onClick={colorchange}
-                  className="w-10 cursor-pointer "
-                >
+                <button onClick={colorchange} className="w-10 cursor-pointer ">
                   <i
                     id="favorite"
                     className="fa-regular fa-heart transition-all  m-1 hover:text-3xl text-2xl hover:mt-1 hover:text-red-500 hover:mb-0.5"
