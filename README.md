@@ -45,7 +45,11 @@ List the key features of your MusicApp . You can use bullet points for this sect
 
 - Music streaming and playlist management
 - Search and discover new music
-- More features will be added
+- More features will be added'
+
+## Snapshots 
+
+
 
 ## Getting Started
 
