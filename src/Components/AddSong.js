@@ -9,8 +9,16 @@ export default function AddSong() {
   const [lyricsFile, setLyricsFile] = useState(null);
   const [instrumentalFile, setInstrumentalFile] = useState(null);
 
-  const { uploadAudio, uploadInstrumental, uploadImage, addSong, songs, loading, setLoading, statusRef } =
-    useContext(SongsContext);
+  const {
+    uploadAudio,
+    uploadInstrumental,
+    uploadImage,
+    addSong,
+    songs,
+    loading,
+    setLoading,
+    statusRef,
+  } = useContext(SongsContext);
   useEffect(() => {
     // console.log("mohiyaddeen ", songs);
   }, [songs, loading]);
@@ -37,17 +45,12 @@ export default function AddSong() {
       console.log("Some Error Occurs");
     }
   };
-  let x = 128;
 
   const handleSubmit = async (e) => {
-    // document.getElementById("loader").style.display = "block";
-    
-
     e.preventDefault();
 
     try {
-      setLoading(true)
-
+      setLoading(true);
       let instrumentalDriveId = null;
       let LrcData = null;
       let imageDriveId = null;
@@ -68,7 +71,7 @@ export default function AddSong() {
       // console.log("image : ", imageDriveId);
 
       // console.log(response)
-     
+
       addSong(
         sname,
         audioDriveId,
@@ -77,43 +80,12 @@ export default function AddSong() {
         1,
         instrumentalDriveId,
         description,
-        `song-${x}`
-      )
-      x++;
-      setLoading(false)
-     
+        `song-3`
+      );
+      setLoading(false);
     } catch (error) {
-
       console.log("Some error Occurs");
     }
-
-
-    // console.log(x)
-    //Need to implemetn custom alert
-    // setSname("");
-    // setDescription("")
-    // setAudioFile(null)
-    // setImageFile(null)
-    // setLyricsFile(null)
-    // setInstrumentalFile(null)
-    // if(status){
-    //   document.getElementById("uploadStatus").innerHTML=`Song "${sname}" Uploaded`;
-    //   document.getElementById("uploadStatus").classList.remove("text-red-600");
-    //   document.getElementById("uploadStatus").classList.add("text-green-600");
-    //   setTimeout(()=>{
-    //         document.getElementById("uploadStatus").innerHTML='';
-    //       },4000)
-
-    //   }else{
-
-    //     document.getElementById("uploadStatus").innerHTML="Upload Failed !"
-    //     document.getElementById("uploadStatus").classList.remove("text-green-600");
-    //     document.getElementById("uploadStatus").classList.add("text-red-600");
-    //     setTimeout(()=>{
-    //       document.getElementById("uploadStatus").innerHTML='';
-    //     },4000)
-
-    // }
   };
 
   const handleNameChange = (e) => {
@@ -135,17 +107,15 @@ export default function AddSong() {
     setInstrumentalFile(e.target.files[0]);
   };
 
-
   try {
     return (
       <>
-        {<div
+        <div
           id="uploadStatus"
           className=" uploadStatus  fixed flex justify-center w-screen h-10 text-3xl font-bold items-center bg-opacity-0  transition-all "
           ref={statusRef}
-        >
+        ></div>
 
-        </div>}
         <div className="p-10 flex items-center flex-col w-full">
           <div className="font-bold text-2xl underline ">Add Song</div>
 

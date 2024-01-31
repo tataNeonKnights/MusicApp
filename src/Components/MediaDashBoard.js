@@ -9,9 +9,9 @@ import NewSongs from "./NewSongs";
 export default function MediaDashBoard() {
   const { playlists, userPlaylists, loadUserPlaylists } =
     useContext(PlaylistsContext);
-    // useContext(SongsContext)
+  // useContext(SongsContext)
   const { playlistId } = useParams();
-  const { songs, loadUserSongs, userSongs } = useContext(SongsContext);
+  const { songs, loadUserSongs, userSongs,deleteInfoRef } = useContext(SongsContext);
   const { users } = useContext(UsersContext);
 
   useEffect(() => {
@@ -31,7 +31,11 @@ export default function MediaDashBoard() {
           </NavLink>
         </div>
         <NewMusicPlaylist flag="custom" />
-        <div id="deleteInfo" className="text-3xl text-red-500"></div>
+        <div
+          id="deleteInfo"
+          className="text-3xl text-red-500"
+          ref={deleteInfoRef}
+        ></div>
         <NewSongs flag="custom" />
       </div>
     );

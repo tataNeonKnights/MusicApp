@@ -17,6 +17,7 @@ export default function PopularPlaylists() {
       //  <!-- Popular Playlists -->
     );
   } catch (error) {
+   
     console.log("some error occured");
   }
 }
