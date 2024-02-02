@@ -48,25 +48,33 @@ List the key features of your MusicApp . You can use bullet points for this sect
 - More features will be added'
 
 ## Snapshots 
+
+
 1. **Home Page**
 ![Home_page_1](https://github.com/tataNeonKnights/MusicApp/assets/133673019/73d6b4f6-9afb-467e-bde4-45f545c75348)
 ![Home_page_2](https://github.com/tataNeonKnights/MusicApp/assets/133673019/47441469-04db-4e32-9c1f-675de6d66bc8)
 ![Home_page_3](https://github.com/tataNeonKnights/MusicApp/assets/133673019/789020f0-33f3-4294-9143-8cacc3f1b319)
 
+
 2. **Playlist and songs page**
 ![Playlist_And_Song_Page](https://github.com/tataNeonKnights/MusicApp/assets/133673019/953e6ebc-3b99-4126-9ce1-e787729f0481)
+
 
 3. **Music Player Page**
 ![Musicplayer_Page](https://github.com/tataNeonKnights/MusicApp/assets/133673019/788d7bdd-fa97-43f9-b127-5fcfa17e89a4)
 
+
 3. **Karaoke Mode - Normal**
 ![Karaoke_Mode_Normal](https://github.com/tataNeonKnights/MusicApp/assets/133673019/a2740063-5977-4626-94cf-fb15c353afb5)
+
 
 4. **Karaoke Mode - Instrumental**
 ![Karaoke_Mode_Instrumental](https://github.com/tataNeonKnights/MusicApp/assets/133673019/97402658-43d5-4b6c-878b-2119dd98beef)
 
+
 5. **Media Dashboard Page**
 ![Media_Dashboard_page](https://github.com/tataNeonKnights/MusicApp/assets/133673019/aa1a893e-5cfc-4f1c-a4fe-16d36a0d6c26)
+
 
 6. **Add song Page**
 ![Add_Song_Page](https://github.com/tataNeonKnights/MusicApp/assets/133673019/8580a53c-7d04-4e55-9c49-1db89bef77ef)
