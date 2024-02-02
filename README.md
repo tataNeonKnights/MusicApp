@@ -48,6 +48,10 @@ List the key features of your MusicApp . You can use bullet points for this sect
 - More features will be added'
 
 ## Snapshots 
+1. Home Page
+![Home_page_1](https://github.com/tataNeonKnights/MusicApp/assets/133673019/73d6b4f6-9afb-467e-bde4-45f545c75348)
+![Home_page_2](https://github.com/tataNeonKnights/MusicApp/assets/133673019/47441469-04db-4e32-9c1f-675de6d66bc8)
+![Home_page_3](https://github.com/tataNeonKnights/MusicApp/assets/133673019/789020f0-33f3-4294-9143-8cacc3f1b319)
 
 
 
