@@ -67,7 +67,7 @@ Make sure you have the following software and tools installed on your system:
 
 1.  the project repository to your local machine (if you have Git installed):
    ```bash
-   git  https://github.com/tataNeonKnights/MusicApp_.git
+   git clone [https://github.com/tataNeonKnights/MusicApp_.git](https://github.com/tataNeonKnights/MusicApp.git)
 ```
 
 ## Branch Naming Convention
